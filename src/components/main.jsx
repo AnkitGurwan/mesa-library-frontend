@@ -72,7 +72,7 @@ const HomePage = () => {
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
     const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});
 
-    const studName = localStorage.getItem('studName').toLowerCase();
+    const studName = localStorage.getItem('studName')?localStorage.getItem('studName').toLowerCase():"";
 
     const logOutHandler = async () => {
         localStorage.clear('studName','studId','studRoll','studJob');
