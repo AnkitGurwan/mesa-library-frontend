@@ -58,7 +58,7 @@ const Login = () => {
     }
 
     return (
-        <div className='h-full w-full flex flex-col md:flex-row overflow-y-hidden' style={{"backgroundColor":"rgb(220 252 231)"}}> 
+        <div className='h-full w-full flex flex-row' style={{"backgroundColor":"rgb(220 252 231)"}}> 
 
             <div className='w-full md:w-1/2 p-8 md:p-0 h-1/3 md:h-full flex justify-center items-center flex-col '>
                 <img className='h-full' src='https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg'/>  
