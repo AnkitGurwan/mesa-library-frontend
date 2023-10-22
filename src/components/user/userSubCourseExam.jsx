@@ -10,6 +10,7 @@ import AuthContext from '../../context/auth/AuthContext';
 import { setUserUpdatePath } from '../../redux/storage/storageSlice';
 import Lottie from './backgroundlottie';
 import Navbar from './navbar';
+import BackgroundParticle from './backgroundParticle';
 
 const Home = () => {
     const { GetDetails } = useContext(AuthContext);
@@ -153,7 +154,7 @@ const Home = () => {
         </div>
 
         
-    <div className='absolute bottom-0 right-0 z-0'><Lottie/></div>
+        <div className='absolute w-full bottom-0 right-0'><BackgroundParticle/></div>
 
             
     </div>

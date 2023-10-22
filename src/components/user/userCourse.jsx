@@ -10,8 +10,7 @@ import Upload from "./userUpload2";
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserUpdatePath } from '../../redux/storage/storageSlice';
 import AuthContext from '../../context/auth/AuthContext';
-import Lottie from './backgroundlottie';
-import logo from '../images/mesa-logo.png';
+import BackgroundParticle from './backgroundParticle';
 import Navbar from './navbar';
 
 
@@ -152,7 +151,7 @@ const Home = () => {
         </div>
         :
         ""}
-        <div className='absolute bottom-0 right-0 z-0'><Lottie/></div>
+        <div className='absolute w-full bottom-0 right-0'><BackgroundParticle/></div>
             
     </div>
   )

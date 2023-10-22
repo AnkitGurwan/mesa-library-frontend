@@ -78,7 +78,7 @@ const Login = () => {
         }
     }
     return (
-        <div className='w-full h-full flex flex-col md:flex-row' style={{"backgroundColor":"rgb(220 252 231)"}}> 
+        <div className='w-full h-full flex flex-col md:flex-row overflow-hidden' style={{"backgroundColor":"rgb(220 252 231)"}}> 
            
 
            <div className='w-full md:w-1/2 h-1/3 md:h-full py-8 flex justify-center items-center flex-col '>
