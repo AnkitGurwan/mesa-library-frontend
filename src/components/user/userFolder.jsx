@@ -20,9 +20,9 @@ const Folder = (props) => {
     }
 
   return (
-    <div className='flex align-center justify-center text-center hover:scale-105  relative text-white font-semibold my-4 mx-4' style={{"background-image":'url("https://www.clearias.com/up/UPSC-Studymaterials-of-ClearIAS.png")',"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
-      <Link to={`${props.name}`} onClick={clickHandler} className='w-60 h-40 flex justify-end items-start cursor-pointer'>
-        <div className='text-[15px] mr-1 mt-1 p-1 text-center capitalize bg-white text-gray-800 rounded-md'>{props.name}</div>
+    <div className='rounded-sm md:rounded-none flex align-center justify-center text-center hover:scale-105  relative text-white font-semibold' style={{"background-image":'url("https://www.clearias.com/up/UPSC-Studymaterials-of-ClearIAS.png")',"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
+      <Link to={`${props.name}`} onClick={clickHandler} className='w-32 lg:w-56 h-24 md:h-40 flex justify-end items-start cursor-pointer '>
+        <div className='text-[10px] md:text-[15px] mr-1 mt-1 p-1 text-center capitalize bg-white text-gray-800 rounded-sm  md:rounded-md'>{props.name}</div>
       </Link>
     </div>
   )

@@ -14,8 +14,8 @@ const BackgroundParticle = () => {
           },
           color: {
             // value: ["#2EB67D", "#ECB22E", "#E01E5B", "#36C5F0"]
-            // value: ["#00ffcc", "#ffd300", "#ff0000", "#147df5"]
-            value: ["#07c8f9", "#09a6f3", "#0a85ed", "#0d41e1"]
+            value: ["#00ffcc", "#ffd300", "#ff0000", "#147df5"]
+            // value: ["#07c8f9", "#09a6f3", "#0a85ed", "#0d41e1"]
           },
           shape: {
             type: "circle"

@@ -25,9 +25,7 @@ const Feedbackpage = () => {
         toast.error('Please try again.', {
             position: toast.POSITION.TOP_CENTER
         });
-        if(localStorage.getItem('studRoll'))
         navigate('/main');
-        else navigate('/');
 
     }
 
