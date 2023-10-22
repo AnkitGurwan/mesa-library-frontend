@@ -1,6 +1,6 @@
 import React,{useContext,useEffect,useState} from 'react';
 import Folder from './userFolder2'
-import File from './userFile2'
+import File from './userFile'
 import fire from '../../config/firebase';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";

@@ -1,6 +1,6 @@
 import React,{useContext,useEffect,useState} from 'react';
 import Folder from './userFolder2'
-import File from './userFile2'
+import File from './userFile'
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Upload from "./userUpload2";
