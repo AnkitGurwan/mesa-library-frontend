@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 const AuthState = (props) => {
     const [studInfo,setStudInfo] = useState({ name : "" , email : "", roll : ""});
-    const url = "http://localhost:5000";
+    const url = process.env.REACT_APP_BACKEND_URL;
     const dispatch = useDispatch();
 
     const userLogin = async()=>{
