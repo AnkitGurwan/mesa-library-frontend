@@ -7,6 +7,7 @@ import fire from '../../config/firebase';
 import AuthContext from '../../context/auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import file from '../images/user-guide.png';
 
 const File = (props) => {
   const [flag,setFlag] = useState(false);
@@ -19,8 +20,10 @@ const File = (props) => {
     <div className='border hover:bg-gray-200 text-gray-200 md:hover:text-gray-700 rounded-lg relative mx-2 cursor-pointer' onClick={()=>{!flag?setFlag(true):setFlagg(false)}}>
   
     <div  className='py-4 mx-4 w-10 h-20 flex flex-col justify-center items-center  '>
-        <i class="fa-regular fa-file px-2 text-xl font-light"></i>
-        <div className='text-xs px-1 pt-2 capitalize text-center'>{props.name?props.name.slice(0,15):""}</div>
+        <div className='flex flex-col justify-center text-center align-center'>
+          <img src={file} alt="file" className='w-20' />
+          <div className='text-[16px] w-full py-4  capitalize text-center font-medium text-black '>{props.name?props.name.slice(0,15):""}</div>
+        </div>
 
           {flag?
           <div id="myModal5" class="modal5 cursor-auto ">
