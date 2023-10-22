@@ -7,7 +7,6 @@ import fire from '../../config/firebase';
 import AuthContext from '../../context/auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import file from '../images/user-guide.png';
 
 const File = (props) => {
   const [flag,setFlag] = useState(false);
@@ -17,13 +16,11 @@ const File = (props) => {
   
 
   return (
-    <div className='border hover:bg-gray-300 text-white hover:text-gray-700 rounded-lg relative mx-2 cursor-pointer' onClick={()=>{!flag?setFlag(true):setFlagg(false)}}>
+    <div className='border hover:bg-gray-200 text-gray-200 md:hover:text-gray-700 rounded-lg relative mx-2 cursor-pointer' onClick={()=>{!flag?setFlag(true):setFlagg(false)}}>
   
-    <div  className='py-3 mx-2 w-auto h-auto flex flex-col justify-center items-center  '>
-        <div className='flex flex-col justify-center items-center'>
-          <img src={file} alt="file" className='w-10 h-12' />
-          <div className='text-[12px] md:text-[14px] w-full py-1 md:py-2 leading-4  capitalize text-center font-medium '>{props.name?props.name.slice(0,15):""}</div>
-        </div>
+    <div  className='py-4 mx-4 w-10 h-20 flex flex-col justify-center items-center  '>
+        <i class="fa-regular fa-file px-2 text-xl font-light"></i>
+        <div className='text-xs px-1 pt-2 capitalize text-center'>{props.name?props.name.slice(0,15):""}</div>
 
           {flag?
           <div id="myModal5" class="modal5 cursor-auto ">
@@ -61,3 +58,15 @@ const File = (props) => {
 
 export default File;
 
+{/* <div class= "modal-content5 flex justify-end">
+                    <div   onClick={()=>{setFlag(false)}}  class="close mt-1 h-8  flex justify-center items-center cursor-pointer hover:bg-gray-200 rounded-full w-8">&times;</div>
+                    <div className='p-2 text-sm '>
+                      <div className='text-lg font-medium text-start pb-1 border-b mb-3 capitalize pl-2'>{props.topic}</div>
+                      <div className='text-start border rounded-md p-3 uppercase'>{props.description}</div>
+                      <div className='flex justify-end items-center  border-t pt-2 mt-2'>
+                        <div className='flex justify-center items-center text-lg font-medium capitalize'>{props.name} , </div>
+                        <div className='flex justify-end items-end px-1 uppercase'>{props.year} yearite</div>
+                      </div>
+                    </div>
+                    
+              </div> */}
