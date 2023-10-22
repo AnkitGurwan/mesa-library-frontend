@@ -21,8 +21,8 @@ const Folder = (props) => {
     }
 
   return (
-    <div className='flex align-center justify-center hover:scale-105 w-full relative text-white mr-10 font-semibold '>
-      <Link to={`${props.name}`} onClick={clickHandler} className='w-32  flex flex-col justify-center align-center text-center cursor-pointer'>
+    <div className='flex align-center justify-center  w-full relative text-white mr-10 font-semibold'>
+      <Link to={`${props.name}`} onClick={clickHandler} className='p-4 w-full h-32 flex flex-col justify-center align-center text-center cursor-pointer'>
         <img src={folder} alt="folder" />
         <div className='text-[16px] mr-1 p-1 text-center capitalize text-gray-800'>{props.name}</div>
       </Link>

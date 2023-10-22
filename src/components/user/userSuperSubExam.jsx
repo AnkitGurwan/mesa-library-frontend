@@ -106,9 +106,9 @@ const Home = () => {
         {foldersName.length?
         <div className='h-auto rounded-md my-7 md:my-4 ml-2 md:ml-6 flex flex-col pb-3 md:pb-6 font-semibold md:font-medium'>
                 <div className='text-start py-4 pl-8 font-semibold md:font-bold text-white text-2xl'>All Courses</div>
-                <div className="grid grid-cols-4 lg:grid-cols-6 gap-4 mx-6 my-2">
+                <div className="grid grid-cols-4 lg:grid-cols-7 gap-4 mx-6 my-2">
                     {foldersName.length ? foldersName.map((folder) => (
-                        <div className='mx-2 border-2 border-gray-400'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
+                        <div className='mx-2 border-2 border-gray-400 hover:scale-105'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                     )) 
                     :
                     ""}

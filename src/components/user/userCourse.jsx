@@ -113,9 +113,9 @@ const Home = () => {
                 <div className='py-4 pl-1 font-semibold md:font-bold text-gary-700 text-2xl'>All Courses</div>
             </div>
            
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mx-2 md:mx-6 my-5 md:my-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mx-2 md:mx-6 my-5 md:my-2">
                 {foldersName.length ? foldersName.map((folder) => (
-                    <div className='mx-2 border-2 border-gray-400'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
+                    <div className='mx-2 border-2 border-gray-400 hover:scale-105'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
                 :
                  ""}
@@ -125,9 +125,9 @@ const Home = () => {
         {filesName.length?
         <div className='z-10 flex flex-col border-b pb-2 md:pb-4'>
             <div className='text-center font-semibold md:font-bold pt-2 pb-3'>Created Files</div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mx-2 md:mx-6 my-5 md:my-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mx-2 md:mx-6 my-5 md:my-2">
                 {filesName.length ? filesName.map((file) => (
-                    <div className='mx-2 text-white border-2 border-white'><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
+                    <div className='mx-2 text-white border-2 border-white '><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
                 :
                  ""}

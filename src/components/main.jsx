@@ -40,7 +40,9 @@ const HomePage = () => {
         }
         else 
         {
-            Navigate("/");
+            Navigate("/main");
+            setAllowed(true);
+            setLoading(false);
             (toast.error('Please login to access', {
               position: toast.POSITION.TOP_CENTER
           }));
