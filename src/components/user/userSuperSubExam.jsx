@@ -1,6 +1,6 @@
 import React,{useContext,useEffect,useState} from 'react';
 import Folder from './userFolder'
-import File from './userFile'
+import File from './userFile2'
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Upload from "./userUpload";
@@ -125,7 +125,7 @@ const Home = () => {
                 </span>
                 <div className='py-4 pl-1 font-semibold md:font-bold text-2xl'>Created Files</div>
             </div>
-            <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4 mx-0 md:mx-6 my-2">
+            <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-4 mx-0 md:mx-6 my-2">
                 {filesName.length ? filesName.map((file) => (
                     <div className='mx-2 border-2 border-gray-400'><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
@@ -145,7 +145,7 @@ const Home = () => {
                 </span>
                 <div className='py-4 pl-1 font-semibold md:font-bold text-white text-2xl'>Files/PDF</div>
             </div>
-            <div className="grid grid-cols-5 gap-4 mx-0 md:mx-6 my-2">
+            <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-4 mx-0 md:mx-6 my-2">
                 {uploadFilesName.length ? uploadFilesName.map((upload) => (
                     <div className='mx-2 border-2 text-white text-start overflow-hidden'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
                 )) 

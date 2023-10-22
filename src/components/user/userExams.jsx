@@ -124,7 +124,7 @@ const Home = () => {
         {filesName.length?
         <div className='overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-3 md:pb-6 font-medium bg-blue-400'>
             <div className='text-start py-4 pl-8 font-semibold md:font-bold text-white text-2xl'>Created Files</div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mx-2 md:mx-6 my-5 md:my-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 ld:grid-cols-7 gap-4 mx-2 md:mx-6 my-5 md:my-2">
                 {filesName.length ? filesName.map((file) => (
                     <div className='mx-2 border-2 border-white'><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
