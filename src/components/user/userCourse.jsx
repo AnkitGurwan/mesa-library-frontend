@@ -105,52 +105,59 @@ const Home = () => {
                 }
             </div>
         </div>
-        <div className='z-10 absolute w-4/5 md:w-full top-28 h-auto rounded-md my-7 md:my-4 pl-2 md:pl-6 flex flex-col pb-3 md:pb-6 font-semibold md:font-medium'>
-            <div className='flex items-center text-gray-700 pl-3 md:pl-7'>
-                <span class="material-symbols-outlined text-3xl">
-                description
-                </span>
-                <div className='py-4 pl-1 font-semibold md:font-bold text-gary-700 text-2xl'>All Courses</div>
+
+        <div className='absolute top-28 w-4/5 md:w-full h-auto z-10'>
+            
+            {foldersName.length?
+            <div className='h-auto rounded-md my-7 md:my-4 pl-2 md:pl-6 flex flex-col pb-3 md:pb-6 font-semibold md:font-medium'>
+                <div className='flex items-center text-gray-700 pl-3 md:pl-7'>
+                    <span class="material-symbols-outlined text-3xl">
+                    description
+                    </span>
+                    <div className='py-4 pl-1 font-semibold md:font-bold text-gary-700 text-2xl'>All Courses</div>
+                </div>
+            
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mx-2 md:mx-6 my-5 md:my-2">
+                    {foldersName.length ? foldersName.map((folder) => (
+                        <div className='mx-2 border-2 border-gray-400 hover:scale-105'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
+                    )) 
+                    :
+                    ""}
+                </div>
+                                    
             </div>
-           
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mx-2 md:mx-6 my-5 md:my-2">
-                {foldersName.length ? foldersName.map((folder) => (
-                    <div className='mx-2 border-2 border-gray-400 hover:scale-105'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
-                )) 
-                :
-                 ""}
+            :""}
+            
+            {filesName.length?
+            <div className='overflow-y-hidden w-4/5 md:w-full rounded-md my-4 pl-2 md:pl-6 flex flex-col pb-3 md:pb-6 font-medium text-gray-700'>
+                <div className='text-start py-4 pl-2 md:pl-8 font-semibold md:font-bold  text-2xl'>Information Files</div>
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mx-0 md:mx-6 my-5 md:my-2">
+                    {filesName.length ? filesName.map((file) => (
+                        <div className='mx-2 '><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
+                    )) 
+                    :
+                    ""}
+                </div>
+                                    
             </div>
-                                
-        </div>
-        {filesName.length?
-        <div className='z-10 flex flex-col border-b pb-2 md:pb-4'>
-            <div className='text-center font-semibold md:font-bold pt-2 pb-3'>Created Files</div>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mx-2 md:mx-6 my-5 md:my-2">
-                {filesName.length ? filesName.map((file) => (
-                    <div className='mx-2 text-white border-2 border-white '><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
-                )) 
-                :
-                 ""}
-            </div>
-                                
-        </div>
-        :
-        ""}
+            :
+            ""}
 
         {uploadFilesName.length?
-        <div className='flex flex-col border-b pb-2 md:pb-4'>
-            <div className='text-center font-semibold md:font-bold pt-2 pb-3'>Uploaded Files</div>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mx-2 md:mx-6 my-5 md:my-2">
-                {uploadFilesName.length ? uploadFilesName.map((upload) => (
-                    <div className='mx-2 border-2'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
-                )) 
-                :
-                 ""}
+                <div className='overflow-y-hidden w-4/5 md:w-full rounded-md mt-6 pl-2 md:pl-6 flex flex-col pb-3 md:pb-6 font-medium text-gray-700'>
+                    <div className='text-start py-4 pl-2 md:pl-8 font-semibold md:font-bold text-2xl'>Files/PDF's</div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mx-0 md:mx-6 my-5 md:my-2">
+                        {uploadFilesName.length ? uploadFilesName.map((upload) => (
+                            <div className='mx-2 text-start overflow-hidden'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
+                        )) 
+                        :
+                        ""}
+                    </div>
+                                        
             </div>
-                                
+            :
+            ""}
         </div>
-        :
-        ""}
         <div className='absolute w-full bottom-0 right-0'><BackgroundParticle/></div>
             
     </div>
