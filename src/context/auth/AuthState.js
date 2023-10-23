@@ -30,6 +30,17 @@ const AuthState = (props) => {
         localStorage.setItem('studRoll',json.studInformation.surname);
         localStorage.setItem('studJob',json.studInformation.jobTitle);
 
+        const data = {
+            userId : json.studInformation.mail,
+            isAuth : true
+        }
+
+        fire
+        .firestore()
+        .collection("userAuth")
+        .add(data)
+        .then(()=>{})
+
         setStudInfo({...studInfo, name : json.studInformation.givenName , roll : json.studInformation.surname , email : json.studInformation.mail});
     }
 
@@ -39,6 +50,13 @@ const AuthState = (props) => {
         const logoutEndpoint = `https://login.microsoftonline.com/${tenantID}/oauth2/v2.0/logout?post_logout_redirect_uri=${process.env.REACT_APP_FRONTEND_URL}`;
        
         window.location.href = logoutEndpoint;
+        const userId = localStorage.getItem('studId');
+
+        fire.firestore().collection("userAuth").where('userId','==',userId).get().then(function(querySnapshot) {
+            querySnapshot.forEach(async function(doc) {
+                doc.ref.delete();
+            });
+        });
     }
 
     const GetDetails = async () => {
@@ -60,6 +78,25 @@ const AuthState = (props) => {
         
     }
 
+    const checkAuth = async () => {
+        const userId = localStorage.getItem('studId');
+        var flag = false;
+
+        await fire.firestore().collection("userAuth").get().then(async (users)=>{
+            const userData = await users.docs.map((user)=>user.data());
+            console.log(userData)
+            const foldersName = userData.filter((eachUser)=>{return eachUser.userId === userId});
+            console.log("hii",foldersName)
+            flag = foldersName.length > 0 ? true:false;
+
+            if(foldersName.length && foldersName[0].isAuth === true)
+                flag=true;
+                console.log("kkk",flag)
+                
+        });
+        return flag;
+    }
+
     const sendFeedback = async (email, header,body)=>{
         const response = await fetch(`${url}/user/feedback`, {
             method: 'POST',
@@ -72,7 +109,7 @@ const AuthState = (props) => {
         return response.status;
     }
 
-    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo,GetDetails,sendFeedback}}>
+    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo,GetDetails,sendFeedback,checkAuth}}>
                 {props.children}
             </AuthContext.Provider>)
 }

@@ -15,20 +15,20 @@ import LoaderLottie from './user/loaderlottie';
 
 
 const HomePage = () => {
-    const { logOut,GetDetails,getToken } = useContext(AuthContext);
+    const { logOut,GetDetails,getToken,checkAuth } = useContext(AuthContext);
     const [searchParams, setSearchParams] =useSearchParams();
     const [loading,setLoading]=useState(true);
     const [allowed,setAllowed]=useState(false);
     const Navigate = useNavigate();
 
-    const funcAllowed= () => {
-        if(localStorage.getItem('studRoll'))
+    const funcAllowed= async () => {
+        const rollNumber = localStorage.getItem('studRoll');
+        const flag = await checkAuth();
+        
+        if(rollNumber && flag)
         {
-          if((`210103001` < localStorage.getItem('studRoll') && localStorage.getItem('studRoll') < `210103140`) || 
-              (`220103001` < localStorage.getItem('studRoll') && localStorage.getItem('studRoll') < `220103140`) ||
-              (`230103001` < localStorage.getItem('studRoll') && localStorage.getItem('studRoll') < `230103140`)
-              (`200103001` < localStorage.getItem('studRoll') && localStorage.getItem('studRoll') < `200103140`))
-          {
+          if(210103001 <= rollNumber && rollNumber <= 210103140 || 230103001 <= rollNumber && rollNumber <= 230103140 ||
+              200103001 < rollNumber && rollNumber < 200103140){
             setAllowed(true);
             setLoading(false);
           }
