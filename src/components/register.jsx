@@ -78,7 +78,10 @@ const Login = () => {
         }
     }
     return (
-        <div className='w-full h-full flex flex-col md:flex-row overflow-hidden' style={{"backgroundColor":"rgb(220 252 231)"}}> 
+        <div>
+        {false
+            ?
+            <div className='w-full h-full flex flex-col md:flex-row overflow-hidden' style={{"backgroundColor":"rgb(220 252 231)"}}> 
            
 
            <div className='w-full md:w-1/2 h-1/3 md:h-full py-8 flex justify-center items-center flex-col '>
@@ -159,7 +162,17 @@ const Login = () => {
         </form>
             </div>
         </div>
-
+                :
+                <div class="absolute top-24 left-9 md:left-1/3 w-4/5 md:w-1/3">
+                <div class="max-w-md bg-white rounded-lg shadow-md p-8">
+                    <h1 class="text-3xl font-bold mb-4">404</h1>
+                    <p class="text-lg text-gray-700 mb-6">Oops! The page you're looking for could not be accessed by you.</p>
+                    <div class="bg-blue-500 text-center text-white text-lg font-semibold py-2 px-4 rounded">
+                        Please try to login through Microsoft.
+                    </div>
+                </div>
+            </div>}
+            </div>
   )
 }
 
