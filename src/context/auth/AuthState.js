@@ -68,11 +68,11 @@ const AuthState = (props) => {
         fire.firestore().collection("files").get().then(async (files)=>{
             const fileData = await files.docs.map((file)=>file.data());
             dispatch(setReduxFiles(fileData));
-        })
+        });
         fire.firestore().collection("uploads").get().then(async (files)=>{
             const uploadData = await files.docs.map((file)=>file.data());
             dispatch(setReduxUploadedFiles(uploadData));
-        })
+        });
 
         return 200;
         

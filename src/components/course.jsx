@@ -69,7 +69,7 @@ const Home = () => {
                 }
             })
 
-        if(newFolderName.length > 3 && flag)
+        if(newFolderName.length >= 3 && flag)
         {
             const data = {
                 createdAt : new Date(),
@@ -98,7 +98,7 @@ const Home = () => {
         }
         else if( flag )
         {
-            toast.error("Folder Name must have atleast 4 characters.", {
+            toast.error("Folder Name must have atleast 3 characters.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
