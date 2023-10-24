@@ -256,29 +256,18 @@ const Home = () => {
         <div className='w-full flex justify-end items-center py-3 border-b'>
             
             
-            <div className='mr-2 md:mr-8 flex'>
-                <form onSubmit={handleUpload} className='flex items-center w-32 md:w-64 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+        <div className='mr-8 flex'>
+                <form onSubmit={handleUpload} className='flex items-center w-40 md:w-64 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-upload px-1 md:px-2"></i>
                     <input type='file' className='px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/>
-                    {
-                    uploadNewFile
-                    ?
-                    newUploadFileAdd
-                    ?
-                    <div className='py-1 px-2 md:px-4 my-1'>
-                        <Spinner/>
-                    </div>
-                    :
-                    <button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>
-                    :
-                    ""}
+                    {uploadNewFile?<button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
                 </form>
-                <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-1 md:mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
-                    <i class="fa-solid fa-file px-1 md:px-2"></i>
+                <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+                    <i class="fa-solid fa-file px-2"></i>
                     <div className='px-1 text-xs md:text-lg'>Create File</div>
                 </button>
-                <button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='flex items-center border py-1 px-1 mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
-                    <i class="fa-solid fa-folder px-2"></i>
+                <button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='flex items-center border py-1 px-1 mx-1 md:mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
+                    <i class="fa-solid fa-folder px-1 md:px-2"></i>
                     <div  className='px-1 text-xs md:text-lg'>Add Folder</div>
                 </button>
                 
@@ -287,7 +276,7 @@ const Home = () => {
             <div id="myModal" class="modal2">
             <div class="modal-content3">
                 <button onClick={()=>{document.getElementById("myModal").style.display="none"}} class="close mt-1 h-8 flex justify-center items-center cursor-pointer hover:bg-gray-200 rounded-full w-8">&times;</button>
-                    <form class="w-60 mx-auto bg-white px-1 md:px-2" onSubmit={submit}>
+                    <form class="w-60 mx-auto bg-white px-2" onSubmit={submit}>
                         
                     <div class="mb-1">
                         
@@ -303,16 +292,9 @@ const Home = () => {
                     </div>
                     
                     <div class="flex items-center justify-center">
-                      {newFolderAdd
-                      ?
-                      <div className='py-1 px-4 my-1'>
-                        <Spinner/>
-                      </div>
-                      :
                       <button id='myButton' onClick={addFolderHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-100" type="submit">
                         Add Folder
                       </button>
-                        }
 
                     </div>
                   </form>
@@ -331,12 +313,11 @@ const Home = () => {
                                 onChange={onChangeHandler2}
                                 value={fileInputData.name}
                                 required
-                                autoFocus
                                 autoComplete='off'
                             />
                             <input
                                 class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline ml-2"
-                                type="number"
+                                type="text"
                                 placeholder="Year Of Studying"
                                 name="year"
                                 onChange={onChangeHandler2}
@@ -349,7 +330,7 @@ const Home = () => {
                             <input
                                 class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                                 type="text"
-                                placeholder="Heading (course code)"
+                                placeholder="Heading"
                                 name="topic"
                                 onChange={onChangeHandler2}
                                 value={fileInputData.topic}
@@ -371,16 +352,9 @@ const Home = () => {
                         </div>
                         
                         <div class="flex items-center justify-center">
-                        {newFileAdd
-                        ?
-                        <div className='py-1 px-4 my-1'>
-                            <Spinner/>
-                        </div>
-                        :
                         <button id='myButton' onClick={addFileHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
                             Create File
                         </button>
-                        }
 
                         </div>
                     </form>
