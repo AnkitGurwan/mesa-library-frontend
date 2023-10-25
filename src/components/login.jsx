@@ -22,8 +22,10 @@ const Login = () => {
     }
 
     const submitHandler = (e) => {
+        console.log("kk",user.email)
         setLoading(true);
         e.preventDefault();
+        const mailId = user.email;
         if(user.email && user.password)
         {
             fire
@@ -31,9 +33,11 @@ const Login = () => {
             .signInWithEmailAndPassword(user.email,user.password)
             .then((user)=>{
                 const data = {
-                    userId : user.email,
+                    adminId : mailId,
                     isAuth : true
                 }
+                localStorage.setItem('adminId',data.adminId);
+                console.log(data.adminId)
         
                 fire
                 .firestore()
@@ -61,7 +65,7 @@ const Login = () => {
                     });
                 }
                 else{
-                    toast.error("User not found", {
+                    toast.error("Please try again", {
                         position: toast.POSITION.BOTTOM_RIGHT
                     });
                 }

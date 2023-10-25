@@ -67,7 +67,7 @@ const Home = () => {
     },[]);
 
     const pathHandler = (e) => {
-        const value = e.target.innerText.toLowerCase();
+        const value = e.target.innerText;
         dispatch(setUserUpdatePath(value));
         var x = "";
         var y = "";

@@ -104,7 +104,7 @@ const AuthState = (props) => {
         await fire.firestore().collection("adminAuth").get().then(async (users)=>{
             const userData = await users.docs.map((user)=>user.data());
             console.log(userData)
-            const foldersName = userData.filter((eachUser)=>{return eachUser.userId === AdminId});
+            const foldersName = userData.filter((eachUser)=>{return eachUser.adminId === AdminId});
             console.log("hii",foldersName)
 
             if(foldersName.length && foldersName[0].isAuth === true)

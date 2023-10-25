@@ -111,7 +111,7 @@
     flex-direction: column;
     align-items: end;
   }
-}
+
 
 .modal-content4 {
   background-color: #fefefe;
@@ -124,4 +124,5 @@
   flex-direction: column;
   align-items: end;
 
+}
 }

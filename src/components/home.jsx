@@ -12,6 +12,7 @@ import { Spinner } from '@material-tailwind/react';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Loader from './loader';
+import LoaderLottie from './user/loaderlottie';
 
 const Home = () => {
     const { GetDetails, checkAdminAuth } = useContext(AuthContext);
@@ -38,8 +39,9 @@ const Home = () => {
     const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});
 
     const getItem = async () => {
-        await GetDetails();
+        
         const flag = await checkAdminAuth();
+        // alert(flag)
 
         if(flag)
         {
@@ -56,6 +58,7 @@ const Home = () => {
         } 
 
         localStorage.setItem('pathAdmin',"");
+        await GetDetails();
     }
     
     useEffect(()=>{
@@ -262,8 +265,13 @@ const Home = () => {
     
 
   return (
-    <div>
-        {allowed
+    <div className='h-full w-full'>
+        {
+        loading
+        ?
+        <div className='h-full flex items-center justify-center'><LoaderLottie/></div>
+        :
+        allowed
         ?
         <div>
         <div className='w-full h-16 text-end border-b flex items-center justify-end bg-white'>

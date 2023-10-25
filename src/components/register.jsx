@@ -48,7 +48,8 @@ const Login = () => {
                         userId : user.email,
                         isAuth : true
                     }
-            
+
+                    localStorage.setItem('adminId',user.email);
                     fire
                     .firestore()
                     .collection("adminAuth")
