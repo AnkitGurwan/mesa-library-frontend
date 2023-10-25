@@ -97,6 +97,24 @@ const AuthState = (props) => {
         return flag;
     }
 
+    const checkAdminAuth = async () => {
+        const AdminId = localStorage.getItem('adminId');
+        var flag = false;
+
+        await fire.firestore().collection("adminAuth").get().then(async (users)=>{
+            const userData = await users.docs.map((user)=>user.data());
+            console.log(userData)
+            const foldersName = userData.filter((eachUser)=>{return eachUser.userId === AdminId});
+            console.log("hii",foldersName)
+
+            if(foldersName.length && foldersName[0].isAuth === true)
+                flag=true;
+            else flag=false;
+                
+        });
+        return flag;
+    }
+
     const sendFeedback = async (email, header,body)=>{
         const response = await fetch(`${url}/user/feedback`, {
             method: 'POST',
@@ -109,7 +127,7 @@ const AuthState = (props) => {
         return response.status;
     }
 
-    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo,GetDetails,sendFeedback,checkAuth}}>
+    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo,GetDetails,sendFeedback,checkAuth,checkAdminAuth}}>
                 {props.children}
             </AuthContext.Provider>)
 }

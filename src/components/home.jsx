@@ -14,14 +14,13 @@ import "react-toastify/dist/ReactToastify.css";
 import Loader from './loader';
 
 const Home = () => {
-    const { GetDetails } = useContext(AuthContext);
+    const { GetDetails, checkAdminAuth } = useContext(AuthContext);
     const [newFolderName, setNewFolderName] = useState("");
-    const dispatch = useDispatch();
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
-    const [rootPath,setRootPath] = useState([]);
     const [newFolderAdd,setNewFolderAdd]  = useState(false);
     const [loading,setLoading]  = useState(true);
+    const [allowed,setAllowed]=useState(false);
     const [newFileAdd,setNewFileAdd]  = useState(false);
     const [newUploadFileAdd,setNewUploadFileAdd]  = useState(false);
     const Navigate = useNavigate();
@@ -39,8 +38,22 @@ const Home = () => {
     const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});
 
     const getItem = async () => {
-        const x= await GetDetails();
-        if(x===200)setLoading(false);
+        await GetDetails();
+        const flag = await checkAdminAuth();
+
+        if(flag)
+        {
+            setAllowed(true);
+            setLoading(false);
+        }
+        else 
+        {
+            setLoading(false);
+            Navigate("/");
+            (toast.error('Please login to access', {
+              position: toast.POSITION.TOP_CENTER
+          }));
+        } 
 
         localStorage.setItem('pathAdmin',"");
     }
@@ -250,6 +263,9 @@ const Home = () => {
 
   return (
     <div>
+        {allowed
+        ?
+        <div>
         <div className='w-full h-16 text-end border-b flex items-center justify-end bg-white'>
             <button onClick={()=>{Navigate('/')}} className='text-white bg-black py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer'>Log Out</button>
         </div>
@@ -406,7 +422,17 @@ const Home = () => {
         
 
 
-            
+            </div>
+            :
+            <div class="absolute top-24 left-9 md:left-1/3 w-4/5 md:w-1/3">
+                <div class="max-w-md bg-white rounded-lg shadow-md p-8">
+                    <h1 class="text-3xl font-bold mb-4">404</h1>
+                    <p class="text-lg text-gray-700 mb-6">Oops! The page you're looking for could not be accessed by you.</p>
+                    <div class="bg-blue-500 text-center text-white text-xl font-bold py-2 px-4 rounded">
+                        You are not part of this Course.
+                    </div>
+                </div>
+            </div>}
     </div>
   )
 }

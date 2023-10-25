@@ -43,6 +43,18 @@ const Login = () => {
                 .updateProfile({
                 displayName: user.email
                 }).then(() => {
+
+                    const data = {
+                        userId : user.email,
+                        isAuth : true
+                    }
+            
+                    fire
+                    .firestore()
+                    .collection("adminAuth")
+                    .add(data)
+                    .then(()=>{})
+                    
                     setLoading(false);
                     const currentUser = fire.auth().currentUser;
                     toast.success("Registered Successfully", {

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../context/auth/AuthContext'
 import fire from '../config/firebase';
@@ -30,6 +30,18 @@ const Login = () => {
             .auth()
             .signInWithEmailAndPassword(user.email,user.password)
             .then((user)=>{
+                const data = {
+                    userId : user.email,
+                    isAuth : true
+                }
+        
+                fire
+                .firestore()
+                .collection("adminAuth")
+                .add(data)
+                .then(()=>{})
+
+                console.log(user)
                 setLoading(false);
                 toast.success("Logged In Successfully", {
                     position: toast.POSITION.TOP_RIGHT
@@ -53,7 +65,9 @@ const Login = () => {
                         position: toast.POSITION.BOTTOM_RIGHT
                     });
                 }
-            })
+            });
+
+           
         }
     }
 
