@@ -53,8 +53,7 @@ const HomePage = () => {
         if(localStorage.getItem('studName') === null && code)
             await getToken(code);
 
-            if(foldersName.length === 0)
-            await GetDetails();
+        await GetDetails();
 
         funcAllowed();
     }

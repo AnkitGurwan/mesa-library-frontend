@@ -12,19 +12,11 @@ const File = (props) => {
   const [flag,setFlag] = useState(false);
   const [flagg,setFlagg] = useState(false);
   const [showDelete,setShowDelete] = useState(false);
-  const { GetDetails } = useContext(AuthContext);
+  const { removeFile , GetDetails } = useContext(AuthContext);
   
-  const deleteHandler = () => {
-    fire.firestore().collection("files").where('name','==',props.topic).where('parent','==',props.parent).get().then(function(querySnapshot) {
-      querySnapshot.forEach(async function(doc) {
-          doc.ref.delete();
-          toast.success("File Deleted Successfully", {
-            position: toast.POSITION.BOTTOM_RIGHT
-        });
-        await GetDetails();
-      });
-  });
-  
+  const deleteHandler = async () => {
+    const x = await removeFile(props.topic,props.parent);
+    if(x===201)GetDetails();
   }
 
   return (

@@ -6,11 +6,39 @@ import { useDispatch } from 'react-redux';
 
 const AuthState = (props) => {
     const [studInfo,setStudInfo] = useState({ name : "" , email : "", roll : ""});
-    const url = process.env.REACT_APP_BACKEND_URL;
+    const url = 'http://localhost:5000';
     const dispatch = useDispatch();
 
     const userLogin = async()=>{
         window.location.href = `${url}/auth/microsoft`;
+    }
+
+    const registerUser = async (email,password) => {
+        
+        const response = await fetch(`${url}/user/createuser`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email , password })
+        });
+        
+        const json = await response.json();
+        return response.status;
+    }
+
+    const loginUser = async (email,password) => {
+        const response = await fetch(`${url}/user/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        });
+        
+        const json = await response.json();
+        localStorage.setItem('btpToken', json.token);
+        return response.status;
     }
 
     const getToken = async(code)=>{
@@ -60,19 +88,47 @@ const AuthState = (props) => {
     }
 
     const GetDetails = async () => {
-        fire.firestore().collection("folders").get().then(async (folders)=>{
-            const folderData = await folders.docs.map((folder)=>folder.data());
-            dispatch(setReduxFolders(folderData));
+        const response1 = await fetch(`${url}/post/folder`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const response2 = await fetch(`${url}/post/file`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const response3 = await fetch(`${url}/post/upload`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        console.log("i m here bro")
+        const folders = await response1.json();
+        console.log("folder",folders)
+        dispatch(setReduxFolders(folders));
+
+        const files = await response2.json();
+        dispatch(setReduxFiles(files));
+
+        const uploads = await response3.json();
+        dispatch(setReduxUploadedFiles(uploads));
+        // fire.firestore().collection("folders").get().then(async (folders)=>{
+        //     const folderData = await folders.docs.map((folder)=>folder.data());
+        //     dispatch(setReduxFolders(folderData));
            
-        });
-        fire.firestore().collection("files").get().then(async (files)=>{
-            const fileData = await files.docs.map((file)=>file.data());
-            dispatch(setReduxFiles(fileData));
-        });
-        fire.firestore().collection("uploads").get().then(async (files)=>{
-            const uploadData = await files.docs.map((file)=>file.data());
-            dispatch(setReduxUploadedFiles(uploadData));
-        });
+        // });
+        // fire.firestore().collection("files").get().then(async (files)=>{
+        //     const fileData = await files.docs.map((file)=>file.data());
+        //     dispatch(setReduxFiles(fileData));
+        // });
+        // fire.firestore().collection("uploads").get().then(async (files)=>{
+        //     const uploadData = await files.docs.map((file)=>file.data());
+        //     dispatch(setReduxUploadedFiles(uploadData));
+        // });
 
         return 200;
         
@@ -127,7 +183,84 @@ const AuthState = (props) => {
         return response.status;
     }
 
-    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo,GetDetails,sendFeedback,checkAuth,checkAdminAuth}}>
+    const addFolder = async (name, parent,supParent)=>{
+        console.log(name)
+        const response = await fetch(`${url}/post/folder`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, parent,supParent }),
+        });
+        const json = await response.json();
+        return response.status;
+    }
+
+    const addFile = async (topic , name , year, description, parent , supParent)=>{
+        const response = await fetch(`${url}/post/file`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ topic , name , year, description, parent , supParent }),
+        });
+        const json = await response.json();
+        return response.status;
+    }
+
+    const uploadFile = async (name,parent,supParent,url) => {
+        alert(name)
+        const response = await fetch(`${url}/post/upload`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name,parent,supParent,url }),
+        });
+        const json = await response.json();
+        return response.status;
+    }
+
+    const removeFolder = async (name, parent)=>{
+        console.log(name)
+        const response = await fetch(`${url}/post/folder`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, parent }),
+        });
+        const json = await response.json();
+        return response.status;
+    }
+
+    const removeFile = async (topic, parent)=>{
+        console.log(topic)
+        const response = await fetch(`${url}/post/file`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ topic, parent }),
+        });
+        const json = await response.json();
+        return response.status;
+    }
+
+    const removeUpload = async (name, parent)=>{
+        console.log(name)
+        const response = await fetch(`${url}/post/upload`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, parent }),
+        });
+        const json = await response.json();
+        return response.status;
+    }
+
+    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo,GetDetails,sendFeedback,checkAuth,checkAdminAuth,registerUser,loginUser,addFolder,addFile,uploadFile,removeFile,removeFolder,removeUpload}}>
                 {props.children}
             </AuthContext.Provider>)
 }

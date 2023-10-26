@@ -15,7 +15,7 @@ import Loader from './loader';
 import LoaderLottie from './user/loaderlottie';
 
 const Home = () => {
-    const { GetDetails, checkAdminAuth } = useContext(AuthContext);
+    const { GetDetails , addFolder, addFile , uploadFile } = useContext(AuthContext);
     const [newFolderName, setNewFolderName] = useState("");
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
@@ -30,17 +30,17 @@ const Home = () => {
     
 
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
-    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === "root"});
+    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === "root" && eachFolder.supParent === "root"});
 
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == "root" && eachFolder.supParent === "root"});
 
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == "root" && eachFolder.supParent === "root"});
 
     const getItem = async () => {
         
-        const flag = await checkAdminAuth();
+        const flag = true;
         // alert(flag)
 
         if(flag)
@@ -59,7 +59,7 @@ const Home = () => {
 
         localStorage.setItem('pathAdmin',"");
 
-        if(foldersName.length === 0)
+        // if(allFoldersName.length===0)
         await GetDetails();
     }
     
@@ -75,186 +75,150 @@ const Home = () => {
     setFileInputData({...fileInputData,[e.target.name] : e.target.value})
   }
 
-    const addFolderHandler = (e) => {
-        setNewFolderAdd(true);
-        e.preventDefault();
-        var flag = true;
-        
-        foldersName.map((folder) => {
-                if(folder.name === newFolderName)
-                {
-                    flag = false;
-                }
-            })
-
-        if(newFolderName.length > 3 && flag)
-        {
-            const data = {
-                createdAt : new Date(),
-                name : newFolderName,
-                userId : 12345,
-                createdBy : 'ankit',
-                path : newFolderName==='root'?[]:["parent folder path"],
-                parent : "root" ,
-                lastAccessed : null,
-                updatedAt : new Date()
+  const addFolderHandler = async (e) => {
+    e.preventDefault();
+    var flag = true;
+    
+    foldersName.map((folder) => {
+            if(folder.name === newFolderName)
+            {
+                flag = false;
             }
-            fire
-            .firestore()
-            .collection("folders")
-            .add(data)
-            .then((folder)=>{
-                setAdded(!added);
-                setNewFolderAdd(false);
-                setNewFolderName("");
-                if(document.getElementById("myModal"))
-                    document.getElementById("myModal").style.display="none"
-                    toast.success("Folder Added Successfully", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-            })
+        })
 
-        }
-        else if( flag )
+    if(newFolderName.length >= 3 && flag)
+    {
+        const x = await addFolder(newFolderName,"root","root");
+        alert(x)
+        
+        if(x === 201)
         {
-            setNewFolderAdd(false);
-            toast.error("Folder Name must have atleast 4 characters.", {
+            document.getElementById("myModal").style.display="none"
+            toast.success("Folder added succesfully", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
-        }
-        else
-        {
-            setNewFolderAdd(false);
-            toast.error("Folder Name Already Exist.", {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            setAdded(!added);
+            
+            setNewFolderName("");
+            
         }
     }
+    else if( !flag )
+    {
+        toast.error("Folder Name Already Exist.", {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+    }
+    else
+    {
+        toast.error("Please try again", {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+    }
+}
 
-    const addFileHandler = (e) => {
-        setNewFileAdd(true);
-        e.preventDefault();
-        var flag = true;
-        
-        filesName.map((file) => {
-                if(file.name === fileInputData.topic)
-                {
-                    flag = false;
-                }
-            })
+const addFileHandler = async (e) => {
+    e.preventDefault();
+    var flag = true;
+    
+    filesName.map((file) => {
+            if(file.name === fileInputData.topic)
+            {
+                flag = false;
+            }
+        })
 
         if(fileInputData.topic.length >= 3 && flag)
         {
-            const data = {
-                createdAt : new Date(),
-                name : fileInputData.topic,
-                userId : 12345,
-                createdBy : fileInputData.name,
-                year : fileInputData.year,
-                description : fileInputData.description,
-                path : newFolderName === 'root'?[]:["parent folder path"],
-                parent : "root" ,
-                lastAccessed : null,
-                updatedAt : new Date()
-            }
-            fire
-            .firestore()
-            .collection("files")
-            .add(data)
-            .then((file)=>{
+            const x = await addFile(fileInputData.topic,fileInputData.name,fileInputData.year,fileInputData.description,"root","root");
+            
+            if(x === 201)
+            {
                 setAdded(!added);
-                setNewFileAdd(false);
+                document.getElementById("myModal2").style.display="none"
                 setFileInputData({name:"",topic:"",year:"",description:""});
-                if(document.getElementById("myModal2"))
-                    document.getElementById("myModal2").style.display="none"
-                    toast.success("File Created Successfully", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-            })
-
+                toast.success("File added succesfully", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+            }
         }
-        else if( flag )
+        else if( !flag )
         {
-            setNewFileAdd(false);
-            toast.error("Folder Name must have atleast 4 characters.", {
+            toast.error("File Name Already Exist.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
         else
         {
-            setNewFileAdd(false);
-            toast.error("Folder Name Already Exist.", {
+            toast.error("Please try again", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
-    }
+}
 
-    const handleUpload = (e) => {
-        setNewUploadFileAdd(true);
-        e.preventDefault();
+const handleUpload = (e) => {
+    setNewUploadFileAdd(true);
+    e.preventDefault();
 
-        var flag = true;
+    var flag = true;
+    
+    uploadFilesName.map((file) => {
+            if(file.name === uploadNewFile.name)
+            {
+                flag = false;
+            }
+        })
+
+    if(flag)
+    {
+        const data = {
+            createdAt : new Date(),
+            name : uploadNewFile.name,
+            userId : 12345,
+            createdBy : "ankit",
+            path : newFolderName === 'root'?[]:["parent folder path"],
+            parent : "root" ,
+            lastAccessed : null,
+            // extension :  uploadNewFile.name? uploadNewFile.name.split(".")[1]:".txt",
+            updatedAt : new Date(),
+            url:""
+        }
         
-        uploadFilesName.map((file) => {
-                if(file.name === uploadNewFile.name)
-                {
-                    flag = false;
-                }
-            })
-
-        if(flag)
-        {
-            const data = {
-                createdAt : new Date(),
-                name : uploadNewFile.name,
-                userId : 12345,
-                createdBy : "ankit",
-                path : newFolderName === 'root'?[]:["parent folder path"],
-                parent : "root" ,
-                lastAccessed : null,
-                // extension :  uploadNewFile.name? uploadNewFile.name.split(".")[1]:".txt",
-                updatedAt : new Date(),
-                url:""
+        const uploadFileRef = fire.storage().ref(`uploads/${data.userId}/${ uploadNewFile.name}`);
+        
+        uploadFileRef.put(uploadNewFile).on("state_changed",(snapshot) => {
+            const progress = Math.round(
+            (snapshot.bytesTransferred/ snapshot.totalBytes) * 100
+            );
+        console.log(progress+ "%");
+        },
+        (error)=>{
+            console.log(error)
+        },
+        async()=>{
+            const fileData = await uploadFileRef.getDownloadURL();
+            const x= await uploadFile(uploadNewFile.name,"root","root",fileData);
+            if(x===201)
+            {
+                setAdded(!added);
+                // setNewUploadFileAdd(false);
+                setUploadNewFile("");
+                toast.success("File Uploaded Successfully", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
             }
             
-            const uploadFileRef = fire.storage().ref(`uploads/${data.userId}/${ uploadNewFile.name}`);
-            
-            uploadFileRef.put(uploadNewFile).on("state_changed",(snapshot) => {
-                const progress = Math.round(
-                (snapshot.bytesTransferred/ snapshot.totalBytes) * 100
-                );
-            console.log(progress+ "%");
-            },
-            (error)=>{
-                console.log(error)
-            },
-            async()=>{
-                const fileData = await uploadFileRef.getDownloadURL();
-                data.url=fileData;
-                fire
-                .firestore()
-                .collection("uploads")
-                .add(data)
-                .then((file)=>{
-                    setAdded(!added);
-                    setNewUploadFileAdd(false);
-                    setUploadNewFile("");
-                    setNewFolderName("");
-                    toast.success("File Uploaded Successfully", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-                })
-            });
-        }
-        
-        else
-        {
-            setNewUploadFileAdd(false);
-            toast.error("File already uploaded.", {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
-        }
+        });
     }
+    
+    else
+    {
+        setNewUploadFileAdd(false);
+        toast.error("File already uploaded.", {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+    }
+}
 
     const onChangeHandler = (e) => {
         (setNewFolderName(e.target.value));
@@ -408,7 +372,7 @@ const Home = () => {
             <div className='text-center pt-2 pb-3 md:pl-2'>Created Files</div>
             <div className="grid grid-cols-2 md:grid-cols-6">
                 {filesName ? filesName.map((file) => (
-                    <div><File key={file.userId} parent={file.parent} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
+                    <div><File key={file.userId} parent={file.parent} name={file.name} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
                 :
                  ""}
@@ -420,7 +384,7 @@ const Home = () => {
             <div className='text-center pt-2 pb-3'>Uploaded Files</div>
             <div className="grid grid-cols-2 md:grid-cols-6">
                 {uploadFilesName ? uploadFilesName.map((upload) => (
-                    <div><Upload key={upload.userId} parent={upload.parent} name={upload.name} url={upload.url}/></div>
+                    <div><Upload parent={upload.parent} name={upload.name} url={upload.url}/></div>
                 )) 
                 :
                  ""}

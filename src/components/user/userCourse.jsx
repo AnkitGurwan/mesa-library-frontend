@@ -21,19 +21,18 @@ const Home = () => {
     const Navigate = useNavigate();
     const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
-    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === course});
+    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === course && eachFolder.supParent === "root"});
 
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == course});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == course && eachFolder.supParent === "root"});
 
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == course});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == course && eachFolder.supParent === "root"});
 
     var path =  useSelector(state => state.Files.userPath);
 
 
     const getItem = async () => {
-        if(foldersName.length === 0)
         await GetDetails();
         const x = localStorage.getItem('pathAdmin');
 

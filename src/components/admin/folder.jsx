@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Folder = (props) => {
   const dispatch = useDispatch();
   const [showDelete,setShowDelete] = useState(false);
-  const { GetDetails } = useContext(AuthContext);
+  const { removeFolder , GetDetails } = useContext(AuthContext);
   
   const clickHandler = () => {
     dispatch(setPath(props.name));
@@ -25,17 +25,9 @@ const Folder = (props) => {
     localStorage.setItem('pathAdmin',x);
   }
 
-  const deleteHandler = () => {
-    fire.firestore().collection("folders").where('name','==',props.name).where('parent','==',props.parent).get().then(function(querySnapshot) {
-      querySnapshot.forEach(async function(doc) {
-          doc.ref.delete();
-          toast.success("Folder Deleted Successfully", {
-            position: toast.POSITION.BOTTOM_RIGHT
-        });
-        await GetDetails();
-      });
-  });
-  
+  const deleteHandler = async () => {
+    const x = await removeFolder(props.name,props.parent);
+    if(x===201)GetDetails();
   }
 
   return (

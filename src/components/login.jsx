@@ -8,7 +8,7 @@ import logo from './images/mesa-logo.png';
 import { Spinner } from "@material-tailwind/react";
 
 const Login = () => {
-    const {userLogin} = useContext(AuthContext);
+    const { userLogin , loginUser } = useContext(AuthContext);
     const [user , setUser] = useState({email:"",password:""});
     const [loading,setLoading] = useState(false);
     const Navigate = useNavigate();
@@ -21,57 +21,44 @@ const Login = () => {
         await userLogin();
     }
 
-    const submitHandler = (e) => {
-        console.log("kk",user.email)
+    const submitHandler = async (e) => {
         setLoading(true);
         e.preventDefault();
-        const mailId = user.email;
+        
         if(user.email && user.password)
         {
-            fire
-            .auth()
-            .signInWithEmailAndPassword(user.email,user.password)
-            .then((user)=>{
-                const data = {
-                    adminId : mailId,
-                    isAuth : true
-                }
-                localStorage.setItem('adminId',data.adminId);
-                console.log(data.adminId)
-        
-                fire
-                .firestore()
-                .collection("adminAuth")
-                .add(data)
-                .then(()=>{})
-
-                console.log(user)
-                setLoading(false);
+            const x = await loginUser(user.email,user.password);
+            if(x === 200)
+            {
                 toast.success("Logged In Successfully", {
-                    position: toast.POSITION.TOP_RIGHT
+                    position: toast.POSITION.BOTTOM_RIGHT
                 });
                 Navigate('/root');
-            })
-            .catch((error)=>{
-                setLoading(false);
-                if(error.code === "auth/invalid-login-credentials")
-                    toast.error("Invalid Password", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-                else if(error.code === "auth/too-many-requests")
-                {
-                    toast.error("Too many retry's. Your account is temporarily blocked. Try again after some time.", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-                }
-                else{
-                    toast.error("Please try again", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-                }
+            }
+            else if(x === 400)
+            {
+                toast.error("Incorrect User Id", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+            }
+            else if(x === 401)
+            {
+                toast.error("Incorrect password", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+            }
+            else 
+            {
+                toast.error("Please try again", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+            }
+        }
+        else 
+        {
+            toast.error("Please fill details completely.", {
+                position: toast.POSITION.BOTTOM_RIGHT
             });
-
-           
         }
     }
 

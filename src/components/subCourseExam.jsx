@@ -12,26 +12,26 @@ import { setReduxFiles, setReduxUploadedFiles, setUpdatePath } from '../redux/st
 import AuthContext from '../context/auth/AuthContext';
 
 const Home = () => {
-    const { GetDetails } = useContext(AuthContext);
+    const { GetDetails , addFolder, addFile , uploadFile } = useContext(AuthContext);
     const [newFolderName, setNewFolderName] = useState("");
     const dispatch = useDispatch();
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
-    const { subExams } = useParams();
+    const { subExams , exams } = useParams();
     const Navigate = useNavigate();
     const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
-    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === subExams});
+    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
 
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams && eachFolder.supParent === exams});
 
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams && eachFolder.supParent === exams});
 
     var path =  useSelector(state => state.Files.path);
     const getItem = async () => {
-        if(foldersName.length === 0)
+        // if(allFoldersName.length===0)
         await GetDetails();
         
         const x = localStorage.getItem('pathAdmin');
@@ -59,113 +59,82 @@ const Home = () => {
     setFileInputData({...fileInputData,[e.target.name] : e.target.value})
   }
 
-    const addFolderHandler = (e) => {
-        e.preventDefault();
-        var flag = true;
-        
-        foldersName.map((folder) => {
-                if(folder.name === newFolderName)
-                {
-                    flag = false;
-                }
-            })
-
-        if(newFolderName.length > 3 && flag)
-        {
-            const data = {
-                createdAt : new Date(),
-                name : newFolderName,
-                userId : 12345,
-                createdBy : 'ankit',
-                path : newFolderName==='root'?[]:["parent folder path"],
-                parent : subExams ,
-                lastAccessed : null,
-                updatedAt : new Date()
+  const addFolderHandler = async (e) => {
+    e.preventDefault();
+    var flag = true;
+    
+    foldersName.map((folder) => {
+            if(folder.name === newFolderName)
+            {
+                flag = false;
             }
-            fire
-            .firestore()
-            .collection("folders")
-            .add(data)
-            .then((folder)=>{
-                setAdded(!added);
-                setNewFolderName("");
-                if(document.getElementById("myModal"))
-                    document.getElementById("myModal").style.display="none"
-                    toast.success("Folder Added Successfully", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-            })
+        })
 
-        }
-        else if( flag )
+    if(newFolderName.length >= 3 && flag)
+    {
+        const x = await addFolder(newFolderName,subExams,exams);
+        
+        if(x === 201)
         {
-            toast.error("Folder Name must have atleast 4 characters.", {
+            toast.success("Folder added succesfully", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
-        }
-        else
-        {
-            toast.error("Folder Name Already Exist.", {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            setAdded(!added);
+            document.getElementById("myModal").style.display="none"
+            setNewFolderName("");
+            
         }
     }
+    else if( !flag )
+    {
+        toast.error("Folder Name Already Exist.", {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+    }
+    else
+    {
+        toast.error("Please try again", {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+    }
+}
 
-    const addFileHandler = (e) => {
-        e.preventDefault();
-        var flag = true;
-        
-        filesName.map((file) => {
-                if(file.name === fileInputData.topic)
-                {
-                    flag = false;
-                }
-            })
+const addFileHandler = async (e) => {
+    e.preventDefault();
+    var flag = true;
+    
+    filesName.map((file) => {
+            if(file.name === fileInputData.topic)
+            {
+                flag = false;
+            }
+        })
 
         if(fileInputData.topic.length >= 3 && flag)
         {
-            const data = {
-                createdAt : new Date(),
-                name : fileInputData.topic,
-                userId : 12345,
-                createdBy : fileInputData.name,
-                year : fileInputData.year,
-                description : fileInputData.description,
-                path : newFolderName === 'root'?[]:["parent folder path"],
-                parent : subExams ,
-                lastAccessed : null,
-                updatedAt : new Date()
-            }
-            fire
-            .firestore()
-            .collection("files")
-            .add(data)
-            .then((file)=>{
-                setAdded(!added);
-                setFileInputData({name:"",topic:"",year:"",description:""});
-                if(document.getElementById("myModal2"))
-                    document.getElementById("myModal2").style.display="none"
-                    toast.success("File Created Successfully", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-            })
-
+            const x = await addFile(fileInputData.topic,fileInputData.name,fileInputData.year,fileInputData.description,subExams,exams);
+            
+            if(x === 201)
+            toast.success("File added succesfully", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
         }
-        else if( flag )
+        else if( !flag )
         {
-            toast.error("Folder Name must have atleast 4 characters.", {
+            toast.error("File Name Already Exist.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
         else
         {
-            toast.error("Folder Name Already Exist.", {
+            toast.error("Please try again", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
     }
 
     const handleUpload = (e) => {
+        // setNewUploadFileAdd(true);
         e.preventDefault();
         var flag = true;
         
@@ -204,15 +173,16 @@ const Home = () => {
             },
             async()=>{
                 const fileData = await uploadFileRef.getDownloadURL();
-                data.url=fileData;
-                fire
-                .firestore()
-                .collection("uploads")
-                .add(data)
-                .then((file)=>{
-                    setAdded(!added);
-                    setUploadNewFile("");
-                })
+                const x= await uploadFile(uploadNewFile.name,"root","root",fileData);
+            if(x===201)
+            {
+                setAdded(!added);
+                // setNewUploadFileAdd(false);
+                setUploadNewFile("");
+                toast.success("File Uploaded Successfully", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+            }
             });
 
         }

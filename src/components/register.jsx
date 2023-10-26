@@ -1,12 +1,14 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../context/auth/AuthContext'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import fire from '../config/firebase';
 import logo from './images/mesa-logo.png';
 import { Spinner } from "@material-tailwind/react";
 
-const Login = () => {
+const Register = () => {
+    const { registerUser } = useContext(AuthContext);
     const [user , setUser] = useState({email:"",password:"",confirmPassword:""});
     const [loading,setLoading] = useState(false);
     const Navigate = useNavigate();
@@ -16,83 +18,50 @@ const Login = () => {
     }
 
 
-    const clickHandler = async () => {
-       
-    }
-
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         setLoading(true);
         e.preventDefault();
         if(user.password != user.confirmPassword)
         {
-            alert(user.password);
-            alert(useEffect.confirmPassword)
             toast.error("Password does not match", {
                 position: toast.POSITION.BOTTOM_RIGHT
               });
         }
         if(user.email && user.password)
         {
-            fire
-            .auth()
-            .createUserWithEmailAndPassword(user.email,user.password)
-            .then((user) => {
-                fire
-                .auth()
-                .currentUser
-                .updateProfile({
-                displayName: user.email
-                }).then(() => {
-
-                    const data = {
-                        userId : user.email,
-                        isAuth : true
-                    }
-
-                    localStorage.setItem('adminId',user.email);
-                    fire
-                    .firestore()
-                    .collection("adminAuth")
-                    .add(data)
-                    .then(()=>{})
-                    
-                    setLoading(false);
-                    const currentUser = fire.auth().currentUser;
-                    toast.success("Registered Successfully", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-                    Navigate('/root');
-                })
-                .catch((err)=>{
-                    setLoading(false);
-                    toast.error("Please try again.", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-                })
-            })
-            .catch((err) => {
-                setLoading(false);
-                if(err.code === "auth/email-already-in-use"){
-                    toast.error("Email already in use", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-                }
-                if(err.code === 'auth/invalid-email'){
-                    toast.error("Invalid email", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-                }
-                if(err.code === 'auth/weak-password'){
-                    toast.error("Weak password", {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-                }
-            })
+            const x = await registerUser(user.email,user.password);
+            alert(x)
+            if(x === 201)
+            {
+                toast.success("Registered Successfully", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+                Navigate('/root');
+            }
+            else if(x === 401)
+            {
+                toast.warning("Email already in use", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+                Navigate('/root');
+            }
+            else 
+            {
+                toast.error("Please try again", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+            }
+        }
+        else 
+        {
+            toast.error("Please fill details completely.", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
         }
     }
     return (
-        <div>
-        {false
+        <div className='h-full '>
+        {true
             ?
             <div className='w-full h-full flex flex-col md:flex-row overflow-hidden' style={{"backgroundColor":"rgb(220 252 231)"}}> 
            
@@ -189,4 +158,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default Register;

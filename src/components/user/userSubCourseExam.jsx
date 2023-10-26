@@ -15,22 +15,22 @@ import BackgroundParticle from './backgroundParticle';
 const Home = () => {
     const { GetDetails } = useContext(AuthContext);
     const dispatch = useDispatch();
-    const { subExams } = useParams();
+    const { subExams , exams } = useParams();
     const Navigate = useNavigate();
     const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
-    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === subExams});
+    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
 
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent === subExams});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
 
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent === subExams});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
 
     var path =  useSelector(state => state.Files.userPath);
     
     const getItem = async () => {
-        if(foldersName.length === 0)
+        if(allFoldersName.length === 0)
         await GetDetails();
         const x = localStorage.getItem('pathAdmin');
         var str = "";

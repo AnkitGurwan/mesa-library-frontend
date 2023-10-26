@@ -10,18 +10,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 const File = (props) => {
   const [showDelete,setShowDelete] = useState(false);
-  const { GetDetails } = useContext(AuthContext);
+  const { removeUpload , GetDetails } = useContext(AuthContext);
 
-  const deleteHandler = () => {
-    fire.firestore().collection("uploads").where('name','==',props.name).where('parent','==',props.parent).get().then(function(querySnapshot) {
-      querySnapshot.forEach(async function(doc) {
-          doc.ref.delete();
-          toast.success("File Removed Successfully", {
-            position: toast.POSITION.BOTTOM_RIGHT
-        });
-        await GetDetails();
-      });
-  });
+  const deleteHandler = async () => {
+    const x = await removeUpload(props.name,props.parent);
+    if(x===200)GetDetails();
   
   }
   

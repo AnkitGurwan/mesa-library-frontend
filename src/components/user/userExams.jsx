@@ -17,22 +17,20 @@ const Home = () => {
     const { GetDetails } = useContext(AuthContext);
     const dispatch = useDispatch();
     const Navigate = useNavigate();
-    const { exams } = useParams();
+    const { exams , course } = useParams();
     const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
-    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === exams});
+    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === exams && eachFolder.supParent === course});
 
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == exams});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == exams && eachFolder.supParent === course});
 
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == exams});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == exams && eachFolder.supParent === course});
 
     var path =  useSelector(state => state.Files.userPath);
     const getItem = async () => {
-        if(foldersName.length === 0)
         await GetDetails();
-    
         const x = localStorage.getItem('pathAdmin');
         var str = "";
         var pathArray = ["main"];
