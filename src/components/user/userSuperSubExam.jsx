@@ -29,7 +29,9 @@ const Home = () => {
     var path =  useSelector(state => state.Files.userPath);
 
     const getItem = async () => {
+        if(foldersName.length === 0)
         await GetDetails();
+    
         const x = localStorage.getItem('pathAdmin');
         var str = "";
         var pathArray = ["main"];

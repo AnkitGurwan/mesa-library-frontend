@@ -58,6 +58,8 @@ const Home = () => {
         } 
 
         localStorage.setItem('pathAdmin',"");
+
+        if(foldersName.length === 0)
         await GetDetails();
     }
     

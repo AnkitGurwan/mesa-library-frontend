@@ -31,6 +31,7 @@ const Home = () => {
 
     var path =  useSelector(state => state.Files.path);
     const getItem = async () => {
+        if(foldersName.length === 0)
         await GetDetails();
         
         const x = localStorage.getItem('pathAdmin');
