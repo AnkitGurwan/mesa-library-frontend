@@ -17,6 +17,7 @@ import LoaderLottie from './user/loaderlottie';
 const Home = () => {
     const { GetDetails , addFolder, addFile , uploadFile } = useContext(AuthContext);
     const [newFolderName, setNewFolderName] = useState("");
+    const [progress , setProgress] = useState("");
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
     const [newFolderAdd,setNewFolderAdd]  = useState(false);
@@ -190,18 +191,18 @@ const handleUpload = (e) => {
             const progress = Math.round(
             (snapshot.bytesTransferred/ snapshot.totalBytes) * 100
             );
-        console.log(progress+ "%");
+        setProgress(progress+ "%");
         },
         (error)=>{
             console.log(error)
         },
         async()=>{
-            const fileData = await uploadFileRef.getDownloadURL();
+            var fileData = await uploadFileRef.getDownloadURL();
             const x= await uploadFile(uploadNewFile.name,"root","root",fileData);
-            if(x===201)
+            if(x === 201)
             {
                 setAdded(!added);
-                // setNewUploadFileAdd(false);
+                setNewUploadFileAdd(false);
                 setUploadNewFile("");
                 toast.success("File Uploaded Successfully", {
                     position: toast.POSITION.BOTTOM_RIGHT
@@ -250,7 +251,7 @@ const handleUpload = (e) => {
                 <form onSubmit={handleUpload} className='flex items-center w-40 md:w-64 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-upload px-1 md:px-2"></i>
                     <input type='file' className='px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/>
-                    {uploadNewFile?<button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
+                    {uploadNewFile?!newUploadFileAdd?<button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:<div className='flex justify-center items-center h-4 w-24'><Loader/></div>:""}
                 </form>
                 <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-file px-2"></i>
@@ -372,7 +373,7 @@ const handleUpload = (e) => {
             <div className='text-center pt-2 pb-3 md:pl-2'>Created Files</div>
             <div className="grid grid-cols-2 md:grid-cols-6">
                 {filesName ? filesName.map((file) => (
-                    <div><File key={file.userId} parent={file.parent} name={file.name} description={file.description} year={file.year} topic={file.name}/></div>
+                    <div><File key={file.userId} parent={file.parent} name={file.name} description={file.description} year={file.year} topic={file.topic}/></div>
                 )) 
                 :
                  ""}
@@ -407,6 +408,7 @@ const handleUpload = (e) => {
                     </div>
                 </div>
             </div>}
+            {newUploadFileAdd?<div className='fixed bottom-12 right-12 bg-black text-white rounded-sm w-12 h-10 flex justify-center items-center'>{progress}</div>:""}
     </div>
   )
 }

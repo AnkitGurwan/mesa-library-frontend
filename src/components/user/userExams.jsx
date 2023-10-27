@@ -97,7 +97,10 @@ const Home = () => {
                 pathState
                 ?
                 pathState.map((indPath) => { return <div className='flex items-center'><button onClick={pathHandler} className='mr-1 md:mr-2 cursor-pointer text-[16px] md:text-lg capitalize hover:bg-blue-400 px-1 rounded-sm hover:text-white'>{indPath}</button>
-                <div className='mr-1 md:mr-2'>{`>`}</div></div>}):""
+                <div className='mr-1 md:mr-2'>{`>`}</div></div>})
+                :
+                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
+                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
                 }
             </div>
         </div>

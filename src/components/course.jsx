@@ -17,6 +17,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
+    const [progress , setProgress] = useState("");
     const { course  } = useParams();
     const Navigate = useNavigate();
     const [pathState,setPathState] = useState("");
@@ -24,7 +25,7 @@ const Home = () => {
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === course && eachFolder.supParent === "root"});
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
     const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == course && eachFolder.supParent === "root"});
-
+    const [newUploadFileAdd,setNewUploadFileAdd]  = useState(false);
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
     const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == course && eachFolder.supParent === "root"});
 
@@ -133,6 +134,7 @@ const Home = () => {
     }
 
     const handleUpload = async (e) => {
+        setNewUploadFileAdd(true);
         e.preventDefault();
         var flag = true;
         
@@ -165,7 +167,7 @@ const Home = () => {
                 const progress = Math.round(
                 (snapshot.bytesTransferred/ snapshot.totalBytes) * 100
                 );
-            console.log(progress+ "%");
+                setProgress(progress+ "%");
             },
             (error)=>{
                 console.log(error)
@@ -176,7 +178,7 @@ const Home = () => {
             if(x===201)
             {
                 setAdded(!added);
-                // setNewUploadFileAdd(false);
+                setNewUploadFileAdd(false);
                 setUploadNewFile("");
                 toast.success("File Uploaded Successfully", {
                     position: toast.POSITION.BOTTOM_RIGHT
@@ -341,7 +343,9 @@ const Home = () => {
                 pathState
                 ?
                 pathState.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
-                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>}):""
+                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>}):
+                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
+                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
                 }
                 
             </div>
@@ -384,7 +388,7 @@ const Home = () => {
 
         
 
-
+        {newUploadFileAdd?<div className='fixed bottom-12 right-12 bg-black text-white rounded-sm w-12 h-10 flex justify-center items-center'>{progress}</div>:""}
             
     </div>
   )

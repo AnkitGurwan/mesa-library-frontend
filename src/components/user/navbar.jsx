@@ -11,7 +11,7 @@ const Navbar = () => {
                 </div>
                 <div>
                     <Link className='px-5 text-lg md:text-xl hover:underline tracking-wide' to={'/feedback'}>Feedback</Link>
-                    <button onClick={()=>{Navigate('/')}} className='tracking-tight hover:underline hover:scale-105 px-2 mr-5 cursor-pointer text-lg md:text-xl'>Log Out</button>
+                    <button onClick={()=>{Navigate('/');localStorage.clear();}} className='tracking-tight hover:underline hover:scale-105 px-2 mr-5 cursor-pointer text-lg md:text-xl'>Log Out</button>
                 </div>
                 
             </div>

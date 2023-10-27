@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 const AuthState = (props) => {
     const [studInfo,setStudInfo] = useState({ name : "" , email : "", roll : ""});
-    const url = process.env.BACKEND_URL;
+    const url = process.env.REACT_APP_BACKEND_URL
     const dispatch = useDispatch();
 
     const userLogin = async()=>{
@@ -208,14 +208,13 @@ const AuthState = (props) => {
         return response.status;
     }
 
-    const uploadFile = async (name,parent,supParent,url) => {
-        alert(name)
+    const uploadFile = async (name,parent,supParent,urlFirebase) => {
         const response = await fetch(`${url}/post/upload`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name,parent,supParent,url }),
+            body: JSON.stringify({ name,parent,supParent,urlFirebase }),
         });
         const json = await response.json();
         return response.status;

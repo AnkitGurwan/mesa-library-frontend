@@ -22,10 +22,10 @@ const Home = () => {
     const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
-
+    const [progress , setProgress] = useState("");
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
     const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams && eachFolder.supParent === exams});
-
+    const [newUploadFileAdd,setNewUploadFileAdd]  = useState(false);
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
     const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams && eachFolder.supParent === exams});
 
@@ -134,7 +134,7 @@ const addFileHandler = async (e) => {
     }
 
     const handleUpload = (e) => {
-        // setNewUploadFileAdd(true);
+        setNewUploadFileAdd(true);
         e.preventDefault();
         var flag = true;
         
@@ -166,7 +166,7 @@ const addFileHandler = async (e) => {
                 const progress = Math.round(
                 (snapshot.bytesTransferred/ snapshot.totalBytes) * 100
                 );
-            console.log(progress+ "%");
+                setProgress(progress+ "%");
             },
             (error)=>{
                 console.log(error)
@@ -177,7 +177,7 @@ const addFileHandler = async (e) => {
             if(x===201)
             {
                 setAdded(!added);
-                // setNewUploadFileAdd(false);
+                setNewUploadFileAdd(false);
                 setUploadNewFile("");
                 toast.success("File Uploaded Successfully", {
                     position: toast.POSITION.BOTTOM_RIGHT
@@ -342,7 +342,10 @@ const addFileHandler = async (e) => {
                 pathState
                 ?
                 pathState.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
-                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>}):""
+                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
+                :
+                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
+                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
                 }
                 
             </div>
@@ -384,7 +387,7 @@ const addFileHandler = async (e) => {
         </div>
 
         
-
+        {newUploadFileAdd?<div className='fixed bottom-12 right-12 bg-black text-white rounded-sm w-12 h-10 flex justify-center items-center'>{progress}</div>:""}
 
             
     </div>
