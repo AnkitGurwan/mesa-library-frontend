@@ -43,7 +43,6 @@ const Register = () => {
                 toast.warning("Email already in use", {
                     position: toast.POSITION.BOTTOM_RIGHT
                 });
-                Navigate('/root');
             }
             else 
             {
