@@ -344,7 +344,7 @@ const addFileHandler = async (e) => {
                 pathState.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
                 <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
                 :
-                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
+                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button className='mr-3 '>{indPath}</button>
                 <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
                 }
                 

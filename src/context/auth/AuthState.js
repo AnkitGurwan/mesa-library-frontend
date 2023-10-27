@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 const AuthState = (props) => {
     const [studInfo,setStudInfo] = useState({ name : "" , email : "", roll : ""});
-    const url = process.env.REACT_APP_BACKEND_URL
+    const url = process.env.REACT_APP_FRONTEND_URL
     const dispatch = useDispatch();
 
     const userLogin = async()=>{
@@ -42,7 +42,6 @@ const AuthState = (props) => {
     }
 
     const getToken = async(code)=>{
-        console.log("json.studInformation")
         const response = await fetch(`${url}/auth/microsoft/getToken`, {
             method: 'GET',
             headers: {
@@ -52,7 +51,6 @@ const AuthState = (props) => {
         });
 
         const json=await response.json();
-        console.log(json.studInformation)
         localStorage.setItem('studName',json.studInformation.givenName);
         localStorage.setItem('studId',json.studInformation.mail);
         localStorage.setItem('studRoll',json.studInformation.surname);
@@ -106,9 +104,7 @@ const AuthState = (props) => {
                 'Content-Type': 'application/json',
             }
         });
-        console.log("i m here bro")
         const folders = await response1.json();
-        console.log("folder",folders)
         dispatch(setReduxFolders(folders));
 
         const files = await response2.json();
@@ -140,14 +136,13 @@ const AuthState = (props) => {
 
         await fire.firestore().collection("userAuth").get().then(async (users)=>{
             const userData = await users.docs.map((user)=>user.data());
-            console.log(userData)
+
             const foldersName = userData.filter((eachUser)=>{return eachUser.userId === userId});
-            console.log("hii",foldersName)
+
             flag = foldersName.length > 0 ? true:false;
 
             if(foldersName.length && foldersName[0].isAuth === true)
                 flag=true;
-                console.log("kkk",flag)
                 
         });
         return flag;
@@ -159,9 +154,7 @@ const AuthState = (props) => {
 
         await fire.firestore().collection("adminAuth").get().then(async (users)=>{
             const userData = await users.docs.map((user)=>user.data());
-            console.log(userData)
             const foldersName = userData.filter((eachUser)=>{return eachUser.adminId === AdminId});
-            console.log("hii",foldersName)
 
             if(foldersName.length && foldersName[0].isAuth === true)
                 flag=true;
@@ -179,12 +172,12 @@ const AuthState = (props) => {
             },
             body: JSON.stringify({ email, header,body }),
         });
-        console.log(response.json())
+
         return response.status;
     }
 
     const addFolder = async (name, parent,supParent)=>{
-        console.log(name)
+
         const response = await fetch(`${url}/post/folder`, {
             method: 'POST',
             headers: {
@@ -221,7 +214,6 @@ const AuthState = (props) => {
     }
 
     const removeFolder = async (name, parent)=>{
-        console.log(name)
         const response = await fetch(`${url}/post/folder`, {
             method: 'DELETE',
             headers: {
@@ -234,7 +226,6 @@ const AuthState = (props) => {
     }
 
     const removeFile = async (topic, parent)=>{
-        console.log(topic)
         const response = await fetch(`${url}/post/file`, {
             method: 'DELETE',
             headers: {
@@ -247,7 +238,6 @@ const AuthState = (props) => {
     }
 
     const removeUpload = async (name, parent)=>{
-        console.log(name)
         const response = await fetch(`${url}/post/upload`, {
             method: 'DELETE',
             headers: {
