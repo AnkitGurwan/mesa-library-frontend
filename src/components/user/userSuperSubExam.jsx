@@ -57,10 +57,6 @@ const Home = () => {
             newArray+="$";
         }
         localStorage.setItem('pathAdmin',newArray);
-
-        
-        path = pathArray;
-        setPathState(path);
     }
     
     useEffect(()=>{
@@ -94,12 +90,7 @@ const Home = () => {
         <div className='z-10 flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-20 md:top-16 w-full h-12'>
             <div className='flex mx-2 md:mx-5'>
                 {
-                pathState
-                ?
-                pathState.map((indPath) => { return <div className='flex items-center'><button onClick={pathHandler} className='mr-1 md:mr-2 cursor-pointer text-[16px] md:text-lg capitalize hover:bg-blue-400 px-1 rounded-sm hover:text-white'>{indPath}</button>
-                <div className='mr-1 md:mr-2'>{`>`}</div></div>})
-                :
-                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button className='mr-3 '>{indPath}</button>
+                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1 capitalize'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
                 <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
                 }
             </div>
