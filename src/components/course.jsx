@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Upload from "./admin/upload";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setReduxFiles, setReduxUploadedFiles, setUpdatePath } from '../redux/storage/storageSlice';
+import { setReduxFiles, setReduxUploadedFiles, setUpdatePath ,setPath } from '../redux/storage/storageSlice';
 import AuthContext from '../context/auth/AuthContext';
 
 const Home = () => {
@@ -32,22 +32,15 @@ const Home = () => {
     var path =  useSelector(state => state.Files.path);
 
     const getItem = async () => {
-        // if(allFoldersName.length===0)
         await GetDetails();
-        const x = localStorage.getItem('pathAdmin');
-        var str = "";
+
         var pathArray = ["root"];
-        for(let i=0; i < x.length;i++)
+        pathArray.push(course);
+        
+        if(path.length <= 1)
         {
-            if(x[i] === '$')
-            {
-                pathArray.push(str);
-                str = "";
-            }
-            else str+=x[i];
+            dispatch(setPath(course));
         }
-        path = pathArray;
-        setPathState(path);
     }
     useEffect(() => {
         getItem();
@@ -203,21 +196,17 @@ const Home = () => {
     const pathHandler = (e) => {
         dispatch(setUpdatePath(e.target.innerText));
         var x = "";
-        var y = "";
+
+
         for(let i=0;i<path.length;i++)
         {
             x += "/";
             x += path[i];
-            if(i != 0)
-            {
-                y += path[i];
-                y+="$";
-            }
+
             if(e.target.innerText === path[i])
             break;
             
         }
-        localStorage.setItem('pathAdmin',y);
         Navigate(`${x}`);
     }
 
@@ -340,11 +329,8 @@ const Home = () => {
         <div className='flex justify-between items-center py-3 border-b'>
             <div className='flex mx-2 md:mx-6'>
                 {
-                pathState
-                ?
-                pathState.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
-                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>}):
-                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button className='mr-3 '>{indPath}</button>
+               
+                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler}className='mr-3 '>{indPath}</button>
                 <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
                 }
                 

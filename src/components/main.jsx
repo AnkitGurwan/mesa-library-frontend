@@ -87,7 +87,7 @@ const HomePage = () => {
             :
             allowed
             ?
-            <div className='w-full' style={{'background-image': 'linear-gradient(to top left, white 0%, #132d7a 74%)'}}>
+            <div className='w-full h-full' style={{'background-image': 'linear-gradient(to top left, white 0%, #132d7a 74%)'}}>
                 <div className='w-full h-1/2 text-white'>
                     <div className='flex justify-between items-center mx-8 py-4'>
                         <div className='text-xl md:text-3xl font-bold pl-2 md:pl-4 pt-0 md:pt-4'>MESA Library</div>

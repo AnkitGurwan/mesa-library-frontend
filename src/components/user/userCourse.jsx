@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Upload from "./userUpload2";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserUpdatePath } from '../../redux/storage/storageSlice';
+import { setUserUpdatePath ,setUserPath } from '../../redux/storage/storageSlice';
 import AuthContext from '../../context/auth/AuthContext';
 import BackgroundParticle from './backgroundParticle';
 import Navbar from './navbar';
@@ -34,38 +34,16 @@ const Home = () => {
 
     const getItem = async () => {
         await GetDetails();
-        const x = localStorage.getItem('pathAdmin');
+        
 
-        var str = "";
-        var pathArray = ["main"];
-        for(let i=0; i<x.length;i++)
+        if(path.length <= 1)
         {
-            if(x[i]==='$')
-            {
-                pathArray.push(str);
-                if(str === course)
-                {
-                    dispatch(setUserUpdatePath(pathArray));
-                    path = pathArray;
-                    break;
-                }
-                str = "";
-                
-            }
-            else str+=x[i];
+            dispatch(setUserPath(course));
         }
-
-        var newArray = "";
-        for(let i=1; i<pathArray.length; i++)
-        {
-            newArray+=pathArray[i];
-            newArray+="$";
-        }
-        localStorage.setItem('pathAdmin',newArray);
     }
     useEffect(()=>{
         getItem();
-    },[]);
+    },[])
 
 
     const pathHandler = (e) => {

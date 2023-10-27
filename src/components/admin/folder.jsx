@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { setPath } from '../../redux/storage/storageSlice';
 import folder from '../images/folder.png';
-import fire from '../../config/firebase';
 import AuthContext from '../../context/auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -15,14 +14,6 @@ const Folder = (props) => {
   
   const clickHandler = () => {
     dispatch(setPath(props.name));
-    var x = "";
-    if(localStorage.getItem('pathAdmin'))
-    {
-        x = localStorage.getItem('pathAdmin')
-    }
-    x += props.name;
-    x += "$";
-    localStorage.setItem('pathAdmin',x);
   }
 
   const deleteHandler = async () => {

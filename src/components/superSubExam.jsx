@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Upload from "./admin/upload";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setReduxFiles, setReduxUploadedFiles, setUpdatePath } from '../redux/storage/storageSlice';
+import { setReduxFiles, setReduxUploadedFiles, setUpdatePath ,setPath } from '../redux/storage/storageSlice';
 import AuthContext from '../context/auth/AuthContext';
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
-    const { superSub , subExams } = useParams();
+    const { superSub , subExams , course , exams } = useParams();
     const Navigate = useNavigate();
     const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
@@ -30,24 +30,25 @@ const Home = () => {
     const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == superSub && eachFolder.supParent === subExams});
 
     var path =  useSelector(state => state.Files.path);
+
     const getItem = async () => {
         // if(allFoldersName.length===0)
         await GetDetails();
         
-        const x = localStorage.getItem('pathAdmin');
-        var str = "";
         var pathArray = ["root"];
-        for(let i=0; i<x.length;i++)
+        pathArray.push(course);
+        pathArray.push(exams);
+        pathArray.push(subExams);
+        pathArray.push(superSub);
+    
+        if(path.length <= 1)
         {
-            if(x[i]==='$')
-            {
-                pathArray.push(str);
-                str = "";
-            }
-            else str+=x[i];
+            dispatch(setPath(course));
+            dispatch(setPath(exams));
+            dispatch(setPath(subExams));
+            dispatch(setPath(superSub));
+            setPathState(pathArray);
         }
-        path = pathArray;
-        setPathState(path);
     }
     useEffect(()=>{
         getItem();
@@ -157,7 +158,7 @@ const addFileHandler = async (e) => {
                 name : uploadNewFile.name,
                 userId : 12345,
                 createdBy : "ankit",
-                path : newFolderName === 'root'?[]:["parent folder path"],
+                pathState : newFolderName === 'root'?[]:["parent folder pathState"],
                 parent : superSub ,
                 lastAccessed : null,
                 // extension :  uploadNewFile.name? uploadNewFile.name.split(".")[1]:".txt",
@@ -210,21 +211,16 @@ const addFileHandler = async (e) => {
     const pathHandler = (e) => {
         dispatch(setUpdatePath(e.target.innerText));
         var x = "";
-        var y = "";
-        for(let i=0;i<pathState.length;i++)
+
+        if(path.length === 1)path=pathState;
+        for(let i=0;i<path.length;i++)
         {
             x += "/";
-            x += pathState[i];
-            if(i != 0)
-            {
-                y += pathState[i];
-                y+="$";
-            }
-            if(e.target.innerText === pathState[i])
+            x += path[i];
+            if(e.target.innerText === path[i])
             break;
             
         }
-        localStorage.setItem('pathAdmin',y);
         Navigate(`${x}`);
     }
 
@@ -233,124 +229,18 @@ const addFileHandler = async (e) => {
         <div className='w-full h-16 text-end border-b flex items-center justify-end'>
             <button onClick={()=>{Navigate('/')}} className='text-white bg-black py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer'>Log Out</button>
         </div>
-        <div className='flex justify-end items-center py-3 border-b'>
+       
             
-            <div className='mr-8 flex'>
-                <form onSubmit={handleUpload} className='flex items-center w-40 md:w-64 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
-                    <i class="fa-solid fa-upload px-1 md:px-2"></i>
-                    <input type='file' className='px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/>
-                    {uploadNewFile?<button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
-                </form>
-                <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
-                    <i class="fa-solid fa-file px-2"></i>
-                    <div className='px-1 text-xs md:text-lg'>Create File</div>
-                </button>
-                <button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='flex items-center border py-1 px-1 mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
-                    <i class="fa-solid fa-folder px-1 md:px-2"></i>
-                    <div  className='px-1 text-xs md:text-lg'>Add Folder</div>
-                </button>
-                
-                
-            </div>
-            <div id="myModal" class="modal2">
-            <div class="modal-content3">
-                <button onClick={()=>{document.getElementById("myModal").style.display="none"}} class="close mt-1 h-8 flex justify-center items-center cursor-pointer hover:bg-gray-200 rounded-full w-8">&times;</button>
-                    <form class="w-60 mx-auto bg-white px-2" onSubmit={submit}>
-                        
-                    <div class="mb-1">
-                        
-                      <input
-                        class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                        superSub="text"
-                        placeholder="Enter Folder Name"
-                        name="folderName"
-                        onChange={onChangeHandler}
-                        value={newFolderName}
-                        required
-                      />
-                    </div>
-                    
-                    <div class="flex items-center justify-center">
-                      <button id='myButton' onClick={addFolderHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-100" superSub="submit">
-                        Add Folder
-                      </button>
-
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div id="myModal2" class="modal3">
-                <div class="modal-content4">
-                    <button onClick={()=>{document.getElementById("myModal2").style.display="none"}} class="close mt-1 h-8 flex justify-center items-center cursor-pointer hover:bg-gray-200 rounded-full w-8">&times;</button>
-                        <form class="w-full h-68 mx-auto bg-white px-2" onSubmit={submit}>
-                        <div class="mb-1 w-full flex">  
-                            <input
-                                class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline mr-2"
-                                superSub="text"
-                                placeholder="Enter Your Name"
-                                name="name"
-                                onChange={onChangeHandler2}
-                                value={fileInputData.name}
-                                required
-                                autoComplete='off'
-                            />
-                            <input
-                                class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline ml-2"
-                                superSub="text"
-                                placeholder="Year Of Studying"
-                                name="year"
-                                onChange={onChangeHandler2}
-                                value={fileInputData.year}
-                                required
-                                autoComplete='off'
-                            />
-                        </div>
-                        <div class="mb-1 w-full">  
-                            <input
-                                class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                                superSub="text"
-                                placeholder="Heading"
-                                name="topic"
-                                onChange={onChangeHandler2}
-                                value={fileInputData.topic}
-                                required
-                                autoComplete='off'
-                            />
-                        </div>
-                        <div class="mb-1 w-full">  
-                            <textarea
-                                class="appearance-none border text-sm rounded w-full h-40 mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                                superSub="text"
-                                placeholder="Decription"
-                                name="description"
-                                onChange={onChangeHandler2}
-                                value={fileInputData.description}
-                                required
-                                autoComplete='off'
-                            />
-                        </div>
-                        
-                        <div class="flex items-center justify-center">
-                        <button id='myButton' onClick={addFileHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-full" superSub="submit">
-                            Create File
-                        </button>
-
-                        </div>
-                    </form>
-                    </div>
-                </div>
-            
-        </div>
 
         <div className='flex justify-between items-center py-3 border-b'>
             <div className='flex mx-2 md:mx-6'>
-                {
-                pathState
+            {
+                path.length<2 && pathState
                 ?
-                pathState.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
+                pathState.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler}className='mr-3 '>{indPath}</button>
                 <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
                 :
-                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button className='mr-3 '>{indPath}</button>
+                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler}className='mr-3 '>{indPath}</button>
                 <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
                 }
                 

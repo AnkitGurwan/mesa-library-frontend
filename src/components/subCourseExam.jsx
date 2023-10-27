@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Upload from "./admin/upload";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setReduxFiles, setReduxUploadedFiles, setUpdatePath } from '../redux/storage/storageSlice';
+import { setReduxFiles, setReduxUploadedFiles, setUpdatePath , setPath } from '../redux/storage/storageSlice';
 import AuthContext from '../context/auth/AuthContext';
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
-    const { subExams , exams } = useParams();
+    const { subExams , exams , course } = useParams();
     const Navigate = useNavigate();
     const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
@@ -30,24 +30,21 @@ const Home = () => {
     const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams && eachFolder.supParent === exams});
 
     var path =  useSelector(state => state.Files.path);
+
     const getItem = async () => {
-        // if(allFoldersName.length===0)
         await GetDetails();
         
-        const x = localStorage.getItem('pathAdmin');
-        var str = "";
         var pathArray = ["root"];
-        for(let i=0; i<x.length;i++)
+        pathArray.push(course);
+        pathArray.push(exams);
+        pathArray.push(subExams);
+        
+        if(path.length <= 1)
         {
-            if(x[i]==='$')
-            {
-                pathArray.push(str);
-                str = "";
-            }
-            else str+=x[i];
+            dispatch(setPath(course));
+            dispatch(setPath(exams));
+            dispatch(setPath(subExams));
         }
-        path = pathArray;
-        setPathState(path);
     }
     useEffect(()=>{
         getItem();
@@ -152,7 +149,7 @@ const addFileHandler = async (e) => {
                 name : uploadNewFile.name,
                 userId : 12345,
                 createdBy : "ankit",
-                path : newFolderName === 'root'?[]:["parent folder path"],
+                pathState : newFolderName === 'root'?[]:["parent folder pathState"],
                 parent : subExams ,
                 lastAccessed : null,
                 // extension :  uploadNewFile.name? uploadNewFile.name.split(".")[1]:".txt",
@@ -205,21 +202,15 @@ const addFileHandler = async (e) => {
     const pathHandler = (e) => {
         dispatch(setUpdatePath(e.target.innerText));
         var x = "";
-        var y = "";
-        for(let i=0;i<pathState.length;i++)
+
+        for(let i=0;i<path.length;i++)
         {
             x += "/";
-            x += pathState[i];
-            if(i != 0)
-            {
-                y += pathState[i];
-                y+="$";
-            }
-            if(e.target.innerText === pathState[i])
+            x += path[i];
+            if(e.target.innerText === path[i])
             break;
             
         }
-        localStorage.setItem('pathAdmin',y);
         Navigate(`${x}`);
     }
   return (
@@ -338,13 +329,8 @@ const addFileHandler = async (e) => {
 
         <div className='flex justify-between items-center py-3 border-b'>
             <div className='flex mx-2 md:mx-6'>
-                {
-                pathState
-                ?
-                pathState.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
-                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
-                :
-                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button className='mr-3 '>{indPath}</button>
+            {
+                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler}className='mr-3 '>{indPath}</button>
                 <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
                 }
                 

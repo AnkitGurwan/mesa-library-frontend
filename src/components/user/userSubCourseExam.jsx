@@ -7,7 +7,7 @@ import Upload from "./userUpload2";
 
 import { useDispatch, useSelector } from 'react-redux';
 import AuthContext from '../../context/auth/AuthContext';
-import { setUserUpdatePath } from '../../redux/storage/storageSlice';
+import { setUserUpdatePath ,setUserPath } from '../../redux/storage/storageSlice';
 import Lottie from './backgroundlottie';
 import Navbar from './navbar';
 import BackgroundParticle from './backgroundParticle';
@@ -15,7 +15,7 @@ import BackgroundParticle from './backgroundParticle';
 const Home = () => {
     const { GetDetails } = useContext(AuthContext);
     const dispatch = useDispatch();
-    const { subExams , exams } = useParams();
+    const { subExams , exams , course } = useParams();
     const Navigate = useNavigate();
     const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
@@ -30,61 +30,31 @@ const Home = () => {
     var path =  useSelector(state => state.Files.userPath);
     
     const getItem = async () => {
-        if(allFoldersName.length === 0)
         await GetDetails();
-        const x = localStorage.getItem('pathAdmin');
-        var str = "";
-        var pathArray = ["main"];
-        for(let i=0; i<x.length;i++)
+        
+        if(path.length <= 1)
         {
-            if(x[i]==='$')
-            {
-                pathArray.push(str);
-                if(str === subExams)
-                {
-                    dispatch(setUserUpdatePath(pathArray));
-                    path = pathArray;
-                    break;
-                }
-                str = "";
-                
-            }
-            else str+=x[i];
+            dispatch(setUserPath(course));
+            dispatch(setUserPath(exams));
+            dispatch(setUserPath(subExams));
         }
-
-        var newArray = "";
-        for(let i=1; i<pathArray.length; i++)
-        {
-            newArray+=pathArray[i];
-            newArray+="$";
-        }
-        localStorage.setItem('pathAdmin',newArray);
     }
-
     useEffect(()=>{
         getItem();
-    },[]);
+    },[])
 
     const pathHandler = (e) => {
         const value = e.target.innerText.toLowerCase();
         dispatch(setUserUpdatePath(value));
         var x = "";
-        var y = "";
         for(let i=0;i<path.length;i++)
         {
             x += "/";
             x += path[i];
-            if(i != 0)
-            {
-                y += path[i];
-                y+="$";
-            }
             if(value === path[i])
             break;
             
         }
-        localStorage.setItem('pathAdmin',y);
-        alert(x)
         Navigate(`${x}`);
     }
 
