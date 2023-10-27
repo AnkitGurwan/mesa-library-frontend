@@ -99,7 +99,7 @@
 
 
   
-@media screen and (max-width:650px) {
+@media screen and (max-width:550px) {
   .modal-content3 {
     background-color: #fefefe;
     margin: 8% auto; /* 15% from the top and centered */
@@ -119,6 +119,35 @@
   padding: 0 20px 20px;
   border-radius: 5px;
   width: 90vw; /* Could be more or less, depending on screen size */
+  font-size: large;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+
+}
+}
+
+
+@media screen and (max-width:850px) {
+  .modal-content3 {
+    background-color: #fefefe;
+    margin: 8% auto; /* 15% from the top and centered */
+    padding: 0 20px 20px;
+    border-radius: 5px;
+    width: 70vw; /* Could be more or less, depending on screen size */
+    font-size: large;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+
+
+.modal-content4 {
+  background-color: #fefefe;
+  margin: 8% auto; /* 15% from the top and centered */
+  padding: 0 20px 20px;
+  border-radius: 5px;
+  width: 80vw; /* Could be more or less, depending on screen size */
   font-size: large;
   display: flex;
   flex-direction: column;

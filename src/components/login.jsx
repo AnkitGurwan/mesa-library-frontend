@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../context/auth/AuthContext'
 import fire from '../config/firebase';
@@ -8,7 +8,7 @@ import logo from './images/mesa-logo.png';
 import { Spinner } from "@material-tailwind/react";
 
 const Login = () => {
-    const { userLogin , loginUser } = useContext(AuthContext);
+    const { userLogin , loginUser ,GetDetails } = useContext(AuthContext);
     const [user , setUser] = useState({email:"",password:""});
     const [loading,setLoading] = useState(false);
     const Navigate = useNavigate();
@@ -16,6 +16,13 @@ const Login = () => {
     const changeHandler = (e) => {
         setUser({...user,[e.target.name] : e.target.value})
     }
+    const getItem = async () => {
+        await GetDetails();
+    }
+
+    useEffect(()=>{
+        getItem();
+    },[])
 
     const clickHandler = async () => {
         await userLogin();
