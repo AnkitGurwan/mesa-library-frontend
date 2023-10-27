@@ -22,7 +22,7 @@ const Home = () => {
     const [pathState,setPathState] = useState("");
     const [progress , setProgress] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
-    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === course && eachFolder.supParent === "root"});
+    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === exams && eachFolder.supParent === course});
     const [newUploadFileAdd,setNewUploadFileAdd]  = useState(false);
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
     const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == exams && eachFolder.supParent === course});
@@ -53,7 +53,7 @@ const Home = () => {
     }
     useEffect(()=>{
         getItem();
-    },[])
+    },[added])
 
     const [fileInputData , setFileInputData] = useState({topic:"",name:"",year:"",description:""});
 
@@ -77,15 +77,15 @@ const Home = () => {
         const x = await addFolder(newFolderName,exams,course);
         
         if(x === 201)
-        {
-            toast.success("Folder added succesfully", {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
-            setAdded(!added);
-            document.getElementById("myModal").style.display="none"
-            setNewFolderName("");
-            
-        }
+    {
+        toast.success("Folder added succesfully", {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+        setAdded(!added);
+        document.getElementById("myModal").style.display="none"
+        setNewFolderName("");
+        
+    }
     }
     else if( !flag )
     {
@@ -180,7 +180,7 @@ const addFileHandler = async (e) => {
             },
             async()=>{
                 const fileData = await uploadFileRef.getDownloadURL();
-                const x= await uploadFile(uploadNewFile.name,course,"root",fileData);
+                const x= await uploadFile(uploadNewFile.name,exams,course,fileData);
                 if(x===201)
                 {
                     setAdded(!added);

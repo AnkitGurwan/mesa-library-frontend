@@ -58,6 +58,7 @@ const Register = () => {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
+        setLoading(false);
     }
     return (
         <div className='h-full '>

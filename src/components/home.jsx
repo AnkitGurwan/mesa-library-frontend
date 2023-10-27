@@ -41,17 +41,15 @@ const Home = () => {
 
     const getItem = async () => {
         
-        const flag = true;
-        // alert(flag)
+        const flag = await GetDetails();
 
-        if(flag)
+        if(flag === 200)
         {
             setAllowed(true);
             setLoading(false);
         }
         else 
         {
-            setLoading(false);
             Navigate("/");
             (toast.error('Please login to access', {
               position: toast.POSITION.TOP_CENTER
@@ -61,7 +59,7 @@ const Home = () => {
         localStorage.setItem('pathAdmin',"");
 
         // if(allFoldersName.length===0)
-        await GetDetails();
+       
     }
     
     useEffect(()=>{
@@ -90,7 +88,6 @@ const Home = () => {
     if(newFolderName.length >= 3 && flag)
     {
         const x = await addFolder(newFolderName,"root","root");
-        alert(x)
         
         if(x === 201)
         {

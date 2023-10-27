@@ -93,7 +93,7 @@ const Home = () => {
             <div className='flex mx-2 md:mx-5'>
                
                 {path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1 capitalize'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
-                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})};
+                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})}
                 
             </div>
         </div>

@@ -59,7 +59,9 @@ const Login = () => {
             toast.error("Please fill details completely.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
+            
         }
+        setLoading(false);
     }
 
     return (
