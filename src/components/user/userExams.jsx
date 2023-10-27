@@ -42,6 +42,7 @@ const Home = () => {
                 if(str === exams)
                 {
                     dispatch(setUserUpdatePath(pathArray));
+                    path = pathArray;
                     break;
                 }
                 str = "";
@@ -69,16 +70,16 @@ const Home = () => {
         dispatch(setUserUpdatePath(value));
         var x = "";
         var y = "";
-        for(let i=0;i<pathState.length;i++)
+        for(let i=0;i<path.length;i++)
         {
             x += "/";
-            x += pathState[i];
+            x += path[i];
             if(i != 0)
             {
-                y += pathState[i];
+                y += path[i];
                 y+="$";
             }
-            if(value === pathState[i])
+            if(value === path[i])
             break;
             
         }

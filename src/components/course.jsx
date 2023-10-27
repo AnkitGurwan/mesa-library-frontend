@@ -207,13 +207,13 @@ const Home = () => {
         for(let i=0;i<path.length;i++)
         {
             x += "/";
-            x += pathState[i];
+            x += path[i];
             if(i != 0)
             {
-                y += pathState[i];
+                y += path[i];
                 y+="$";
             }
-            if(e.target.innerText === pathState[i])
+            if(e.target.innerText === path[i])
             break;
             
         }
