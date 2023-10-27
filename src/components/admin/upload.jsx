@@ -14,7 +14,7 @@ const File = (props) => {
 
   const deleteHandler = async () => {
     const x = await removeUpload(props.name,props.parent);
-    if(x===200)GetDetails();
+    if(x===201)GetDetails();
   
   }
   
