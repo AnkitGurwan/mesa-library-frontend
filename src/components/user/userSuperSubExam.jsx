@@ -101,18 +101,18 @@ const Home = () => {
         ""}
 
 {uploadFilesName.length?
-        <div className='overflow-y-hidden w-4/5 md:w-full rounded-md mt-6 pl-2 md:pl-6 flex flex-col pb-3 md:pb-6 font-medium text-gray-700'>
-            <div className='text-start py-4 pl-2 md:pl-8 font-semibold md:font-bold text-2xl'>Files/PDF's</div>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mx-0 md:mx-6 my-5 md:my-2">
-                {uploadFilesName.length ? uploadFilesName.map((upload) => (
-                    <div className='mx-2 text-start overflow-hidden'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
-                )) 
-                :
-                 ""}
+            <div className='overflow-y-hidden w-4/5 md:w-full rounded-md mt-6 pl-2 md:pl-6 flex flex-col pb-3 md:pb-6 font-medium text-gray-700'>
+                <div className='text-start py-6 pl-2 md:pl-8 font-semibold md:font-bold text-2xl'>Files/PDF's</div>
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mx-0 md:mx-6 my-5 md:my-2">
+                    {uploadFilesName.length ? uploadFilesName.map((upload) => (
+                        <div className='mx-2 my-2 text-start overflow-hidden'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
+                    )) 
+                    :
+                    ""}
+                </div>
+                                    
             </div>
-                                
-        </div>
-        :
+            :
         ""}
         </div>
         <div className='absolute w-full bottom-0 right-0'><BackgroundParticle/></div>
