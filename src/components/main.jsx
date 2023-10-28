@@ -15,7 +15,7 @@ import LoaderLottie from './user/loaderlottie';
 
 
 const HomePage = () => {
-    const { logOut,GetDetails,getToken,checkAuth } = useContext(AuthContext);
+    const { logOut,GetDetails,getToken,checkAuth,createStudent } = useContext(AuthContext);
     const [searchParams, setSearchParams] =useSearchParams();
     const [loading,setLoading]=useState(true);
     const [allowed,setAllowed]=useState(false);
@@ -49,6 +49,9 @@ const HomePage = () => {
 
     const getItem = async () => {
         const code = searchParams.get('code');  
+
+        if(localStorage.getItem('studName'))
+        await createStudent(localStorage.getItem('studId'),localStorage.getItem('studName'),localStorage.getItem('studRoll'));
         
         if(localStorage.getItem('studName') === null && code)
             await getToken(code);

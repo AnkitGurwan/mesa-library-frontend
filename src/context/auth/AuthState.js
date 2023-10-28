@@ -42,6 +42,20 @@ const AuthState = (props) => {
         return response.status;
     }
 
+    const createStudent = async (userEmail,userName,userRoll) => {
+        const response = await fetch(`${url}/user/newstudent`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userEmail,userName,userRoll})
+        });
+        
+        const json = await response.json(); 
+        
+        return response.status;
+};
+
     const getToken = async(code)=>{
         const response = await fetch(`${url}/auth/microsoft/getToken`, {
             method: 'GET',
@@ -250,7 +264,7 @@ const AuthState = (props) => {
         return response.status;
     }
 
-    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo,GetDetails,sendFeedback,checkAuth,checkAdminAuth,registerUser,loginUser,addFolder,addFile,uploadFile,removeFile,removeFolder,removeUpload}}>
+    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo,GetDetails,sendFeedback,checkAuth,checkAdminAuth,registerUser,loginUser,addFolder,addFile,uploadFile,removeFile,removeFolder,removeUpload,createStudent}}>
                 {props.children}
             </AuthContext.Provider>)
 }
