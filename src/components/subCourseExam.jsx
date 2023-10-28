@@ -364,7 +364,7 @@ const addFileHandler = async (e) => {
             <div className='text-center pt-2 pb-3 md:pl-2'>Uploaded Files</div>
             <div className="grid grid-cols-2 md:grid-cols-6">
                 {uploadFilesName.length ? uploadFilesName.map((upload) => (
-                    <div><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
+                    <div><Upload key={upload.userId} parent={upload.parent} name={upload.name} url={upload.url}/></div>
                 )) 
                 :
                  ""}
