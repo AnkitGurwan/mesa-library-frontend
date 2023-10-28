@@ -179,7 +179,7 @@ const addFileHandler = async (e) => {
             },
             async()=>{
                 const fileData = await uploadFileRef.getDownloadURL();
-                const x= await uploadFile(uploadNewFile.name,"root","root",fileData);
+                const x= await uploadFile(uploadNewFile.name,superSub,subExams,fileData);
                 if(x===201)
                 {
                     setAdded(!added);

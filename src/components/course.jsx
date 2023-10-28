@@ -167,7 +167,7 @@ const Home = () => {
             },
             async()=>{
                 const fileData = await uploadFileRef.getDownloadURL();
-                const x= await uploadFile(uploadNewFile.name,"root","root",fileData);
+                const x= await uploadFile(uploadNewFile.name,course,"root",fileData);
             if(x===201)
             {
                 setAdded(!added);
