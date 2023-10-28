@@ -45,7 +45,7 @@ const Home = () => {
 
 
     const pathHandler = (e) => {
-        const value = e.target.innerText.toLowerCase();
+        const value = e.target.innerText;
         dispatch(setUserUpdatePath(value));
         var x = "";
         var y = "";
@@ -66,7 +66,7 @@ const Home = () => {
         <div className='z-10 flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-20 md:top-16 w-full h-12'>
             <div className='flex mx-2 md:mx-5'>
                
-                {path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1 capitalize'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
+                {path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
                 <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})}
                 
             </div>

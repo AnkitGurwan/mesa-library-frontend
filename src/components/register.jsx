@@ -61,7 +61,7 @@ const Register = () => {
     }
     return (
         <div className='h-full '>
-        {true
+        {false
             ?
             <div className='w-full h-full flex flex-col md:flex-row overflow-hidden' style={{"backgroundColor":"rgb(220 252 231)"}}> 
            
