@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../context/auth/AuthContext'
 import fire from '../config/firebase';
@@ -6,18 +6,37 @@ import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import logo from './images/mesa-logo.png';
 import { Spinner } from "@material-tailwind/react";
+import LoadingBar from 'react-top-loading-bar'
 
 const Login = () => {
     const { userLogin , loginUser ,GetDetails } = useContext(AuthContext);
     const [user , setUser] = useState({email:"",password:""});
     const [loading,setLoading] = useState(false);
     const Navigate = useNavigate();
+    const [progress, setProgress] = useState(0);
 
     const changeHandler = (e) => {
         setUser({...user,[e.target.name] : e.target.value})
     }
     const getItem = async () => {
         await GetDetails();
+    }
+
+    const topHandler = () => {
+        setTimeout(function(){setProgress(5)},1000);
+        setTimeout(function(){setProgress(10)},3000);
+        setTimeout(function(){setProgress(15)},6000);
+        setTimeout(function(){setProgress(20)},8000);
+        setTimeout(function(){setProgress(30)},10000);
+        setTimeout(function(){setProgress(40)},12000);
+        setTimeout(function(){setProgress(50)},15000);
+        setTimeout(function(){setProgress(60)},18000);
+        setTimeout(function(){setProgress(70)},20000);
+        setTimeout(function(){setProgress(75)},23000);
+        setTimeout(function(){setProgress(80)},26000);
+        setTimeout(function(){setProgress(85)},30000);
+        setTimeout(function(){setProgress(90)},35000);
+        setTimeout(function(){setProgress(95)},40000);
     }
 
     useEffect(()=>{
@@ -37,6 +56,7 @@ const Login = () => {
             const x = await loginUser(user.email,user.password);
             if(x === 200)
             {
+                setProgress(100)
                 toast.success("Logged In Successfully", {
                     position: toast.POSITION.BOTTOM_RIGHT
                 });
@@ -73,7 +93,11 @@ const Login = () => {
 
     return (
         <div className='h-full w-full flex flex-col md:flex-row overflow-y-hidden' style={{"backgroundColor":"rgb(220 252 231)"}}> 
-
+            <LoadingBar
+                    color='#f11946'
+                    progress={progress}
+                    onLoaderFinished={() => setProgress(0)}
+                />
             <div className='w-full md:w-1/2 p-8 md:p-0 h-1/3 md:h-full flex justify-center items-center flex-col '>
                 <img className='h-full' src='https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg'/>  
                
@@ -131,6 +155,7 @@ const Login = () => {
                 
                 :
                 <button
+                    onClick={topHandler}
                     type="submit"
                     class="px-7 w-full h-12 rounded-md text-md font-bold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] bg-blue-700 hover:bg-blue-800">
                     Sign in
@@ -147,7 +172,7 @@ const Login = () => {
                 <div
                     class = "w-full h-12 text-white flex justify-center items-center rounded-md cursor-pointer font-medium"
                     style={{"background-color": "#3b5998"}}
-                    onClick={clickHandler}>
+                    onClick={()=>{clickHandler();topHandler()}}>
                     <i class="fa-brands fa-windows text-2xl p-2 my-auto mx-2"></i>
                     Continue with Microsoft
                 </div>
