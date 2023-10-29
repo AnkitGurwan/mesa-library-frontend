@@ -24,19 +24,20 @@ const Login = () => {
 
     const topHandler = () => {
         setTimeout(function(){setProgress(5)},1000);
-        setTimeout(function(){setProgress(10)},3000);
-        setTimeout(function(){setProgress(15)},6000);
-        setTimeout(function(){setProgress(20)},8000);
-        setTimeout(function(){setProgress(30)},10000);
-        setTimeout(function(){setProgress(40)},12000);
-        setTimeout(function(){setProgress(50)},15000);
-        setTimeout(function(){setProgress(60)},18000);
-        setTimeout(function(){setProgress(70)},20000);
-        setTimeout(function(){setProgress(75)},23000);
-        setTimeout(function(){setProgress(80)},26000);
-        setTimeout(function(){setProgress(85)},30000);
-        setTimeout(function(){setProgress(90)},35000);
-        setTimeout(function(){setProgress(95)},40000);
+        setTimeout(function(){setProgress(10)},4000);
+        setTimeout(function(){setProgress(15)},7000);
+        setTimeout(function(){setProgress(20)},10000);
+        setTimeout(function(){setProgress(30)},13000);
+        setTimeout(function(){setProgress(40)},16000);
+        setTimeout(function(){setProgress(50)},19000);
+        setTimeout(function(){setProgress(60)},21000);
+        setTimeout(function(){setProgress(70)},24000);
+        setTimeout(function(){setProgress(75)},27000);
+        setTimeout(function(){setProgress(80)},30000);
+        setTimeout(function(){setProgress(85)},35000);
+        setTimeout(function(){setProgress(90)},40000);
+        setTimeout(function(){setProgress(95)},45000);
+        setTimeout(function(){setProgress(98)},50000);
     }
 
     useEffect(()=>{
