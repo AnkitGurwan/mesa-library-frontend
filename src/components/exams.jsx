@@ -226,10 +226,24 @@ const addFileHandler = async (e) => {
         <div className='flex justify-end items-center py-3 border-b'>
             
         <div className='mr-8 flex'>
-                <form onSubmit={handleUpload} className='flex items-center w-40 md:w-64 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
-                    <i class="fa-solid fa-upload px-1 md:px-2"></i>
-                    <input type='file' className='px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/>
-                    {uploadNewFile?<button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
+                <form onSubmit={handleUpload} className='flex items-center w-52 md:w-96 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+                <div class="w-full" onDragOver={(e)=>{e.preventDefault();}} onDrop={(e)=>{e.preventDefault();setUploadNewFile(e.dataTransfer.files[0])}} >
+                    <label
+                        class="flex justify-center w-full h-12 md:h-16 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
+                        <span class="flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            <span class="font-medium text-gray-600">
+                                Drop files to Attach, or
+                                <span class="text-blue-600 underline px-2">browse</span>
+                            </span>
+                        </span>
+                        <input type='file' className='hidden px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/>
+                    </label>
+                </div>
                 </form>
                 <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-file px-2"></i>
