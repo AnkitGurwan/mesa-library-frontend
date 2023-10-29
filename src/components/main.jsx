@@ -50,13 +50,15 @@ const HomePage = () => {
     const getItem = async () => {
         const code = searchParams.get('code');  
 
-        if(localStorage.getItem('studName'))
-        await createStudent(localStorage.getItem('studId'),localStorage.getItem('studName'),localStorage.getItem('studRoll'));
+        
         
         if(localStorage.getItem('studName') === null && code)
             await getToken(code);
 
         await GetDetails();
+
+        if(localStorage.getItem('studName'))
+            await createStudent(localStorage.getItem('studId'),localStorage.getItem('studName'),localStorage.getItem('studRoll'));
 
         funcAllowed();
     }
