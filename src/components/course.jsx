@@ -220,7 +220,7 @@ const Home = () => {
         <div className='flex justify-end items-center py-3 border-b'>
             
             <div className='mr-8 flex'>
-                <form onSubmit={handleUpload} className='flex items-center w-44 md:w-96 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+                <form onSubmit={handleUpload} className={`flex items-center ${uploadNewFile?'w-76':'md:w-48'} md:w-96 border ml-8 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100`}>
                 <div class="w-full" onDragOver={(e)=>{e.preventDefault();}} onDrop={(e)=>{e.preventDefault();setUploadNewFile(e.dataTransfer.files[0])}} >
                     <label
                         class="flex justify-center w-full h-12 md:h-16 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
@@ -240,16 +240,16 @@ const Home = () => {
                 </div>
                     {/* <i class="fa-solid fa-upload px-1 md:px-2"></i>
                     <input type='file' className='px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/> */}
-                    {uploadNewFile?<button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
+                    {uploadNewFile?<button className='mx-4 bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
                 </form>
-                <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+                {!uploadNewFile?<button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='w-20 md:w-36 flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-file px-2"></i>
                     <div className='px-1 text-xs md:text-lg'>Create File</div>
-                </button>
-                <button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='flex items-center border py-1 px-1 mx-1 md:mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
+                </button>:""}
+                {!uploadNewFile?<button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='w-20 md:w-36 flex items-center border py-1 px-1 mx-1 md:mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-folder px-1 md:px-2"></i>
                     <div  className='px-1 text-xs md:text-lg'>Add Folder</div>
-                </button>
+                </button>:""}
                 
                 
             </div>

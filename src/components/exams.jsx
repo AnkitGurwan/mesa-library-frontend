@@ -225,8 +225,8 @@ const addFileHandler = async (e) => {
         </div>
         <div className='flex justify-end items-center py-3 border-b'>
             
-        <div className='mr-8 flex'>
-        <form onSubmit={handleUpload} className='flex items-center w-44 md:w-96 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+            <div className='mr-8 flex'>
+                <form onSubmit={handleUpload} className={`flex items-center ${uploadNewFile?'w-76':'md:w-48'} md:w-96 border ml-8 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100`}>
                 <div class="w-full" onDragOver={(e)=>{e.preventDefault();}} onDrop={(e)=>{e.preventDefault();setUploadNewFile(e.dataTransfer.files[0])}} >
                     <label
                         class="flex justify-center w-full h-12 md:h-16 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
@@ -246,16 +246,16 @@ const addFileHandler = async (e) => {
                 </div>
                     {/* <i class="fa-solid fa-upload px-1 md:px-2"></i>
                     <input type='file' className='px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/> */}
-                    {uploadNewFile?<button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
+                    {uploadNewFile?<button className='mx-4 bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
                 </form>
-                <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+                {!uploadNewFile?<button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='w-20 md:w-36 flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-file px-2"></i>
                     <div className='px-1 text-xs md:text-lg'>Create File</div>
-                </button>
-                <button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='flex items-center border py-1 px-1 mx-1 md:mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
+                </button>:""}
+                {!uploadNewFile?<button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='w-20 md:w-36 flex items-center border py-1 px-1 mx-1 md:mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-folder px-1 md:px-2"></i>
                     <div  className='px-1 text-xs md:text-lg'>Add Folder</div>
-                </button>
+                </button>:""}
                 
                 
             </div>
@@ -268,7 +268,7 @@ const addFileHandler = async (e) => {
                         
                       <input
                         class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                        exams="text"
+                        type="text"
                         placeholder="Enter Folder Name"
                         name="folderName"
                         onChange={onChangeHandler}
@@ -278,7 +278,7 @@ const addFileHandler = async (e) => {
                     </div>
                     
                     <div class="flex items-center justify-center">
-                      <button id='myButton' onClick={addFolderHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-100" exams="submit">
+                      <button id='myButton' onClick={addFolderHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-100" type="submit">
                         Add Folder
                       </button>
 
@@ -293,7 +293,7 @@ const addFileHandler = async (e) => {
                         <div class="mb-1 w-full flex">  
                             <input
                                 class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline mr-2"
-                                exams="text"
+                                type="text"
                                 placeholder="Enter Your Name"
                                 name="name"
                                 onChange={onChangeHandler2}
@@ -303,7 +303,7 @@ const addFileHandler = async (e) => {
                             />
                             <input
                                 class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline ml-2"
-                                exams="text"
+                                type="text"
                                 placeholder="Year Of Studying"
                                 name="year"
                                 onChange={onChangeHandler2}
@@ -315,7 +315,7 @@ const addFileHandler = async (e) => {
                         <div class="mb-1 w-full">  
                             <input
                                 class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                                exams="text"
+                                type="text"
                                 placeholder="Heading"
                                 name="topic"
                                 onChange={onChangeHandler2}
@@ -327,7 +327,7 @@ const addFileHandler = async (e) => {
                         <div class="mb-1 w-full">  
                             <textarea
                                 class="appearance-none border text-sm rounded w-full h-40 mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                                exams="text"
+                                type="text"
                                 placeholder="Decription"
                                 name="description"
                                 onChange={onChangeHandler2}
@@ -338,7 +338,7 @@ const addFileHandler = async (e) => {
                         </div>
                         
                         <div class="flex items-center justify-center">
-                        <button id='myButton' onClick={addFileHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-full" exams="submit">
+                        <button id='myButton' onClick={addFileHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
                             Create File
                         </button>
 

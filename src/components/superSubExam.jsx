@@ -230,6 +230,128 @@ const addFileHandler = async (e) => {
             <button onClick={()=>{Navigate('/')}} className='text-white bg-black py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer'>Log Out</button>
         </div>
        
+       <div className='flex justify-end items-center py-3 border-b'>
+            
+        <div className='mr-8 flex'>
+        <form onSubmit={handleUpload} className='flex items-center w-44 md:w-96 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+                <div class="w-full" onDragOver={(e)=>{e.preventDefault();}} onDrop={(e)=>{e.preventDefault();setUploadNewFile(e.dataTransfer.files[0])}} >
+                    <label
+                        class="flex justify-center w-full h-12 md:h-16 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
+                        <span class="flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            <span class="font-medium text-gray-600">
+                                Drop files to Attach, or
+                                <span class="text-blue-600 underline px-2">browse</span>
+                            </span>
+                        </span>
+                        <input type='file' className='hidden px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/>
+                    </label>
+                </div>
+                    {/* <i class="fa-solid fa-upload px-1 md:px-2"></i>
+                    <input type='file' className='px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/> */}
+                    {uploadNewFile?<button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
+                </form>
+                <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+                    <i class="fa-solid fa-file px-2"></i>
+                    <div className='px-1 text-xs md:text-lg'>Create File</div>
+                </button>
+                
+                
+                
+            </div>
+            <div id="myModal" class="modal2">
+            <div class="modal-content3">
+                <button onClick={()=>{document.getElementById("myModal").style.display="none"}} class="close mt-1 h-8 flex justify-center items-center cursor-pointer hover:bg-gray-200 rounded-full w-8">&times;</button>
+                    <form class="w-60 mx-auto bg-white px-2" onSubmit={submit}>
+                        
+                    <div class="mb-1">
+                        
+                      <input
+                        class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                        subExams="text"
+                        placeholder="Enter Folder Name"
+                        name="folderName"
+                        onChange={onChangeHandler}
+                        value={newFolderName}
+                        required
+                      />
+                    </div>
+                    
+                    <div class="flex items-center justify-center">
+                      <button id='myButton' onClick={addFolderHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-100" subExams="submit">
+                        Add Folder
+                      </button>
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div id="myModal2" class="modal3">
+                <div class="modal-content4">
+                    <button onClick={()=>{document.getElementById("myModal2").style.display="none"}} class="close mt-1 h-8 flex justify-center items-center cursor-pointer hover:bg-gray-200 rounded-full w-8">&times;</button>
+                        <form class="w-full h-68 mx-auto bg-white px-2" onSubmit={submit}>
+                        <div class="mb-1 w-full flex">  
+                            <input
+                                class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline mr-2"
+                                subExams="text"
+                                placeholder="Enter Your Name"
+                                name="name"
+                                onChange={onChangeHandler2}
+                                value={fileInputData.name}
+                                required
+                                autoComplete='off'
+                            />
+                            <input
+                                class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline ml-2"
+                                subExams="text"
+                                placeholder="Year Of Studying"
+                                name="year"
+                                onChange={onChangeHandler2}
+                                value={fileInputData.year}
+                                required
+                                autoComplete='off'
+                            />
+                        </div>
+                        <div class="mb-1 w-full">  
+                            <input
+                                class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                                subExams="text"
+                                placeholder="Heading"
+                                name="topic"
+                                onChange={onChangeHandler2}
+                                value={fileInputData.topic}
+                                required
+                                autoComplete='off'
+                            />
+                        </div>
+                        <div class="mb-1 w-full">  
+                            <textarea
+                                class="appearance-none border text-sm rounded w-full h-40 mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                                subExams="text"
+                                placeholder="Decription"
+                                name="description"
+                                onChange={onChangeHandler2}
+                                value={fileInputData.description}
+                                required
+                                autoComplete='off'
+                            />
+                        </div>
+                        
+                        <div class="flex items-center justify-center">
+                        <button id='myButton' onClick={addFileHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-full" subExams="submit">
+                            Create File
+                        </button>
+
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            
+        </div>
             
 
         <div className='flex justify-between items-center py-3 border-b'>

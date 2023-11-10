@@ -37,6 +37,10 @@ const Home = () => {
             dispatch(setUserPath(course));
             dispatch(setUserPath(exams));
         }
+        else if(path.length >= 2)
+        {
+            dispatch(setUserUpdatePath(exams));
+        }
     }
     useEffect(()=>{
         getItem();
