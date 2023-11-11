@@ -32,6 +32,7 @@ const Home = () => {
 
 
     const getItem = async () => {
+        if(foldersName.length === 0)
         await GetDetails();
         
 
