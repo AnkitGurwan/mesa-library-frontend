@@ -97,9 +97,10 @@ const HomePage = () => {
                     <div className='flex justify-between items-center mx-8 py-4'>
                         <div className='text-xl md:text-3xl font-bold pl-2 md:pl-4 pt-0 md:pt-4'>MESA Library</div>
                         <div>
+                        <Link className='text-white text-lg md:text-xl font-semibold hover:underline mx-1 md:mx-2' to={'/feedback'}>Feedback</Link>
                         <button className='text-white text-lg md:text-xl font-semibold hover:underline' onClick={logOutHandler}>Log Out
                         </button>
-                        <Link className='text-white text-lg md:text-xl font-semibold hover:underline' to={'/feedback'}>Feedback</Link>
+                        
                         </div>
                     </div>
                     <div className='ml-4 mt-5 flex flex-col justify-center items-center'>
