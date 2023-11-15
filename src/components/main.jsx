@@ -28,7 +28,7 @@ const HomePage = () => {
         if(rollNumber && flag)
         {
           if((210103001 <= rollNumber && rollNumber <= 210103140) || (230103001 <= rollNumber && rollNumber <= 230103140) ||
-              (200103001 < rollNumber && rollNumber < 200103140) || (220103001 < rollNumber && rollNumber < 220103140)){
+              (200103001 <= rollNumber && rollNumber < 200103140) || (220103001 <= rollNumber && rollNumber < 220103140)){
             setAllowed(true);
             setLoading(false);
           }
