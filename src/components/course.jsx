@@ -97,7 +97,7 @@ const Home = () => {
         var flag = true;
         
         filesName.map((file) => {
-                if(file.name === fileInputData.topic)
+                if(file.topic === fileInputData.topic)
                 {
                     flag = false;
                 }
