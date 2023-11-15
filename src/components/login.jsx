@@ -23,7 +23,6 @@ const Login = () => {
     }
 
     const topHandler = () => {
-        if(user.password.length > 0){
         setTimeout(function(){setProgress(5)},1000);
         setTimeout(function(){setProgress(10)},4000);
         setTimeout(function(){setProgress(15)},7000);
@@ -39,7 +38,7 @@ const Login = () => {
         setTimeout(function(){setProgress(90)},40000);
         setTimeout(function(){setProgress(95)},45000);
         setTimeout(function(){setProgress(98)},50000);
-        }
+        
     }
 
     const clickHandler = async () => {
