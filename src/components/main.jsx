@@ -85,7 +85,7 @@ const HomePage = () => {
     }
 
     return (
-        <div className='w-full' style={{'background-image': 'linear-gradient(to top left, white 0%, #132d7a 74%)'}}>
+        <div className='w-full min-h-full' style={{'background-image': 'linear-gradient(to top left, white 0%, #132d7a 74%)'}}>
             {loading
             ?
             <div className='bg-white h-full flex items-center justify-center'><LoaderLottie/></div>

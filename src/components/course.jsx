@@ -369,7 +369,7 @@ const Home = () => {
             <div className='text-center pt-2 pb-3 md:pl-2'>Created Files</div>
             <div className="grid grid-cols-2 md:grid-cols-6">
                 {filesName ? filesName.map((file) => (
-                    <div><File key={file.userId} parent={file.parent} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
+                    <div><File key={file.userId} parent={file.parent} name={file.name} description={file.description} year={file.year} topic={file.topic}/></div>
                 )) 
                 :
                  ""}
