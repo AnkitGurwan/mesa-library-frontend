@@ -94,10 +94,10 @@ const HomePage = () => {
             ?
             <div className='w-full' >
                 <div className='w-full h-1/2 text-white'>
-                    <div className='flex justify-between items-center mx-8 py-4'>
+                    <div className='flex justify-between items-center mx-4 md:mx-8 py-4'>
                         <div className='text-xl md:text-3xl font-bold pl-2 md:pl-4 pt-0 md:pt-4'>MESA Library</div>
                         <div>
-                        <Link className='text-white text-lg md:text-xl font-semibold hover:underline mx-1 md:mx-2' to={'/feedback'}>Feedback</Link>
+                        <Link className='text-white text-lg md:text-xl font-semibold hover:underline mx-2' to={'/feedback'}>Feedback</Link>
                         <button className='text-white text-lg md:text-xl font-semibold hover:underline' onClick={logOutHandler}>Log Out
                         </button>
                         
