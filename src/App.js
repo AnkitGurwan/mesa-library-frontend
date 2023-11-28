@@ -2,6 +2,7 @@ import React from "react";
 import { Route , Routes , BrowserRouter } from 'react-router-dom';
 import Login from './components/login';
 import Register from './components/register';
+import Intro from './components/intro';
 import AuthState from './context/auth/AuthState';
 import Home from "./components/home";
 import Course from "./components/course";
@@ -20,7 +21,8 @@ function App() {
       <AuthState>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Login/>}/>
+            <Route path='/' element={<Intro/>}/>
+            <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route path='/feedback' element={<Feedback/>}/>
             <Route path='/root' element={<Home/>}/>
