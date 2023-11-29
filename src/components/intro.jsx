@@ -3,29 +3,14 @@ import { Link } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import Navbar from './homeNavBar';
+import Footer from './footer';
 
 
 const intro = () => {
   return (
     <div>
-        <navbar className='flex justify-between mb-3 py-4 px-16 items-center'>
-            <div className='flex items-center'>
-                <img className='h-20 w-40' src='https://iitg.ac.in/clubs/mesa/images/logo4.png' alt='mesa logo'/>
-            </div>
-            
-            <div className='flex pr-12 items-center '>
-                <div className='flex flex-col hover:scale-105'>
-                    <div className='px-5 font-Manrope font-medium cursor-pointer  text-lg text-gray-500'>About us</div>
-                    <div className='px-4'><hr style={{"height":"2px","font":"gray","backgroundColor":"gray"}}/></div>
-                </div>
-                <div className='px-5 font-Manrope font-medium cursor-pointer hover:scale-105 text-lg text-gray-500'>Events</div>
-                <div className='px-5 font-Manrope font-medium cursor-pointer hover:scale-105 text-lg text-gray-500'>Our Team</div>
-                <div className='px-5 flex font-Manrope font-medium cursor-pointer hover:scale-105 text-lg text-gray-500'>
-                    <div className=''>Library</div>
-                    <div className='text-xs pb-2 px-1 text-black'>NEW</div>
-                </div>
-            </div>
-        </navbar>
+        <Navbar/>
 
         <div className='mx-16 px-4 py-7 bg-blue-400 text-white font-Manrope'>
             <div className='px-4 pt-2 pb-6 font-semibold'>
@@ -75,27 +60,7 @@ const intro = () => {
                 <div>Anouncements</div>
             </div>
         </div>
-        <footer className='my-6 px-40 py-8 flex justify-between border-t-2'>
-            <div className='w-1/3 text-center px-12'>
-                <div className='font-medium py-3'>MESA</div>
-                <div>Department of Mechanical Engineering, Indian Institute of Technology Guwahati</div>
-            </div>
-            <div className='w-1/3 text-center px-12'>
-                <div className='font-medium py-3'>Useful Links</div>
-                <div className='flex flex-col'>
-                    <Link className='hover:scale-105' to={'https://www.iitg.ac.in/'}>IIT Guwahati</Link>
-                    <Link className='hover:scale-105' to={'https://academic.iitg.ac.in/sso/'}>Academic Portal</Link>
-                    <Link className='hover:scale-105' to={'https://www.iitg.ac.in/mech/'}>Department of ME</Link>
-                </div>
-            </div>
-            <div className='w-1/3 text-center px-12'>
-                <div className='font-medium py-3'>Contact US</div>
-                <div className='flex flex-col'>
-                    <div>mesa@iitg.ac.in</div>
-                    <div>Facebook</div>
-                </div>
-            </div>
-        </footer>
+        <Footer/>
     </div>
   )
 }

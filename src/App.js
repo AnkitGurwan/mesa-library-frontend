@@ -15,6 +15,7 @@ import UserExams from "./components/user/userExams";
 import UserSubCourseExams from "./components/user/userSubCourseExam";
 import UserSuperSubExams from "./components/user/userSuperSubExam";
 import Feedback from "./components/user/feedbackUser";
+import Team from "./components/team";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route path='/feedback' element={<Feedback/>}/>
+            <Route path='/team' element={<Team/>}></Route>
             <Route path='/root' element={<Home/>}/>
             <Route path='/root/:course' element={<Course/>}/>
             <Route path='/root/:course/:exams' element={<Exams/>}/>
