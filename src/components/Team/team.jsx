@@ -1,6 +1,6 @@
-import Footer from "./footer";
-import Navbar from "./homeNavBar";
-import Card from "./user/teamCard";
+import Footer from "../IntroPage/footer";
+import Navbar from "../IntroPage/homeNavBar";
+import Card from "./teamCard";
 
 const Team = () => {
     return ( 

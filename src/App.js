@@ -2,7 +2,7 @@ import React from "react";
 import { Route , Routes , BrowserRouter } from 'react-router-dom';
 import Login from './components/login';
 import Register from './components/register';
-import Intro from './components/intro';
+import Intro from './components/IntroPage/intro';
 import AuthState from './context/auth/AuthState';
 import Home from "./components/home";
 import Course from "./components/course";
@@ -15,7 +15,7 @@ import UserExams from "./components/user/userExams";
 import UserSubCourseExams from "./components/user/userSubCourseExam";
 import UserSuperSubExams from "./components/user/userSuperSubExam";
 import Feedback from "./components/user/feedbackUser";
-import Team from "./components/team";
+import Team from "./components/Team/team";
 
 function App() {
   return (

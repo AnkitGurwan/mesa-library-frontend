@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return ( 
-        <navbar className='flex justify-between mb-3 pt-2 md:pt-4 px-4 md:px-16 items-center'>
+        <navbar className='flex w-full justify-between mb-3 pt-2 md:pt-4 px-4 md:px-16 items-center'>
             <div className='flex items-center'>
                 <img className='h-12 md:h-20 w-20 md:w-40' src='https://iitg.ac.in/clubs/mesa/images/logo4.png' alt='mesa logo'/>
             </div>

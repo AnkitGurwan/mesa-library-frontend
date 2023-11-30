@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
     return ( 
-        <footer className='my-6 px-40 py-8 flex justify-between border-t-2'>
+        <footer className='w-full my-6 px-40 py-8 flex justify-between border-t-2'>
             <div className='w-1/3 text-center px-12'>
                 <div className='font-medium py-3'>MESA</div>
                 <div>Department of Mechanical Engineering, Indian Institute of Technology Guwahati</div>
