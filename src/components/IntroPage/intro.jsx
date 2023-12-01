@@ -13,7 +13,7 @@ const intro = () => {
     <div>
         <Navbar/>
 
-        <div className='mx-16 px-4 py-7 bg-blue-400 text-white font-Manrope'>
+        <div className='mt-10 mx-16 px-4 py-7 bg-blue-400 text-white font-Manrope'>
             <div className='px-4 pt-2 pb-6 font-semibold'>
                 <TypeAnimation
                     sequence={[
@@ -31,6 +31,7 @@ const intro = () => {
                     speed={50}
                     style={{ "fontSize" : "2em" , "display": "inline-block" }}
                     repeat={0}
+                    className='h-max'
                     />
             </div>
             <div className='flex'>

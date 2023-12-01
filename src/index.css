@@ -11,3 +11,10 @@ html,body,#root,.app{
   /* background-color: rgb(220 252 231); */
   /* overflow-y: hidden; */
 }
+
+/*For showing which page is active on navbar(homeNavBar.jsx)*/
+.active{
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  color: #0f4e9b;
+}
