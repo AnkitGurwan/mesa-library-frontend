@@ -14,7 +14,7 @@ const intro = () => {
         <Navbar/>
 
         <div className='mt-10 mx-2 sm:mx-16 px-4 pt-7 pb-2 bg-blue-400 text-white font-Manrope'>
-            <div className='sm:px-4 pt-2 pb-6 font-semibold'>
+            <div className='px-4 pt-2 pb-6 font-semibold'>
                 <TypeAnimation
                     sequence={[
                         // Same substring at the start will only be typed out once, initially
@@ -30,8 +30,8 @@ const intro = () => {
                     wrapper="span"
                     speed={50}
                     style={{ "display": "inline-block" }}
-                    repeat={Infinity}
-                    className='h-[65px] max-[300px]:h-[100px] sm:h-[72px] md:h-[50px] text-2xl sm:text-3xl'
+                    repeat={0}
+                    className='h-[95px]  sm:h-[72px] md:h-[50px] text-2xl sm:text-3xl'
                     />
             </div>
             <div className='flex'>

@@ -23,7 +23,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Intro/>}/>
-            <Route path='/login' element={<Login/>}/>
+            <Route path='/library' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route path='/feedback' element={<Feedback/>}/>
             <Route path='/team' element={<Team/>}></Route>

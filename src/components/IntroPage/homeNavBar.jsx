@@ -1,11 +1,7 @@
-import { navbar } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import toggleIcon from './assests/toggle.jpg';
+
 
 const Navbar = () => {
-    const [shortNav, setShortNav] = useState(false)
-    const [crossIcon, setCrossIcon] = useState(false)
     const navbarPages = [
         ['About Us', '/'],
         ['Events', '/events'],
@@ -36,7 +32,7 @@ const Navbar = () => {
                     ))}
                 </div>
             </div>
-            <hr className="w-full bg-[#303030] shadow-[5px_5px_10px_rgba(0,0,0,0.8)]"/>
+            <hr className="w-full bg-slate-400/0.3 shadow-[5px_5px_15px_rgba(0,67,101,1)]" />
         </navbar>
     );
 }
