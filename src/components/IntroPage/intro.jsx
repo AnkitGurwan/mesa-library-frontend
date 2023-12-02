@@ -13,8 +13,8 @@ const intro = () => {
     <div>
         <Navbar/>
 
-        <div className='mt-10 mx-16 px-4 py-7 bg-blue-400 text-white font-Manrope'>
-            <div className='px-4 pt-2 pb-6 font-semibold'>
+        <div className='mt-10 mx-2 sm:mx-16 px-4 pt-7 pb-2 bg-blue-400 text-white font-Manrope'>
+            <div className='sm:px-4 pt-2 pb-6 font-semibold'>
                 <TypeAnimation
                     sequence={[
                         // Same substring at the start will only be typed out once, initially
@@ -29,17 +29,17 @@ const intro = () => {
                     ]}
                     wrapper="span"
                     speed={50}
-                    style={{ "fontSize" : "2em" , "display": "inline-block" }}
-                    repeat={0}
-                    className='h-max'
+                    style={{ "display": "inline-block" }}
+                    repeat={Infinity}
+                    className='h-[65px] max-[300px]:h-[100px] sm:h-[72px] md:h-[50px] text-2xl sm:text-3xl'
                     />
             </div>
             <div className='flex'>
-                <div className='px-4'>MESA connects you to the world outside the walls of your classroom and to that in the cubicle. We aim to be the cornerstone of the all-round deveploment of our student community by providing academic resources to conducting workshops and talks. We plan to be an integral part of your campus life from your Induction to Freshers' Party to Convocation to your Farewell Party.</div>
+                <div className='px-4 mb-7'>MESA connects you to the world outside the walls of your classroom and to that in the cubicle. We aim to be the cornerstone of the all-round deveploment of our student community by providing academic resources to conducting workshops and talks. We plan to be an integral part of your campus life from your Induction to Freshers' Party to Convocation to your Farewell Party.</div>
             </div>
         </div>
 
-        <div className='my-8 mx-16'>
+        <div className='my-16 mx-2 sm:mx-16'>
             <div>
                 <Carousel
                     autoPlay={true}
