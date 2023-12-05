@@ -1,17 +1,16 @@
 import React , { useContext,useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/auth/AuthContext';
+import AuthContext from '../../context/auth/AuthContext';
 import { useSearchParams } from 'react-router-dom';
 import { BsChevronRight } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import Folder from './user/userFolder';
-import File from './user/userFile';
-import Upload from './admin/upload';
-import "./styles.css";
-import Lottie from './user/courselottie';
-import LoaderLottie from './user/loaderlottie';
+import Folder from '../userComponents/userFolder';
+import File from '../userComponents/userFile';
+import Upload from '../adminComponents/upload';
+import Lottie from '../userComponents/courselottie';
+import LoaderLottie from '../userComponents/loaderlottie';
 
 
 const HomePage = () => {

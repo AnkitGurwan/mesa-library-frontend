@@ -36,7 +36,7 @@ const Register = () => {
                 toast.success("Registered Successfully", {
                     position: toast.POSITION.BOTTOM_RIGHT
                 });
-                Navigate('/root');
+                Navigate('root');
             }
             else if(x === 401)
             {

@@ -1,54 +1,71 @@
 import React,{useContext,useEffect,useState} from 'react';
-import Folder from './admin/folder'
-import File from './admin/file'
-import fire from '../config/firebase';
+import Folder from '../adminComponents/folder'
+import File from '../adminComponents/file'
+import fire from '../../config/firebase';
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Upload from "../adminComponents/upload";
+import { useDispatch, useSelector } from 'react-redux';
+import AuthContext from '../../context/auth/AuthContext';
+import { setUpdatePath } from '../../redux/storage/storageSlice';
+import { Spinner } from '@material-tailwind/react';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Upload from "./admin/upload";
-
-import { useDispatch, useSelector } from 'react-redux';
-import { setReduxFiles, setReduxUploadedFiles, setUpdatePath , setPath } from '../redux/storage/storageSlice';
-import AuthContext from '../context/auth/AuthContext';
+import Loader from '../loader';
+import LoaderLottie from '../userComponents/loaderlottie';
 
 const Home = () => {
     const { GetDetails , addFolder, addFile , uploadFile } = useContext(AuthContext);
     const [newFolderName, setNewFolderName] = useState("");
-    const dispatch = useDispatch();
+    const [progress , setProgress] = useState("");
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
-    const { subExams , exams , course } = useParams();
-    const Navigate = useNavigate();
-    const [pathState,setPathState] = useState("");
-    const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
-    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
-    const [progress , setProgress] = useState("");
-    const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams && eachFolder.supParent === exams});
+    const [newFolderAdd,setNewFolderAdd]  = useState(false);
+    const [loading,setLoading]  = useState(true);
+    const [allowed,setAllowed]=useState(false);
+    const [newFileAdd,setNewFileAdd]  = useState(false);
     const [newUploadFileAdd,setNewUploadFileAdd]  = useState(false);
-    const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams && eachFolder.supParent === exams});
+    const Navigate = useNavigate();
 
-    var path =  useSelector(state => state.Files.path);
+    const path =  useSelector(state => state.Files.path);
+    
+
+    const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
+    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === "root" && eachFolder.supParent === "root"});
+
+    const allFilesName = useSelector(state => state.Files.allFilesNameStore);
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == "root" && eachFolder.supParent === "root"});
+
+    const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == "root" && eachFolder.supParent === "root"});
 
     const getItem = async () => {
-        await GetDetails();
         
-        var pathArray = ["root"];
-        pathArray.push(course);
-        pathArray.push(exams);
-        pathArray.push(subExams);
-        
-        if(path.length <= 1)
+        const flag = await GetDetails();
+
+        if(flag === 200)
         {
-            dispatch(setPath(course));
-            dispatch(setPath(exams));
-            dispatch(setPath(subExams));
+            setAllowed(true);
+            setLoading(false);
         }
+        else 
+        {
+            Navigate("/");
+            (toast.error('Please login to access', {
+              position: toast.POSITION.TOP_CENTER
+          }));
+        } 
+
+        localStorage.setItem('pathAdmin',"");
+
+        // if(allFoldersName.length===0)
+       
     }
+    
     useEffect(()=>{
         getItem();
+        
     },[added])
+    
 
     const [fileInputData , setFileInputData] = useState({topic:"",name:"",year:"",description:""});
 
@@ -69,15 +86,16 @@ const Home = () => {
 
     if(newFolderName.length >= 3 && flag)
     {
-        const x = await addFolder(newFolderName,subExams,exams);
+        const x = await addFolder(newFolderName,"root","root");
         
         if(x === 201)
         {
+            document.getElementById("myModal").style.display="none"
             toast.success("Folder added succesfully", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
             setAdded(!added);
-            document.getElementById("myModal").style.display="none"
+            
             setNewFolderName("");
             
         }
@@ -109,12 +127,17 @@ const addFileHandler = async (e) => {
 
         if(fileInputData.topic.length >= 3 && flag)
         {
-            const x = await addFile(fileInputData.topic,fileInputData.name,fileInputData.year,fileInputData.description,subExams,exams);
+            const x = await addFile(fileInputData.topic,fileInputData.name,fileInputData.year,fileInputData.description,"root","root");
             
             if(x === 201)
-            toast.success("File added succesfully", {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            {
+                setAdded(!added);
+                document.getElementById("myModal2").style.display="none"
+                setFileInputData({name:"",topic:"",year:"",description:""});
+                toast.success("File added succesfully", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+            }
         }
         else if( !flag )
         {
@@ -128,50 +151,51 @@ const addFileHandler = async (e) => {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
-    }
+}
 
-    const handleUpload = (e) => {
-        setNewUploadFileAdd(true);
-        e.preventDefault();
-        var flag = true;
-        
-        uploadFilesName.map((file) => {
-                if(file.name === uploadNewFile.name)
-                {
-                    flag = false;
-                }
-            })
+const handleUpload = (e) => {
+    setNewUploadFileAdd(true);
+    e.preventDefault();
 
-        if(flag)
-        {
-            const data = {
-                createdAt : new Date(),
-                name : uploadNewFile.name,
-                userId : 12345,
-                createdBy : "ankit",
-                pathState : newFolderName === 'root'?[]:["parent folder pathState"],
-                parent : subExams ,
-                lastAccessed : null,
-                // extension :  uploadNewFile.name? uploadNewFile.name.split(".")[1]:".txt",
-                updatedAt : new Date(),
-                url:""
+    var flag = true;
+    
+    uploadFilesName.map((file) => {
+            if(file.name === uploadNewFile.name)
+            {
+                flag = false;
             }
-            
-            const uploadFileRef = fire.storage().ref(`uploads/${data.userId}/${ uploadNewFile.name}`);
-            
-            uploadFileRef.put(uploadNewFile).on("state_changed",(snapshot) => {
-                const progress = Math.round(
-                (snapshot.bytesTransferred/ snapshot.totalBytes) * 100
-                );
-                setProgress(progress+ "%");
-            },
-            (error)=>{
-                console.log(error)
-            },
-            async()=>{
-                const fileData = await uploadFileRef.getDownloadURL();
-                const x= await uploadFile(uploadNewFile.name,subExams,exams,fileData);
-            if(x===201)
+        })
+
+    if(flag)
+    {
+        const data = {
+            createdAt : new Date(),
+            name : uploadNewFile.name,
+            userId : 12345,
+            createdBy : "ankit",
+            path : newFolderName === 'root'?[]:["parent folder path"],
+            parent : "root" ,
+            lastAccessed : null,
+            // extension :  uploadNewFile.name? uploadNewFile.name.split(".")[1]:".txt",
+            updatedAt : new Date(),
+            url:""
+        }
+        
+        const uploadFileRef = fire.storage().ref(`uploads/${data.userId}/${ uploadNewFile.name}`);
+        
+        uploadFileRef.put(uploadNewFile).on("state_changed",(snapshot) => {
+            const progress = Math.round(
+            (snapshot.bytesTransferred/ snapshot.totalBytes) * 100
+            );
+        setProgress(progress+ "%");
+        },
+        (error)=>{
+            console.log(error)
+        },
+        async()=>{
+            var fileData = await uploadFileRef.getDownloadURL();
+            const x= await uploadFile(uploadNewFile.name,"root","root",fileData);
+            if(x === 201)
             {
                 setAdded(!added);
                 setNewUploadFileAdd(false);
@@ -180,17 +204,18 @@ const addFileHandler = async (e) => {
                     position: toast.POSITION.BOTTOM_RIGHT
                 });
             }
-            });
-
-        }
-        
-        else
-        {
-            toast.error("File already uploaded.", {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
-        }
+            
+        });
     }
+    
+    else
+    {
+        setNewUploadFileAdd(false);
+        toast.error("File already uploaded.", {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+    }
+}
 
     const onChangeHandler = (e) => {
         (setNewFolderName(e.target.value));
@@ -199,29 +224,27 @@ const addFileHandler = async (e) => {
     const submit = async (e)=>{
     }
 
-    const pathHandler = (e) => {
-        dispatch(setUpdatePath(e.target.innerText));
-        var x = "";
+    
+    
 
-        for(let i=0;i<path.length;i++)
-        {
-            x += "/";
-            x += path[i];
-            if(e.target.innerText === path[i])
-            break;
-            
-        }
-        Navigate(`${x}`);
-    }
   return (
-    <div>
-        <div className='w-full h-16 text-end border-b flex items-center justify-end'>
+    <div className='h-full w-full'>
+        {
+        loading
+        ?
+        <div className='h-full flex items-center justify-center'><LoaderLottie/></div>
+        :
+        allowed
+        ?
+        <div>
+        <div className='w-full h-16 text-end border-b flex items-center justify-end bg-white'>
             <button onClick={()=>{Navigate('/')}} className='text-white bg-black py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer'>Log Out</button>
         </div>
-        <div className='flex justify-end items-center py-3 border-b'>
+        <div className='w-full flex justify-end items-center py-3 border-b'>
             
-            <div className='mr-8 flex'>
-                <form onSubmit={handleUpload} className={`flex items-center ${uploadNewFile?'w-76':'md:w-48'} md:w-96 border ml-8 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100`}>
+            
+        <div className='mr-8 flex'>
+        <form onSubmit={handleUpload} className='flex items-center w-44 md:w-96 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                 <div class="w-full" onDragOver={(e)=>{e.preventDefault();}} onDrop={(e)=>{e.preventDefault();setUploadNewFile(e.dataTransfer.files[0])}} >
                     <label
                         class="flex justify-center w-full h-12 md:h-16 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
@@ -241,16 +264,16 @@ const addFileHandler = async (e) => {
                 </div>
                     {/* <i class="fa-solid fa-upload px-1 md:px-2"></i>
                     <input type='file' className='px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/> */}
-                    {uploadNewFile?<button className='mx-4 bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
+                    {uploadNewFile?<button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
                 </form>
-                {!uploadNewFile?<button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='w-20 md:w-36 flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+                <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-file px-2"></i>
                     <div className='px-1 text-xs md:text-lg'>Create File</div>
-                </button>:""}
-                {!uploadNewFile?<button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='w-20 md:w-36 flex items-center border py-1 px-1 mx-1 md:mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
+                </button>
+                <button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='flex items-center border py-1 px-1 mx-1 md:mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-folder px-1 md:px-2"></i>
                     <div  className='px-1 text-xs md:text-lg'>Add Folder</div>
-                </button>:""}
+                </button>
                 
                 
             </div>
@@ -344,20 +367,14 @@ const addFileHandler = async (e) => {
             
         </div>
 
-        <div className='flex justify-between items-center py-3 border-b'>
-            <div className='flex mx-2 md:mx-6'>
-            {
-                path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler}className='mr-3 '>{indPath}</button>
-                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
-                }
-                
-            </div>
-        </div>
-
+        {loading?
+        <div className='h-1/2 flex items-center  justify-center'><Loader/></div>
+        :
+        <div>
         <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
             <div className='text-center pt-2 pb-3 md:pl-2'>All Folders</div>
             <div className="grid grid-cols-2 md:grid-cols-6">
-                {foldersName.length ? foldersName.map((folder) => (
+                {foldersName ? foldersName.map((folder) => (
                     <div><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
                 :
@@ -368,8 +385,8 @@ const addFileHandler = async (e) => {
         <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
             <div className='text-center pt-2 pb-3 md:pl-2'>Created Files</div>
             <div className="grid grid-cols-2 md:grid-cols-6">
-                {filesName.length ? filesName.map((file) => (
-                    <div><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
+                {filesName ? filesName.map((file) => (
+                    <div><File key={file.userId} parent={file.parent} name={file.name} description={file.description} year={file.year} topic={file.topic}/></div>
                 )) 
                 :
                  ""}
@@ -378,21 +395,33 @@ const addFileHandler = async (e) => {
         </div>
 
         <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
-            <div className='text-center pt-2 pb-3 md:pl-2'>Uploaded Files</div>
+            <div className='text-center pt-2 pb-3'>Uploaded Files</div>
             <div className="grid grid-cols-2 md:grid-cols-6">
-                {uploadFilesName.length ? uploadFilesName.map((upload) => (
-                    <div><Upload key={upload.userId} parent={upload.parent} name={upload.name} url={upload.url}/></div>
+                {uploadFilesName ? uploadFilesName.map((upload) => (
+                    <div><Upload parent={upload.parent} name={upload.name} url={upload.url}/></div>
                 )) 
                 :
                  ""}
             </div>
                                 
         </div>
+        </div>}
 
         
-        {newUploadFileAdd?<div className='fixed bottom-12 right-12 bg-black text-white rounded-sm w-12 h-10 flex justify-center items-center'>{progress}</div>:""}
 
-            
+
+            </div>
+            :
+            <div class="absolute top-24 left-9 md:left-1/3 w-4/5 md:w-1/3">
+                <div class="max-w-md bg-white rounded-lg shadow-md p-8">
+                    <h1 class="text-3xl font-bold mb-4">404</h1>
+                    <p class="text-lg text-gray-700 mb-6">Oops! The page you're looking for could not be accessed by you.</p>
+                    <div class="bg-blue-500 text-center text-white text-xl font-bold py-2 px-4 rounded">
+                        You are not part of this Course.
+                    </div>
+                </div>
+            </div>}
+            {newUploadFileAdd?<div className='fixed bottom-12 right-12 bg-black text-white rounded-sm w-12 h-10 flex justify-center items-center'>{progress}</div>:""}
     </div>
   )
 }

@@ -58,7 +58,7 @@ const Login = () => {
                 toast.success("Logged In Successfully", {
                     position: toast.POSITION.BOTTOM_RIGHT
                 });
-                Navigate('/root');
+                Navigate('root');
             }
             else if(x === 400)
             {

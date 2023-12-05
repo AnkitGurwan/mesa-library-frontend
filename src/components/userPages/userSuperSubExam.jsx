@@ -1,15 +1,15 @@
 import React,{useContext,useEffect,useState} from 'react';
-import Folder from './userFolder'
-import File from './userFile2'
+import Folder from '../userComponents/userFolder'
+import File from '../userComponents/userFile2'
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
-import Upload from "./userUpload";
+import Upload from "../userComponents/userUpload";
 import { useDispatch, useSelector } from 'react-redux';
 import AuthContext from '../../context/auth/AuthContext';
 import { setUserUpdatePath ,setUserPath } from '../../redux/storage/storageSlice';
-import Lottie from './backgroundlottie';
-import Navbar from './navbar';
-import BackgroundParticle from './backgroundParticle';
+import Lottie from '../userComponents/backgroundlottie';
+import Navbar from '../userComponents/navbar';
+import BackgroundParticle from '../userComponents/backgroundParticle';
 
 const Home = () => {
     const { GetDetails } = useContext(AuthContext);
