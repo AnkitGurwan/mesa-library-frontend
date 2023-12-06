@@ -204,7 +204,7 @@ const addFileHandler = async (e) => {
 
     const pathHandler = (e) => {
         dispatch(setUpdatePath(e.target.innerText));
-        var x = "";
+        var x = "/library";
 
         for(let i=0;i<path.length;i++)
         {

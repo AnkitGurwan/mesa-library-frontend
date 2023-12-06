@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/auth/AuthContext'
-import fire from '../config/firebase';
+import AuthContext from '../../context/auth/AuthContext'
+import fire from '../../config/firebase';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import logo from './images/mesa-logo.png';
+import logo from '../images/mesa-logo.png';
 import { Spinner } from "@material-tailwind/react";
 import LoadingBar from 'react-top-loading-bar'
 

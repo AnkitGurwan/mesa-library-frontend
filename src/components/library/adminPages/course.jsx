@@ -195,7 +195,7 @@ const Home = () => {
 
     const pathHandler = (e) => {
         dispatch(setUpdatePath(e.target.innerText));
-        var x = "";
+        var x = "/library";
 
 
         for(let i=0;i<path.length;i++)

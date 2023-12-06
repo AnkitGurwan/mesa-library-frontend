@@ -49,7 +49,8 @@ const Home = () => {
     const pathHandler = (e) => {
         const value = e.target.innerText;
         dispatch(setUserUpdatePath(value));
-        var x = "";
+        var x = "/library";
+        
         for(let i=0;i<path.length;i++)
         {
             x += "/";

@@ -1,10 +1,10 @@
 import React, { useState,useEffect, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/auth/AuthContext'
+import AuthContext from '../../context/auth/AuthContext'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import fire from '../config/firebase';
-import logo from './images/mesa-logo.png';
+import fire from '../../config/firebase';
+import logo from '../images/mesa-logo.png';
 import { Spinner } from "@material-tailwind/react";
 
 const Register = () => {
