@@ -5,6 +5,7 @@ import fire from '../../../config/firebase';
 import { useNavigate } from "react-router-dom";
 import Upload from "../adminComponents/upload";
 import { useSelector } from 'react-redux';
+import '../../styles.css'
 import AuthContext from '../../../context/auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";

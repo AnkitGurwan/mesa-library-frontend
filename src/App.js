@@ -38,9 +38,9 @@ function App() {
 
             <Route path="/library/main" element={<UsersLogin/>}></Route>
             <Route path="/library/main/:course" element={<UsersCourses/>}></Route>
-            <Route path="/main/:course/:exams" element={<UserExams/>}></Route>
-            <Route path="/main/:course/:exams/:subExams" element={<UserSubCourseExams/>}></Route>
-            <Route path="/main/:course/:exams/:subExams/:superSub" element={<UserSuperSubExams/>}></Route>
+            <Route path="/library/main/:course/:exams" element={<UserExams/>}></Route>
+            <Route path="/library/main/:course/:exams/:subExams" element={<UserSubCourseExams/>}></Route>
+            <Route path="/library/main/:course/:exams/:subExams/:superSub" element={<UserSuperSubExams/>}></Route>
           </Routes>
         </BrowserRouter>
       </AuthState>

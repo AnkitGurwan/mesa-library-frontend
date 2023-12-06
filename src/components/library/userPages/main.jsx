@@ -84,7 +84,7 @@ const HomePage = () => {
     }
 
     return (
-        <div className='w-full h-full' style={{'background-image': 'linear-gradient(to top left, white 0%, #132d7a 74%)'}}>
+        <div className='w-full' style={{'background-image': 'linear-gradient(to top left, white 0%, #132d7a 74%)'}}>
             {loading
             ?
             <div className='bg-white h-full flex items-center justify-center'><LoaderLottie/></div>
@@ -96,7 +96,7 @@ const HomePage = () => {
                     <div className='flex justify-between items-center mx-4 md:mx-8 py-4'>
                         <div className='text-xl md:text-3xl font-bold pl-2 md:pl-4 pt-0 md:pt-4'>MESA Library</div>
                         <div>
-                        <Link className='text-white text-lg md:text-xl font-semibold hover:underline mx-2' to={'/feedback'}>Feedback</Link>
+                        <Link className='text-white text-lg md:text-xl font-semibold hover:underline mx-2 md:mx-4' to={'/feedback'}>Feedback</Link>
                         <button className='text-white text-lg md:text-xl font-semibold hover:underline' onClick={logOutHandler}>Log Out
                         </button>
                         

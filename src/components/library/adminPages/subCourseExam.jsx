@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Upload from "../adminComponents/upload";
+import '../../styles.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { setUpdatePath , setPath } from '../../../redux/storage/storageSlice';
 import AuthContext from '../../../context/auth/AuthContext';
