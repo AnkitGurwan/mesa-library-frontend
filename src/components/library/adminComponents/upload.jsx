@@ -1,32 +1,20 @@
-import React, { useContext, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { setPath } from '../../redux/storage/storageSlice';
-import folder from '../images/folder.png';
-import fire from '../../config/firebase';
-import AuthContext from '../../context/auth/AuthContext';
+import React, { useContext, useState } from 'react';
+import AuthContext from '../../../context/auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 const File = (props) => {
   const [showDelete,setShowDelete] = useState(false);
-  const { GetDetails } = useContext(AuthContext);
+  const { removeUpload , GetDetails } = useContext(AuthContext);
 
-  const deleteHandler = () => {
-    fire.firestore().collection("uploads").where('name','==',props.name).where('parent','==',props.parent).get().then(function(querySnapshot) {
-      querySnapshot.forEach(async function(doc) {
-          doc.ref.delete();
-          toast.success("File Removed Successfully", {
-            position: toast.POSITION.BOTTOM_RIGHT
-        });
-        await GetDetails();
-      });
-  });
+  const deleteHandler = async () => {
+    const x = await removeUpload(props.name,props.parent);
+    if(x===201)GetDetails();
   
   }
   
   return (
-    <div className='border hover:bg-gray-200 rounded-sm p-1 border-gray-400 relative mx-2'
+    <div className='border hover:bg-gray-200 rounded-lg relative mx-2'
     onMouseEnter={()=>{setShowDelete(true)}}
     onMouseLeave={()=>setShowDelete(false)}>
       {showDelete

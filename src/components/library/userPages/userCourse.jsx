@@ -1,15 +1,12 @@
 import React,{useContext,useEffect,useState} from 'react';
 import Folder from '../userComponents/userFolder2'
 import File from '../userComponents/userFile'
-import fire from '../../config/firebase';
-import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Upload from "../userComponents/userUpload2";
-
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserUpdatePath ,setUserPath } from '../../redux/storage/storageSlice';
-import AuthContext from '../../context/auth/AuthContext';
+import { setUserUpdatePath ,setUserPath } from '../../../redux/storage/storageSlice';
+import AuthContext from '../../../context/auth/AuthContext';
 import BackgroundParticle from '../userComponents/backgroundParticle';
 import Navbar from '../userComponents/navbar';
 

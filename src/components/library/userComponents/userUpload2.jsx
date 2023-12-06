@@ -1,7 +1,4 @@
 import React, { useContext, useState } from 'react'
-import fire from '../../config/firebase';
-import AuthContext from '../../context/auth/AuthContext';
-import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 const File = (props) => {

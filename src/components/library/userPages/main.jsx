@@ -1,6 +1,6 @@
 import React , { useContext,useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../../context/auth/AuthContext';
+import AuthContext from '../../../context/auth/AuthContext';
 import { useSearchParams } from 'react-router-dom';
 import { BsChevronRight } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';

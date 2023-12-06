@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../images/mesa-logo.png';
-import AuthContext from '../../context/auth/AuthContext';
+import logo from '../../images/mesa-logo.png';
+import AuthContext from '../../../context/auth/AuthContext';
 
 const Navbar = () => {
     const { logOut } = useContext(AuthContext);

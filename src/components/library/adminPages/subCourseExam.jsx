@@ -1,15 +1,15 @@
 import React,{useContext,useEffect,useState} from 'react';
 import Folder from '../adminComponents/folder'
 import File from '../adminComponents/file'
-import fire from '../../config/firebase';
+import fire from '../../../config/firebase';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Upload from "../adminComponents/upload";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setReduxFiles, setReduxUploadedFiles, setUpdatePath ,setPath } from '../../redux/storage/storageSlice';
-import AuthContext from '../../context/auth/AuthContext';
+import { setReduxFiles, setReduxUploadedFiles, setUpdatePath , setPath } from '../../../redux/storage/storageSlice';
+import AuthContext from '../../../context/auth/AuthContext';
 
 const Home = () => {
     const { GetDetails , addFolder, addFile , uploadFile } = useContext(AuthContext);
@@ -17,57 +17,61 @@ const Home = () => {
     const dispatch = useDispatch();
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
-    const [progress , setProgress] = useState("");
-    const { course  } = useParams();
+    const { subExams , exams , course } = useParams();
     const Navigate = useNavigate();
     const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
-    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === course && eachFolder.supParent === "root"});
+    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
+    const [progress , setProgress] = useState("");
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == course && eachFolder.supParent === "root"});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams && eachFolder.supParent === exams});
     const [newUploadFileAdd,setNewUploadFileAdd]  = useState(false);
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == course && eachFolder.supParent === "root"});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams && eachFolder.supParent === exams});
 
     var path =  useSelector(state => state.Files.path);
 
     const getItem = async () => {
         await GetDetails();
-
+        
         var pathArray = ["root"];
         pathArray.push(course);
+        pathArray.push(exams);
+        pathArray.push(subExams);
         
         if(path.length <= 1)
         {
             dispatch(setPath(course));
+            dispatch(setPath(exams));
+            dispatch(setPath(subExams));
         }
     }
-    useEffect(() => {
+    useEffect(()=>{
         getItem();
-    },[added]);
+    },[added])
 
-    const [fileInputData , setFileInputData] = useState({topic : "" , name : "" , year : "" , description : ""});
+    const [fileInputData , setFileInputData] = useState({topic:"",name:"",year:"",description:""});
 
   const onChangeHandler2 = (e) => {
     setFileInputData({...fileInputData,[e.target.name] : e.target.value})
   }
 
-    const addFolderHandler = async (e) => {
-        e.preventDefault();
-        var flag = true;
-        
-        foldersName.map((folder) => {
-                if(folder.name === newFolderName)
-                {
-                    flag = false;
-                }
-            })
+  const addFolderHandler = async (e) => {
+    e.preventDefault();
+    var flag = true;
+    
+    foldersName.map((folder) => {
+            if(folder.name === newFolderName)
+            {
+                flag = false;
+            }
+        })
 
-        if(newFolderName.length >= 3 && flag)
-        {
-            const x = await addFolder(newFolderName,course,"root");
-            
-            if(x === 201)
+    if(newFolderName.length >= 3 && flag)
+    {
+        const x = await addFolder(newFolderName,subExams,exams);
+        
+        if(x === 201)
         {
             toast.success("Folder added succesfully", {
                 position: toast.POSITION.BOTTOM_RIGHT
@@ -77,10 +81,44 @@ const Home = () => {
             setNewFolderName("");
             
         }
+    }
+    else if( !flag )
+    {
+        toast.error("Folder Name Already Exist.", {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+    }
+    else
+    {
+        toast.error("Please try again", {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+    }
+}
+
+const addFileHandler = async (e) => {
+    e.preventDefault();
+    var flag = true;
+    
+    filesName.map((file) => {
+            if(file.name === fileInputData.topic)
+            {
+                flag = false;
+            }
+        })
+
+        if(fileInputData.topic.length >= 3 && flag)
+        {
+            const x = await addFile(fileInputData.topic,fileInputData.name,fileInputData.year,fileInputData.description,subExams,exams);
+            
+            if(x === 201)
+            toast.success("File added succesfully", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
         }
         else if( !flag )
         {
-            toast.error("Folder Name Already Exist.", {
+            toast.error("File Name Already Exist.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
@@ -92,41 +130,7 @@ const Home = () => {
         }
     }
 
-    const addFileHandler = async (e) => {
-        e.preventDefault();
-        var flag = true;
-        
-        filesName.map((file) => {
-                if(file.topic === fileInputData.topic)
-                {
-                    flag = false;
-                }
-            })
-
-            if(newFolderName.length >= 3 && flag)
-            {
-                const x = await addFile(fileInputData.topic,fileInputData.name,fileInputData.year,fileInputData.description,course,"root");
-                
-                if(x === 201)
-                toast.success("File added succesfully", {
-                    position: toast.POSITION.BOTTOM_RIGHT
-                });
-            }
-            else if( !flag )
-            {
-                toast.error("File Name Already Exist.", {
-                    position: toast.POSITION.BOTTOM_RIGHT
-                });
-            }
-            else
-            {
-                toast.error("Please try again", {
-                    position: toast.POSITION.BOTTOM_RIGHT
-                });
-            }
-    }
-
-    const handleUpload = async (e) => {
+    const handleUpload = (e) => {
         setNewUploadFileAdd(true);
         e.preventDefault();
         var flag = true;
@@ -140,14 +144,13 @@ const Home = () => {
 
         if(flag)
         {
-            
             const data = {
                 createdAt : new Date(),
                 name : uploadNewFile.name,
                 userId : 12345,
                 createdBy : "ankit",
-                path : newFolderName === 'root'?[]:["parent folder path"],
-                parent : course ,
+                pathState : newFolderName === 'root'?[]:["parent folder pathState"],
+                parent : subExams ,
                 lastAccessed : null,
                 // extension :  uploadNewFile.name? uploadNewFile.name.split(".")[1]:".txt",
                 updatedAt : new Date(),
@@ -167,7 +170,7 @@ const Home = () => {
             },
             async()=>{
                 const fileData = await uploadFileRef.getDownloadURL();
-                const x= await uploadFile(uploadNewFile.name,course,"root",fileData);
+                const x= await uploadFile(uploadNewFile.name,subExams,exams,fileData);
             if(x===201)
             {
                 setAdded(!added);
@@ -193,24 +196,22 @@ const Home = () => {
         (setNewFolderName(e.target.value));
     }
 
+    const submit = async (e)=>{
+    }
+
     const pathHandler = (e) => {
         dispatch(setUpdatePath(e.target.innerText));
         var x = "";
-
 
         for(let i=0;i<path.length;i++)
         {
             x += "/";
             x += path[i];
-
             if(e.target.innerText === path[i])
             break;
             
         }
         Navigate(`${x}`);
-    }
-
-    const submit = async (e)=>{
     }
   return (
     <div>
@@ -345,8 +346,7 @@ const Home = () => {
 
         <div className='flex justify-between items-center py-3 border-b'>
             <div className='flex mx-2 md:mx-6'>
-                {
-               
+            {
                 path.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler}className='mr-3 '>{indPath}</button>
                 <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>})
                 }
@@ -357,7 +357,7 @@ const Home = () => {
         <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
             <div className='text-center pt-2 pb-3 md:pl-2'>All Folders</div>
             <div className="grid grid-cols-2 md:grid-cols-6">
-                {foldersName ? foldersName.map((folder) => (
+                {foldersName.length ? foldersName.map((folder) => (
                     <div><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
                 :
@@ -368,8 +368,8 @@ const Home = () => {
         <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
             <div className='text-center pt-2 pb-3 md:pl-2'>Created Files</div>
             <div className="grid grid-cols-2 md:grid-cols-6">
-                {filesName ? filesName.map((file) => (
-                    <div><File key={file.userId} parent={file.parent} name={file.name} description={file.description} year={file.year} topic={file.topic}/></div>
+                {filesName.length ? filesName.map((file) => (
+                    <div><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
                 :
                  ""}
@@ -378,9 +378,9 @@ const Home = () => {
         </div>
 
         <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
-            <div className='text-center pt-2 pb-3'>Uploaded Files</div>
+            <div className='text-center pt-2 pb-3 md:pl-2'>Uploaded Files</div>
             <div className="grid grid-cols-2 md:grid-cols-6">
-                {uploadFilesName ? uploadFilesName.map((upload) => (
+                {uploadFilesName.length ? uploadFilesName.map((upload) => (
                     <div><Upload key={upload.userId} parent={upload.parent} name={upload.name} url={upload.url}/></div>
                 )) 
                 :
@@ -390,8 +390,8 @@ const Home = () => {
         </div>
 
         
-
         {newUploadFileAdd?<div className='fixed bottom-12 right-12 bg-black text-white rounded-sm w-12 h-10 flex justify-center items-center'>{progress}</div>:""}
+
             
     </div>
   )

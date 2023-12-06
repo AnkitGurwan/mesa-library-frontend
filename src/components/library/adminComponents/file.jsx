@@ -1,10 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { setPath } from '../../redux/storage/storageSlice';
-import folder from '../images/folder.png';
-import fire from '../../config/firebase';
-import AuthContext from '../../context/auth/AuthContext';
+import AuthContext from '../../../context/auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 

@@ -1,16 +1,14 @@
 import React,{useContext,useEffect,useState} from 'react';
 import Folder from '../adminComponents/folder'
 import File from '../adminComponents/file'
-import fire from '../../config/firebase';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import fire from '../../../config/firebase';
+import { useNavigate } from "react-router-dom";
 import Upload from "../adminComponents/upload";
-import { useDispatch, useSelector } from 'react-redux';
-import AuthContext from '../../context/auth/AuthContext';
-import { setUpdatePath } from '../../redux/storage/storageSlice';
-import { Spinner } from '@material-tailwind/react';
+import { useSelector } from 'react-redux';
+import AuthContext from '../../../context/auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import Loader from '../loader';
+import Loader from '../../loader';
 import LoaderLottie from '../userComponents/loaderlottie';
 
 const Home = () => {
@@ -19,7 +17,6 @@ const Home = () => {
     const [progress , setProgress] = useState("");
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
-    const [newFolderAdd,setNewFolderAdd]  = useState(false);
     const [loading,setLoading]  = useState(true);
     const [allowed,setAllowed]=useState(false);
     const [newFileAdd,setNewFileAdd]  = useState(false);

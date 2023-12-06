@@ -1,15 +1,15 @@
 import React,{useContext,useEffect,useState} from 'react';
 import Folder from '../adminComponents/folder'
 import File from '../adminComponents/file'
-import fire from '../../config/firebase';
+import fire from '../../../config/firebase';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Upload from "../adminComponents/upload";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setReduxFiles, setReduxUploadedFiles, setUpdatePath ,setPath } from '../../redux/storage/storageSlice';
-import AuthContext from '../../context/auth/AuthContext';
+import { setReduxFiles, setReduxUploadedFiles, setUpdatePath ,setPath } from '../../../redux/storage/storageSlice';
+import AuthContext from '../../../context/auth/AuthContext';
 
 const Home = () => {
     const { GetDetails , addFolder, addFile , uploadFile } = useContext(AuthContext);

@@ -1,15 +1,15 @@
 import React from 'react';
 import Lottie from 'react-lottie-player'
-import lottieJson from '../images/courseanimation.json'
+import lottieJson from '../../images/examanimation.json'
 
 
 const lottie = () => {
   return (
     <div>
-        <div class="">
-            <div class="">
+        <div class="flex items-start justify-center h-full">
+            <div class="text-center mb-4 mr-4">
                 <Lottie
-                    className='h-[200px] md:h-[400px] w-[150px] md:w-[400px]'
+                    className='mb-4 mr-4 h-96 w-full'
                     loop
                     animationData={lottieJson}
                     play

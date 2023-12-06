@@ -4,17 +4,20 @@ import Login from './components/login';
 import Register from './components/register';
 import Intro from './components/IntroPage/intro';
 import AuthState from './context/auth/AuthState';
-import Home from "./components/userPages/home";
-import Course from "./components/adminPages/course";
-import Exams from "./components/adminPages/exams";
-import SubCourseExam from "./components/adminPages/subCourseExam";
-import SuperSubCourseExam from "./components/adminPages/superSubExam";
-import UsersLogin from "./components/adminPages/main";
-import UsersCourses from "./components/userPages/userCourse";
-import UserExams from "./components/userPages/userExams";
-import UserSubCourseExams from "./components/userPages/userSubCourseExam";
-import UserSuperSubExams from "./components/userPages/userSuperSubExam";
-import Feedback from "./components/userPages/feedbackUser";
+
+
+import Course from "./components/library/adminPages/course";
+import Exams from "./components/library/adminPages/exams";
+import SubCourseExam from "./components/library/adminPages/subCourseExam";
+import SuperSubCourseExam from "./components/library/adminPages/superSubExam";
+import UsersLogin from "./components/library/userPages/main";
+
+import Home from "./components/library/adminPages/home";
+import UsersCourses from "./components/library/userPages/userCourse";
+import UserExams from "./components/library/userPages/userExams";
+import UserSubCourseExams from "./components/library/userPages/userSubCourseExam";
+import UserSuperSubExams from "./components/library/userPages/userSuperSubExam";
+import Feedback from "./components/library/userPages/feedbackUser";
 import Team from "./components/Team/team";
 
 function App() {
