@@ -27,7 +27,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="sm:hidden">
-                <div className="flex flex-row justify-between max-[380px]:mx-0 mx-10  p-3" >
+                <div className="flex flex-row justify-between text-lg mx-10 p-5" >
                     {navbarPages.map(([title, url]) => (
                         <NavLink to={url}>{title}</NavLink>
                     ))}

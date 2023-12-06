@@ -6,7 +6,7 @@ const Announcements = () => {
     return ( 
         <div className='w-full my-16 flex flex-col justify-center items-center text-center text-[#252525]'>
             <div className='text-white font-extrabold text-3xl bg-slate-400 py-2 px-[13.5rem] rounded-sm tracking-wider' style={{"font-family": "Dancing Script,cursive"}}>Announcements</div>
-            <div className='flex flex-col sm:flex-row '>
+            <div className='grid grid-cols-2 gap-8 md:gap-0'>
     
                 <a target='_blank' href='https://www.iitg.ac.in/acad/classtt/ME_TimeTable%20Jan-May%202021_29th%20Dec.pdf'  className='w-[270px] sm:h-[400px] md:w-[300px] mt-8 mb-2 py-2 px-4 sm:mr-8 flex flex-col justify-center items-center text-center border rounded-[5%] shadow-[5px_5px_15px_rgba(0,0,0,0.25)]'>
                         <img src={ClassImage} alt="" className='w-[170px] my-4'/>
