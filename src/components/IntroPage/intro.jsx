@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
@@ -15,9 +14,9 @@ const intro = () => {
 
         {/* <div className='relative top-0'> */}
             
-            <div className='my-20 w-full  flex flex-col-reverse justify-center align-center items-center xl:items-start'>
+            <div className='my-20 w-fyll  flex flex-col-reverse justify-center align-center items-center xl:items-start'>
                 <div className='relative top-0 mx-0 md:mx-8'>
-                    <div className='w-full  flex justify-end'>
+                    <div className='w-full flex justify-end'>
                         <Carousel
                             className='w-full'
                             autoPlay={true}
@@ -36,18 +35,18 @@ const intro = () => {
                         </Carousel>
                     </div>
                 </div>
-                <div className='w-[60%] h-[300px] xl:w-[500px] xl:h-[325px] mx-8 mb-20 xl:my-0 px-2 py-6 md:py-3 bg-blue-400 text-white font-Manrope z-10 xl:absolute'>
+                <div className='min-w-[250px] w-[80%] h-[300px] max-w-[700px] xl:w-[500px] xl:h-[325px] mx-8 mb-20 xl:my-0 px-2 py-6 md:py-3 bg-blue-400 text-white font-Manrope z-10 relative xl:absolute'>
                     <div className='px-3 md:px-2 py-3 font-semibold'>
                         <TypeAnimation
                             sequence={[
                             // Same substring at the start will only be typed out once, initially
-                            'We are Mechanical.',
+                            'We are fun.',
                             2000,
                             'We provide Academic Resources.',
                             2000, // wait 2s before replacing "Mice" with "Hamsters"
                             'We conduct Workshops and Seminars.',
                             2000,
-                            'We are fun.',
+                            'We are Mechanical.',
                             2000,
                             
                             ]}
@@ -58,7 +57,7 @@ const intro = () => {
                             className='pb-2 text-3xl'
                             />
                     </div>
-                    <div className='flex lg:bottom-8'>
+                    <div className='flex absolute bottom-8'>
                         <div className='px-3 md:px-2 md:text-[18px] text-[14px]'>MESA connects you to the world outside the walls of your classroom and to that in the cubicle. We aim to be the cornerstone of the all-round deveploment of our student community by providing academic resources to conducting workshops and talks. We plan to be an integral part of your campus life from your Induction to Freshers' Party to Convocation to your Farewell Party.</div>
                     </div>
                 </div>
