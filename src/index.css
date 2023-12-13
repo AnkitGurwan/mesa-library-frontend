@@ -12,6 +12,10 @@ html,body,#root,.app{
   /* overflow-y: hidden; */
 }
 
+.body{
+  min-height: 100%;
+}
+
 /*For showing which page is active on navbar(homeNavBar.jsx)*/
 .active{
   text-decoration: underline;

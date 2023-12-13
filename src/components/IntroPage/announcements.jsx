@@ -4,7 +4,7 @@ import ClassImage from './assests/expired.png'
 const Announcements = () => {
     
     return ( 
-        <div className='w-full my-16 flex flex-col justify-center items-center text-center text-[#252525]'>
+        <div className='w-full my-[87px] flex flex-col justify-center items-center text-center text-[#252525]'>
             <div className='text-white font-extrabold text-3xl bg-slate-400 py-2 px-[13.5rem] rounded-sm tracking-wider' style={{"font-family": "Dancing Script,cursive"}}>Announcements</div>
             <div className='grid grid-cols-2 gap-8 md:gap-0'>
     
