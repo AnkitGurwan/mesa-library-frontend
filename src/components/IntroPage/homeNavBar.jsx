@@ -29,7 +29,7 @@ const Navbar = () => {
             <div className="md:hidden">
                 <div className="flex flex-row flex-wrap justify-center max-[320px]:mx-1 text-lg p-5" >
                     {navbarPages.map(([title, url]) => (
-                        <NavLink className="mx-4" to={url}>{title}</NavLink>
+                        <NavLink className="mx-4 my-1" to={url}>{title}</NavLink>
                     ))}
                 </div>
             </div>
