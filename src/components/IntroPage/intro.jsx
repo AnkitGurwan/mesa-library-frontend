@@ -14,7 +14,7 @@ const intro = () => {
 
         {/* <div className='relative top-0'> */}
             
-            <div className='my-20 w-fyll  flex flex-col-reverse justify-center align-center items-center xl:items-start'>
+            <div className='my-12 md:mx-4 w-fyll  flex flex-col-reverse justify-center align-center items-center xl:items-start' style={{'fontFamily':'Manrope'}}>
                 <div className='relative top-0 mx-0 md:mx-8'>
                     <div className='w-full flex justify-end'>
                         <Carousel

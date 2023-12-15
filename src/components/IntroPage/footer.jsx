@@ -21,7 +21,8 @@ const Footer = () => {
         ['Department of Mechanical Engineering', 'https://www.iitg.ac.in/mech/'],
     ]
     return (
-        <footer className='w-full relative bottom-0 h-[420px] lg:h-[200px] mt-10 bg-gradient-to-t from-[#64beff] to-white'>
+        <footer className='w-full relative bottom-0 h-[420px] lg:h-[200px] mt-10 bg-gradient-to-t from-[#64beff] to-white'
+        style={{"fontFamily":"Sans-serif"}}>
             {/* <div className="w-full flex justify-between absolute left-0 bottom-0 my-6 lg:px-40 py-8">
             <div className='w-1/3 text-center px-12'>
                 <div className='font-medium py-3'>MESA</div>
@@ -47,7 +48,7 @@ const Footer = () => {
             <div className="lg:mx-10 flex flex-col lg:flex-row justify-center lg:justify-between align-center text-center">
 
                 <div className="mt-10">
-                    <p className="font-bold text-lg mb-2">Mesa</p>
+                    <p className="font-bold text-lg mb-2">MESA</p>
                     <p className="ml-5 lg:ml-0 tracking-wider">Department of Mechanical Engineering, IITG</p>
                 </div>
 

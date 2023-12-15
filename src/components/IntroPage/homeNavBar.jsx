@@ -6,14 +6,14 @@ const Navbar = () => {
         ['About Us', '/'],
         ['Events', '/events'],
         ['Team', '/team'],
-        ['BTP', '/soon'],
+        ['BTP Phase-I', '/soon'],
         ['Library', '/library'],
     ]
 
 
     return (
         <navbar className="mb-4">
-            <div className='flex h-contain w-full flex-row justify-center md:justify-between align-center items-center'>
+            <div className='shadow-xl flex h-contain w-full flex-row justify-center md:justify-between align-center items-center'>
                 <Link to={'/'}>
                     <img className="h-20 w-[200px] sm:w-[225px] sm:ml-10 mt-2" src='https://iitg.ac.in/clubs/mesa/images/logo4.png' alt="Mesa Logo" />
                 </Link>
@@ -33,7 +33,7 @@ const Navbar = () => {
                     ))}
                 </div>
             </div>
-            <hr className="w-full bg-slate-400/0.3 shadow-[5px_5px_15px_rgba(0,67,101,1)]" />
+            {/* <hr className="w-full bg-slate-400/0.3 shadow-[5px_5px_15px_rgba(0,67,101,1)]" /> */}
         </navbar>
     );
 }
