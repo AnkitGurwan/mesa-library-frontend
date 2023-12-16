@@ -59,6 +59,12 @@ const Home = () => {
        
     }
     
+    useEffect(() => {
+        if (!localStorage.getItem('btpToken')) {
+            Navigate(`/`);
+        }
+    }, []);
+    
     useEffect(()=>{
         getItem();
         

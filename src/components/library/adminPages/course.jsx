@@ -42,6 +42,13 @@ const Home = () => {
             dispatch(setPath(course));
         }
     }
+
+    useEffect(() => {
+        if (!localStorage.getItem('btpToken')) {
+            Navigate(`/`);
+        }
+    }, []);
+
     useEffect(() => {
         getItem();
     },[added]);

@@ -31,6 +31,12 @@ const Home = () => {
 
     var path =  useSelector(state => state.Files.path);
 
+    useEffect(() => {
+        if (!localStorage.getItem('btpToken')) {
+            Navigate(`/`);
+        }
+    }, []);
+
     const getItem = async () => {
         await GetDetails();
         
