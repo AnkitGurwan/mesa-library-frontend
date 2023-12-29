@@ -16,12 +16,12 @@ const Events = () => {
         <div className="flex flex-col">
             <Navbar/>
             <Title title={"Events"} quote={"It's not about the event itself, it's about creating a memorable experience for your audience."}/>
-            <div className=" grid grid-cols-1 md:grid-cols-2 gap-10 gap-y-16 sm:mx-10 mb-20 place-items-center">
+            <div className="my-20 xl:mx-20 grid grid-cols-1 md:grid-cols-2 gap-10 xl:gap-32 gap-y-16 sm:mx-10 mb-20 place-items-center">
                 {
                     events.map(([title,content])=>(
                         <div className="w-full h-full bg-[#ffffff] shadow-light-card rounded-[50px] p-10 flex flex-col items-center">
-                            <h3 className="text-center text-2xl md:text-4xl  font-extrabold tracking-widest">{title}</h3>
-                            <p className="my-5 tracking-wide text-[16px] text-pretty ">{content}</p>
+                            <h3 className="text-center text-2xl md:text-4xl  font-extrabold tracking-widest ">{title}</h3>
+                            <p className="my-5 text-[16px] text-pretty 2xl:text-[1.3rem]">{content}</p>
                             {
                                 title=='Seismech'? 
                                 <> 

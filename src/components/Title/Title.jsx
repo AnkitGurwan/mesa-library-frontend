@@ -2,9 +2,9 @@
 
 const Title = ({title,quote}) => {
     return ( 
-        <div className="border border-white bg-[url('../public/wave.svg')] bg-image-outline-none aspect-[4/2] sm:aspect-[5/2] width-[100%] bg-no-repeat bg-cover flex justify-center xl:justify-between items-center pb-16 min-[480px]:pb-28 lg:pb-52 xl:pb-60 xl:pl-40 xl:pr-10 2xl:px-40">
-            <p className="text-4xl min-[480px]:text-6xl md:text-7xl lg:text-8xl font-extrabold text-[#fffafa] [text-decoration:underline_overline] underline-offset-[37%] ">{title}</p>
-            <blockquote className="hidden xl:block text-3xl font-bold text-gray-900/80 max-w-lg text-start" >🙶 {quote} 🙷</blockquote>
+        <div className="relative aspect-[4/2] bg-[url('../public/wave5.svg')] md:aspect-[18/5] border border-white md:bg-[url('../public/wave3.svg')] bg-image-outline-none width-[100%] bg-no-repeat bg-cover sm:px-40 overflow-y-hidden">
+            <p className="absolute top-[16%] left-[10%] lg:top-[20%] text-3xl min-[360px]:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-[#fffafa] [text-decoration:underline_overline] underline-offset-[40%] sm:underline-offset-[37%] font-['Manrope']">{title}</p>
+            <blockquote className="text-white absolute sm:top-[20%] 2xl:top-[15%] sm:right-[20%] 2xl:right-[23%] hidden xl:block text-3xl 2xl:text-4xl 3xl:text-5xl font-bold xl:max-w-lg 2xl:max-w-lg text-start font-['Raleway']" >🙶  {quote}  🙷</blockquote>
         </div>
      );
 }
