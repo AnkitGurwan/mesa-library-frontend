@@ -16,7 +16,7 @@ const Events = () => {
         <div className="flex flex-col">
             <Navbar/>
             <Title title={"Events"} quote={"It's not about the event itself, it's about creating a memorable experience for your audience."}/>
-            <div className="my-8 xl:mx-12 grid grid-cols-1 md:grid-cols-2 gap-10 xl:gap-20 gap-y-16 sm:mx-10 mb-20 place-items-center">
+            <div className="mt-20 mb-20 xl:mx-12 grid grid-cols-1 md:grid-cols-2 gap-10 xl:gap-20 gap-y-16 sm:mx-10 place-items-center">
                 {
                     events.map(([title,content])=>(
                         <div className="w-full h-full bg-[#ffffff] shadow-light-card rounded-[50px] p-6 md:p-7 flex flex-col items-center">
