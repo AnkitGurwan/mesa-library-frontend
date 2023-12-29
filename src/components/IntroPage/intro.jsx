@@ -9,7 +9,7 @@ import Announcements from './announcements';
 
 const intro = () => {
   return (
-    <div className='absolute'>
+    <div className='flex flex-col'>
             <Navbar/>
 
         {/* <div className='relative top-0'> */}
@@ -35,7 +35,7 @@ const intro = () => {
                         </Carousel>
                     </div>
                 </div>
-                <div className='min-w-[250px] w-[80%] h-contain max-w-[700px] xl:w-[500px] xl:h-[325px] mx-8 mb-20 xl:my-0 px-2 py-6 md:py-3 bg-blue-400 text-white font-Manrope z-10 relative xl:absolute'>
+                <div className='min-w-[250px] w-[80%] h-contain max-w-[700px] xl:w-[500px] xl:h-[325px] mx-8 mb-20 xl:my-0 px-2 py-6 md:py-3 bg-blue-400 text-white font-Manrope z-2 relative xl:absolute'>
                     <div className='px-3 md:px-2 py-3 font-semibold'>
                         <TypeAnimation
                             sequence={[

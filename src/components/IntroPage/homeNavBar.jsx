@@ -12,8 +12,8 @@ const Navbar = () => {
 
 
     return (
-        <navbar >
-            <div className='shadow-xl flex h-contain w-full flex-row justify-center md:justify-between align-center items-center'>
+        <navbar className="bg-white z-10">
+            <div className='shadow-xl flex py-3 h-contain w-full flex-row justify-center md:justify-between align-center items-center'>
                 <Link to={'/'}>
                     <img className="h-20 w-[200px] sm:w-[225px] sm:ml-10 mt-2" src='https://iitg.ac.in/clubs/mesa/images/logo4.png' alt="Mesa Logo" />
                 </Link>
@@ -27,7 +27,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="md:hidden">
-                <div className="flex flex-row flex-wrap justify-center max-[320px]:mx-1 text-lg p-5" >
+                <div className="flex bg-white flex-row flex-wrap justify-center max-[320px]:mx-1 text-lg p-5" >
                     {navbarPages.map(([title, url]) => (
                         <NavLink className="mx-4 my-1" to={url}>{title}</NavLink>
                     ))}
