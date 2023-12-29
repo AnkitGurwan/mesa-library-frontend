@@ -16,17 +16,17 @@ const Events = () => {
         <div className="flex flex-col">
             <Navbar/>
             <Title title={"Events"} quote={"It's not about the event itself, it's about creating a memorable experience for your audience."}/>
-            <div className="my-20 xl:mx-20 grid grid-cols-1 md:grid-cols-2 gap-10 xl:gap-32 gap-y-16 sm:mx-10 mb-20 place-items-center">
+            <div className="my-8 xl:mx-12 grid grid-cols-1 md:grid-cols-2 gap-10 xl:gap-20 gap-y-16 sm:mx-10 mb-20 place-items-center">
                 {
                     events.map(([title,content])=>(
-                        <div className="w-full h-full bg-[#ffffff] shadow-light-card rounded-[50px] p-10 flex flex-col items-center">
-                            <h3 className="text-center text-2xl md:text-4xl  font-extrabold tracking-widest ">{title}</h3>
-                            <p className="my-5 text-[16px] text-pretty 2xl:text-[1.3rem]">{content}</p>
+                        <div className="w-full h-full bg-[#ffffff] shadow-light-card rounded-[50px] p-6 md:p-7 flex flex-col items-center">
+                            <h3 className="text-center text-3xl md:text-4xl font-bold text-gray-600 tracking-wide " style={{"fontFamily":"cursive"}}>{title}</h3>
+                            <p className="text-center px-3 md:px-4 py-5 md:py-8 text-[15px] text-pretty 2xl:text-[1.3rem] tracking-wide text-gray-500" style={{"fontFamily":"Manrope"}}>{content}</p>
                             {
                                 title=='Seismech'? 
                                 <> 
-                                    <button className="my-2 rounded-xl px-5 pb-3 pt-2 text-xl text-white font-bold bg-[#0066FF] hover:shadow-hover-light-button hover:scale-[102%]" >Learn More</button>
-                                    <button className="my-2 rounded-xl px-5 pb-3 pt-2 text-xl font-bold text-[#0066FF] shadow-light-button hover:shadow-hover-light-button" >Learn More</button>
+                                    <button className="my-2 rounded-xl px-4 pb-2 pt-2 text-xl text-white font-semibold bg-[#0066FF] hover:shadow-hover-light-button hover:scale-[102%]" >Learn More</button>
+                                    <button className="my-2 rounded-xl px-5 pb-3 pt-2 text-xl font-semibold text-[#0066FF] shadow-light-button hover:shadow-hover-light-button" >Learn More</button>
                                 </>
                                 :<></>
                             }
