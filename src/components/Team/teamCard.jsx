@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import SocialMedia from "./SocialMedia";
+import { useInView } from "react-intersection-observer";
 
 const Card = ({name,image,position,background,social}) => {
+    const {ref,inView} = useInView()
     return ( 
-        <div className="h-contain z-1 max-w-[300px] w-full md:w-full flex justify-center align-center text-start flex-col" >
+        <div ref={ref} className={`h-contain z-1 max-w-[300px] w-full md:w-full flex justify-center align-center text-start flex-col ${inView? 'fadeBelowAnimate':''}`} >
             <div className="h-[270px] w-full relative flex flex-row justify-center align-center text-center">
                 <p className="h-[70%] w-full absolute bottom-0 z-0" style={{backgroundColor:`${background}`}}></p>
                 <img src={image} className="inline h-full  absolute bottom-0  z-2 drop-shadow-[10px_0px_15px_rgba(0,0,0,0.6)]" />

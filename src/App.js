@@ -20,6 +20,7 @@ import UserSuperSubExams from "./components/library/userPages/userSuperSubExam";
 import Feedback from "./components/library/userPages/feedbackUser";
 import Team from "./components/Team/team";
 import Events from "./components/Events/Events";
+import Siesmech from "./components/Events/Seismech";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path='/' element={<Intro/>}/>
             <Route path='/team' element={<Team/>}></Route>
             <Route path='/events' element={<Events/>}></Route>
+            <Route path="/events/seismech" element={<Siesmech/>} />
             <Route path='/library' element={<Login/>}/>
             <Route path='/library/register' element={<Register/>}/>
             <Route path='/library/feedback' element={<Feedback/>}/>
