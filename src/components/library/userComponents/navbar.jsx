@@ -18,7 +18,7 @@ const Navbar = () => {
                     <img src= {logo} alt="logo" className="h-12 w-32 object-fit" />
                 </div>
                 <div>
-                    <Link className='px-5 text-lg md:text-xl hover:underline tracking-wide' to={'/feedback'}>Feedback</Link>
+                    <Link className='px-5 text-lg md:text-xl hover:underline tracking-wide' to={'/library/feedback'}>Feedback</Link>
                     <button onClick={logOutHandler} className='tracking-tight hover:underline hover:scale-105 px-2 mr-5 cursor-pointer text-lg md:text-xl'>Log Out</button>
                 </div>
                 
