@@ -231,7 +231,7 @@ const handleUpload = (e) => {
 
     
     const submit = () => {
-        
+
     }
     
     
@@ -246,6 +246,7 @@ const handleUpload = (e) => {
         allowed
         ?
         <div>
+            <Navbar/>
         <div className='w-full flex justify-end items-center py-3 border-b'>
             
             

@@ -1,9 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 
 const navbar = () => {
-    const logOutHandler = async (e)=>{
+    const Navigate = useNavigate();
+
+    const logOutHandler = async ()=>{
         localStorage.removeItem('btpToken');
+        Navigate('/library');
     }
 
   return (
