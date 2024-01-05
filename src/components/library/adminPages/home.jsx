@@ -230,7 +230,9 @@ const handleUpload = (e) => {
     }
 
     
-
+    const submit = () => {
+        
+    }
     
     
 
@@ -286,25 +288,25 @@ const handleUpload = (e) => {
                 <button onClick={()=>{document.getElementById("myModal").style.display="none"}} class="close mt-1 h-8 flex justify-center items-center cursor-pointer hover:bg-gray-200 rounded-full w-8">&times;</button>
                     <form class="w-60 mx-auto bg-white px-2" onSubmit={submit}>
                         
-                    <div class="mb-1">
+                        <div class="mb-1">
+                            
+                        <input
+                            class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                            type="text"
+                            placeholder="Enter Folder Name"
+                            name="folderName"
+                            onChange={onChangeHandler}
+                            value={newFolderName}
+                            required
+                        />
+                        </div>
                         
-                      <input
-                        class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text"
-                        placeholder="Enter Folder Name"
-                        name="folderName"
-                        onChange={onChangeHandler}
-                        value={newFolderName}
-                        required
-                      />
-                    </div>
-                    
-                    <div class="flex items-center justify-center">
-                      <button id='myButton' onClick={addFolderHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-100" type="submit">
-                        Add Folder
-                      </button>
+                        <div class="flex items-center justify-center">
+                            <button id='myButton' onClick={addFolderHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-100" type="submit">
+                                Add Folder
+                            </button>
 
-                    </div>
+                        </div>
                   </form>
                 </div>
               </div>
