@@ -11,6 +11,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Loader from '../../loader';
 import LoaderLottie from '../userComponents/loaderlottie';
+import Navbar from '../adminComponents/navbar';
 
 const Home = () => {
     const { GetDetails , addFolder, addFile , uploadFile } = useContext(AuthContext);
@@ -61,7 +62,10 @@ const Home = () => {
     
     useEffect(() => {
         if (!localStorage.getItem('btpToken')) {
-            Navigate(`/`);
+            Navigate(`/library`);
+            toast.error("Please login to access.", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
         }
     }, []);
     
@@ -129,7 +133,7 @@ const addFileHandler = async (e) => {
             }
         })
 
-        if(fileInputData.topic.length >= 3 && flag)
+        if(fileInputData.topic.length >= 2 && flag)
         {
             const x = await addFile(fileInputData.topic,fileInputData.name,fileInputData.year,fileInputData.description,"root","root");
             
@@ -151,7 +155,7 @@ const addFileHandler = async (e) => {
         }
         else
         {
-            toast.error("Please try again", {
+            toast.warning("Please add few more word in topic.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
@@ -225,8 +229,7 @@ const handleUpload = (e) => {
         (setNewFolderName(e.target.value));
     }
 
-    const submit = async (e)=>{
-    }
+    
 
     
     
@@ -241,9 +244,6 @@ const handleUpload = (e) => {
         allowed
         ?
         <div>
-        <div className='w-full h-16 text-end border-b flex items-center justify-end bg-white'>
-            <button onClick={()=>{Navigate('/')}} className='text-white bg-black py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer'>Log Out</button>
-        </div>
         <div className='w-full flex justify-end items-center py-3 border-b'>
             
             
@@ -325,7 +325,7 @@ const handleUpload = (e) => {
                             />
                             <input
                                 class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline ml-2"
-                                type="text"
+                                type="number"
                                 placeholder="Year Of Studying"
                                 name="year"
                                 onChange={onChangeHandler2}

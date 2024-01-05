@@ -10,6 +10,7 @@ import '../../styles.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { setUpdatePath , setPath } from '../../../redux/storage/storageSlice';
 import AuthContext from '../../../context/auth/AuthContext';
+import Navbar from '../adminComponents/navbar';
 
 const Home = () => {
     const { GetDetails , addFolder, addFile , uploadFile } = useContext(AuthContext);
@@ -33,7 +34,10 @@ const Home = () => {
 
     useEffect(() => {
         if (!localStorage.getItem('btpToken')) {
-            Navigate(`/`);
+            Navigate(`/library`);
+            toast.error("Please login to access.", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
         }
     }, []);
 
@@ -101,17 +105,17 @@ const Home = () => {
 }
 
 const addFileHandler = async (e) => {
-    e.preventDefault();
-    var flag = true;
+        e.preventDefault();
+        var flag = true;
     
-    filesName.map((file) => {
+        filesName.map((file) => {
             if(file.name === fileInputData.topic)
             {
                 flag = false;
             }
         })
 
-        if(fileInputData.topic.length >= 3 && flag)
+        if(fileInputData.topic.length >= 2 && flag)
         {
             const x = await addFile(fileInputData.topic,fileInputData.name,fileInputData.year,fileInputData.description,exams,course);
             
@@ -133,7 +137,7 @@ const addFileHandler = async (e) => {
         }
         else
         {
-            toast.error("Please try again", {
+            toast.warning("Please add few more word in topic.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
@@ -225,9 +229,7 @@ const addFileHandler = async (e) => {
 
   return (
     <div>
-        <div className='w-full h-16 text-end border-b flex items-center justify-end'>
-            <button onClick={()=>{Navigate('/')}} className='text-white bg-black py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer'>Log Out</button>
-        </div>
+        <Navbar/>
         <div className='flex justify-end items-center py-3 border-b'>
             
             <div className='mr-8 flex'>
@@ -308,7 +310,7 @@ const addFileHandler = async (e) => {
                             />
                             <input
                                 class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline ml-2"
-                                type="text"
+                                type="number"
                                 placeholder="Year Of Studying"
                                 name="year"
                                 onChange={onChangeHandler2}
