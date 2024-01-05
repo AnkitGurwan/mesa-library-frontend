@@ -11,7 +11,7 @@ const File = (props) => {
   
 
   return (
-    <div className='border w-full hover:bg-gray-200 text-gray-600 md:hover:text-gray-700 rounded-lg relative cursor-pointer' onClick={()=>{!flag?setFlag(true):setFlagg(false)}}>
+    <div className='border w-full hover:bg-gray-200 text-gray-600 md:hover:text-gray-700 rounded-lg relative cursor-pointer flex justify-center' onClick={()=>{!flag?setFlag(true):setFlagg(false)}}>
   
     <div  className='py-4 w-full h-20 flex flex-col justify-center items-center  '>
         <i class="fa-regular fa-file px-2 text-xl font-light"></i>
