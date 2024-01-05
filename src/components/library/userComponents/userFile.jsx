@@ -9,11 +9,11 @@ const File = (props) => {
   
 
   return (
-    <div className='w-full border text-gray-700 rounded-lg relative mx-2 cursor-pointer' onClick={()=>{!flag?setFlag(true):setFlagg(false)}}>
+    <div className='border w-full hover:bg-gray-200 text-gray-600 md:hover:text-gray-700 rounded-lg relative cursor-pointer flex justify-center' onClick={()=>{!flag?setFlag(true):setFlagg(false)}}>
   
-    <div  className='py-4 mx-4 w-10 h-20 flex flex-col justify-center items-center  '>
+    <div  className='py-4 w-full h-20 flex flex-col justify-center items-center  '>
         <i class="fa-regular fa-file px-2 text-xl font-light"></i>
-        <div className='text-xs pt-2 capitalize text-center'>{props.topic?props.topic.slice(0,15):""}</div>
+        <div className='text-xs px-1 pt-2 capitalize text-center'>{props.topic?props.topic.slice(0,15):""}</div>
 
           {flag?
           <div id="myModal5" class="modal5 cursor-auto ">
