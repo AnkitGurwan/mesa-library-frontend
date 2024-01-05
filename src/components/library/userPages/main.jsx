@@ -68,7 +68,7 @@ const HomePage = () => {
     },[]);
 
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
-    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === "root" && (eachFolder.name === "Sem 3" || eachFolder.name === "Sem 5" || eachFolder.name === "Sem 7")});
+    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === "root"});
 
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
     const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});

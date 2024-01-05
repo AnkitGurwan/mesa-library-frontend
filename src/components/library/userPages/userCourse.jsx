@@ -109,7 +109,7 @@ const Home = () => {
                 <div className='text-start py-4 pl-2 md:pl-8 font-semibold md:font-bold  text-2xl'>Information Files</div>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mx-0 md:mx-6 my-5 md:my-2">
                     {filesName.length ? filesName.map((file) => (
-                        <div className='mx-2 '><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
+                        <div className='mx-2 '><File key={file.userId} name={file.name} description={file.description} year={file.year} topic={file.topic}/></div>
                     )) 
                     :
                     ""}

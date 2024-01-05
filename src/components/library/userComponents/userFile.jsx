@@ -6,8 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 const File = (props) => {
   const [flag,setFlag] = useState(false);
   const [flagg,setFlagg] = useState(false);
-  const [showDelete,setShowDelete] = useState(false);
-  const { GetDetails } = useContext(AuthContext);
   
 
   return (

@@ -296,7 +296,7 @@ const addFileHandler = async (e) => {
                         <form class="w-full h-68 mx-auto bg-white px-2" onSubmit={submit}>
                         <div class="mb-1 w-full flex">  
                             <input
-                                class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline mr-2"
+                                class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline mr-2 normal-case"
                                 type="text"
                                 placeholder="Enter Your Name"
                                 name="name"
@@ -318,7 +318,7 @@ const addFileHandler = async (e) => {
                         </div>
                         <div class="mb-1 w-full">  
                             <input
-                                class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                                class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline normal-case"
                                 type="text"
                                 placeholder="Heading"
                                 name="topic"
@@ -330,7 +330,7 @@ const addFileHandler = async (e) => {
                         </div>
                         <div class="mb-1 w-full">  
                             <textarea
-                                class="appearance-none border text-sm rounded w-full h-40 mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                                class="appearance-none border text-sm rounded w-full h-40 mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline normal-case"
                                 type="text"
                                 placeholder="Decription"
                                 name="description"
