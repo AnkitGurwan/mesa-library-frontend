@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-const navbar = () => {
+const Navbar = () => {
     const Navigate = useNavigate();
 
     const logOutHandler = async ()=>{
@@ -17,4 +17,4 @@ const navbar = () => {
   )
 }
 
-export default navbar
+export default Navbar;
