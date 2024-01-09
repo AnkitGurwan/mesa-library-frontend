@@ -21,7 +21,7 @@ const Footer = () => {
         ['Department of Mechanical Engineering', 'https://www.iitg.ac.in/mech/'],
     ]
     return (
-        <footer className='w-full relative bottom-0 h-[420px] lg:h-[200px] mt-10 bg-gradient-to-t from-[#64beff] to-white'
+        <footer className='w-full relative bottom-0 h-[420px] lg:h-[200px] text-gray-600 mt-10 bg-gradient-to-t from-[#64beff] to-white'
         style={{"fontFamily":"Sans-serif"}}>
             {/* <div className="w-full flex justify-between absolute left-0 bottom-0 my-6 lg:px-40 py-8">
             <div className='w-1/3 text-center px-12'>

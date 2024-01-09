@@ -21,6 +21,7 @@ import Feedback from "./components/library/userPages/feedbackUser";
 import Team from "./components/Team/team";
 import Events from "./components/Events/Events";
 import Siesmech from "./components/Events/Seismech";
+import SeismechPage from "./components/Events/Seismech";
 
 function App() {
   return (
@@ -45,6 +46,8 @@ function App() {
             <Route path="/library/main/:course/:exams" element={<UserExams/>}></Route>
             <Route path="/library/main/:course/:exams/:subExams" element={<UserSubCourseExams/>}></Route>
             <Route path="/library/main/:course/:exams/:subExams/:superSub" element={<UserSuperSubExams/>}></Route>
+
+            <Route path="/library/events/seismech" element={<SeismechPage/>}></Route>
           </Routes>
         </BrowserRouter>
       </AuthState>

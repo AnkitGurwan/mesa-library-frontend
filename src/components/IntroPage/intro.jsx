@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 import Navbar from './homeNavBar';
 import Footer from './footer';
 import Announcements from './announcements';
+import Aim from './aim';
 
 
 const intro = () => {
@@ -63,7 +64,7 @@ const intro = () => {
                 </div>
             </div>
         {/* </div> */}
-
+        <Aim/>
         <Announcements/>
         <Footer/>
     </div>
