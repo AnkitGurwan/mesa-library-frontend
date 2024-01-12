@@ -26,10 +26,10 @@ const team = [
     {
         id:3,
         name:"Jatin Bansal",
-        image:"https://imgs.search.brave.com/metSyjKuX3OGsQ5ZQpRt2PHEpJJi2KzSWJsRG58cdY0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5ncGxheS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzE1L01l/bi1CYWNrZ3JvdW5k/LVBORy1JbWFnZS5w/bmc",
+        image:"https://firebasestorage.googleapis.com/v0/b/mesa-library.appspot.com/o/uploads%2F12345%2F42f668c2-23e7-4f6c-8802-e5d9e1ab3455.png?alt=media&token=a1a9c5fb-6a52-4f44-b5b0-038d56220edf",
         background: "#fdb9a5",
         position:"Events Head",
-        socialMedia: {},
+        socialMedia: {instagram:''},
     },
     {
         id:4,
