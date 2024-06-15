@@ -22,6 +22,7 @@ import Team from "./components/Team/team";
 import Events from "./components/Events/Events";
 import Siesmech from "./components/Events/Seismech";
 import SeismechPage from "./components/Events/Seismech";
+import Merch from "./components/Events/Merch";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Intro/>}/>
             <Route path='/team' element={<Team/>}></Route>
+            <Route path='/merch' element={<Merch/>}></Route>
             <Route path='/events' element={<Events/>}></Route>
             <Route path="/events/seismech" element={<Siesmech/>} />
             <Route path='/library' element={<Login/>}/>
