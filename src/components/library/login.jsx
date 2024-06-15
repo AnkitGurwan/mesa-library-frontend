@@ -136,7 +136,7 @@ const Login = () => {
 
                 <div class="mb-4 px-3 flex items-center justify-between text">
                     <Link
-                    to={'/register'}
+                    to={'/library/register'}
                     class="text-gray-600 hover:underline"
                     >New User?</Link>
                 </div>
