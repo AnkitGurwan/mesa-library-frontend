@@ -24,7 +24,6 @@ const AuthState = (props) => {
             body: JSON.stringify({ email , password })
         });
         
-        const json = await response.json();
         return response.status;
     }
 
@@ -50,8 +49,6 @@ const AuthState = (props) => {
             },
             body: JSON.stringify({ userEmail,userName,userRoll})
         });
-        
-        const json = await response.json(); 
         
         return response.status;
 };
@@ -200,7 +197,7 @@ const AuthState = (props) => {
             },
             body: JSON.stringify({ name, parent,supParent }),
         });
-        const json = await response.json();
+        
         return response.status;
     }
 
@@ -212,7 +209,7 @@ const AuthState = (props) => {
             },
             body: JSON.stringify({ topic , name , year, description, parent , supParent }),
         });
-        const json = await response.json();
+        
         return response.status;
     }
 
@@ -224,7 +221,7 @@ const AuthState = (props) => {
             },
             body: JSON.stringify({ name,parent,supParent,urlFirebase }),
         });
-        const json = await response.json();
+        
         return response.status;
     }
 
@@ -236,7 +233,7 @@ const AuthState = (props) => {
             },
             body: JSON.stringify({ name, parent }),
         });
-        const json = await response.json();
+        
         return response.status;
     }
 
@@ -248,7 +245,7 @@ const AuthState = (props) => {
             },
             body: JSON.stringify({ topic, parent }),
         });
-        const json = await response.json();
+        
         return response.status;
     }
 
@@ -260,7 +257,7 @@ const AuthState = (props) => {
             },
             body: JSON.stringify({ name, parent }),
         });
-        const json = await response.json();
+        
         return response.status;
     }
 

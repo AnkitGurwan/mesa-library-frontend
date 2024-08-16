@@ -96,7 +96,7 @@ const HomePage = () => {
                     <div className='flex justify-between items-center mx-4 md:mx-8 py-4'>
                         <div className='text-xl md:text-3xl font-bold pl-2 md:pl-4 pt-0 md:pt-4'>MESA Library</div>
                         <div>
-                        <Link className='text-white text-lg md:text-xl font-semibold hover:underline mx-2 md:mx-4' to={'/feedback'}>Feedback</Link>
+                        <Link className='text-white text-lg md:text-xl font-semibold hover:underline mx-2 md:mx-4' to={'/library/feedback'}>Feedback</Link>
                         <button className='text-white text-lg md:text-xl font-semibold hover:underline' onClick={logOutHandler}>Log Out
                         </button>
                         
@@ -134,7 +134,7 @@ const HomePage = () => {
                 </div>
 
                 {/* guides */}
-                <div id='guides' className='flex justify-center w-full md:px-4 pt-2 pb-5 z-10' >
+                {/* <div id='guides' className='flex justify-center w-full md:px-4 pt-2 pb-5 z-10' >
                     <div className='bg-[#2b365647] rounded-lg md:rounded-xl p-2 flex flex-col items-center w-full md:3/5 my-2 md:my-4 mx-12 md:mx-32'>
                         <div className='text-2xl text-white font-bold py-4 max-[450px]:text-xl'>SEMESTER GUIDES</div>
                         <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mx-4 md:mx-8 py-2">
@@ -146,7 +146,7 @@ const HomePage = () => {
                         </div>
                                             
                     </div>
-                </div>
+                </div> */}
                 
                 <div className='absolute top-28 md:top-4 left-0 md:left-4 z-0'><Lottie/></div>
             </div>

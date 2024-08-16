@@ -134,11 +134,20 @@ const Login = () => {
                     
                 </div>
 
-                <div class="mb-4 px-3 flex items-center justify-between text">
-                    <Link
-                    to={'/library/register'}
-                    class="text-gray-600 hover:underline"
-                    >New User?</Link>
+                <div className='flex justify-between'>
+                    <div class="mb-4 px-3 flex items-center justify-between text">
+                        <Link
+                        to={'/library/register'}
+                        class="text-gray-600 hover:underline"
+                        >New User?</Link>
+                    </div>
+                    <div class="mb-4 px-3 flex items-center justify-between text">
+                        <Link
+                            to={'/'}
+                            class="text-blue-800 hover:underline">
+                            Return Home
+                        </Link>
+                    </div>
                 </div>
 
                 {loading 

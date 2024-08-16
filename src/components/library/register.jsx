@@ -144,17 +144,20 @@ const Register = () => {
         </form>
             </div>
         </div>
-                :
-                <div class="absolute top-24 left-9 md:left-1/3 w-4/5 md:w-1/3">
-                <div class="max-w-md bg-white rounded-lg shadow-md p-8">
-                    <h1 class="text-3xl font-bold mb-4">404</h1>
-                    <p class="text-lg text-gray-700 mb-6">Oops! The page you're looking for could not be accessed by you.</p>
-                    <div class="bg-blue-500 text-center text-white text-lg font-semibold py-2 px-4 rounded">
-                        Please try to login through Microsoft.
-                    </div>
+        :
+        <div class="absolute top-24 left-9 md:left-1/3 w-4/5 md:w-1/3">
+            <Link to={`/library`} className='text-2xl font-semibold mb-8 pb-4 text-blue-800 cursor-pointer hover:underline'>
+                Go Back
+            </Link>
+            <div class="max-w-md bg-white rounded-lg shadow-md p-8">
+                <h1 class="text-3xl font-bold mb-4">404</h1>
+                <p class="text-lg text-gray-700 mb-6">Oops! The page you're looking for could not be accessed by you.</p>
+                <div class="bg-blue-500 text-center text-white text-lg font-semibold py-2 px-4 rounded">
+                    Please try to login through Microsoft.
                 </div>
-            </div>}
             </div>
+        </div>}
+    </div>
   )
 }
 

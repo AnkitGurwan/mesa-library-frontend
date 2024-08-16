@@ -27,12 +27,12 @@ const Feedbackpage = () => {
 
     return(
         
-        <section class="bg-white dark:bg-gray-900">
-            <Link to={`/main`} className='fixed text-lg md:text-2xl hover:scale-105 font-bold no-underline text-blue-1200 ml-4 md:ml-8 mt-4'>Home</Link>
+        <section class="bg-white dark:bg-gray-900 py-4">
+            <Link to={`/library/main`} className='fixed text-lg md:text-2xl hover:scale-105 font-bold no-underline text-blue-1200 ml-4 md:ml-8 mt-4'>Home</Link>
             <div class="py-4 md:py-6 px-4 mx-auto max-w-screen-md">
-                <h2 class="mb-2 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
-                <p class="mb-4 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl focus">Got a technical issue? Want to send feedback about a feature?</p>
-                <form onSubmit={submit} class="space-y-6">
+                <h2 class="mb-2 text-4xl py-2 tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
+                <p class="mb-4 font-light py-2 text-center text-gray-500 dark:text-gray-400 sm:text-xl focus">Got a technical issue? Want to send feedback about a feature?</p>
+                <form onSubmit={submit} class="space-y-6 pt-4">
                     <div>
                         <label for="email" class="mb-3 text-sm flex font-medium text-gray-900 dark:text-gray-300"><div>Your email</div><div className="text-red-600">*</div></label>
                         <input type="email" id="email" class="shadow-md bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  dark:shadow-sm-light" name='email' value={feedback.email} autoFocus onChange={detectChanges} placeholder="name@gmail.com" required/>
