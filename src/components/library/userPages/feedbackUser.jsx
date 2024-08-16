@@ -21,7 +21,7 @@ const Feedbackpage = () => {
         toast.success('Feedback sent successfully', {
             position: toast.POSITION.TOP_CENTER
         });
-        navigate('/main');
+        navigate('/library/main');
 
     }
 
