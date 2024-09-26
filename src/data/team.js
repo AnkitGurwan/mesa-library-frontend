@@ -10,7 +10,7 @@ const team = [
     {
         id:2,
         name:"Amit Rathore",
-        image:"https://imgs.search.brave.com/metSyjKuX3OGsQ5ZQpRt2PHEpJJi2KzSWJsRG58cdY0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5ncGxheS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzE1L01l/bi1CYWNrZ3JvdW5k/LVBORy1JbWFnZS5w/bmc",
+        image:"https://firebasestorage.googleapis.com/v0/b/mesa-8924d.appspot.com/o/WhatsApp_Image_2024-09-25_at_17.01.30_44e23a88-removebg-preview.png?alt=media&token=81228199-fde3-45c6-af06-dd3d6009d490",
         background: "#5ebec4",
         position:"Vice-President",
         socialMedia: {instagram:'https://www.instagram.com/ig_amitrathore/',linkedin: 'https://www.linkedin.com/in/amit-rathore-7ba1a1259/',mail: 'mailto:rathoream999@gmail.com'},
@@ -26,7 +26,7 @@ const team = [
     {
         id:4,
         name:"Mehak",
-        image:"https://imgs.search.brave.com/metSyjKuX3OGsQ5ZQpRt2PHEpJJi2KzSWJsRG58cdY0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5ncGxheS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzE1L01l/bi1CYWNrZ3JvdW5k/LVBORy1JbWFnZS5w/bmc",
+        image:"https://firebasestorage.googleapis.com/v0/b/mesa-8924d.appspot.com/o/Mehak.png?alt=media&token=95c78b92-2068-4fb2-8df5-75b2db8f2e82",
         background: "#d6a3fb",
         position:"PR and Alumni Head",
         socialMedia: {instagram:'https://www.instagram.com/_mehak86/',linkedin:'https://www.linkedin.com/in/mehak-96474426b/',mail:'mailto:m.mehak@iitg.ac.in'},
@@ -34,7 +34,7 @@ const team = [
     {
         id:5,
         name:"Tanya Gupta",
-        image:"https://imgs.search.brave.com/metSyjKuX3OGsQ5ZQpRt2PHEpJJi2KzSWJsRG58cdY0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5ncGxheS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzE1L01l/bi1CYWNrZ3JvdW5k/LVBORy1JbWFnZS5w/bmc",
+        image:"https://firebasestorage.googleapis.com/v0/b/mesa-8924d.appspot.com/o/Tanya.png?alt=media&token=a0a4eacc-320c-4ab6-a05c-7a7c9922108b",
         background: "#f92c85",
         position:"Core Team",
         socialMedia: {instagram:'https://www.instagram.com/tanyagupta835/',linkedin: 'https://www.linkedin.com/in/tanya-gupta-611066278/',mail: 'mailto:g.tanya@gmail.com'},
@@ -43,7 +43,7 @@ const team = [
     {
         id:6,
         name:"Rohan Sharma",
-        image:"https://imgs.search.brave.com/metSyjKuX3OGsQ5ZQpRt2PHEpJJi2KzSWJsRG58cdY0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5ncGxheS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzE1L01l/bi1CYWNrZ3JvdW5k/LVBORy1JbWFnZS5w/bmc",
+        image:"https://firebasestorage.googleapis.com/v0/b/mesa-8924d.appspot.com/o/Rohan.png?alt=media&token=c9236a93-d37f-448b-a1e6-aec5b1a4df4b",
         background: "orange",
         position:"Core Team",
         socialMedia: {instagram:'https://www.instagram.com/rohan_shr135/',linkedin: 'https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAADcNq1wBkKq6N0JRlFxj18fbxXZw2GV_ymw&keywords=rohan%20sharma&origin=RICH_QUERY_SUGGESTION&position=1&searchId=00f64d4d-3b19-457e-922a-a1f046d1b86d&sid=u1W&spellCorrectionEnabled=false',mail: 'mailto:rohan.mech22@iitg.ac.in'},
@@ -60,7 +60,7 @@ const team = [
     {
         id:8,
         name:"Akshar Chauhan",
-        image:"https://imgs.search.brave.com/metSyjKuX3OGsQ5ZQpRt2PHEpJJi2KzSWJsRG58cdY0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5ncGxheS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzE1L01l/bi1CYWNrZ3JvdW5k/LVBORy1JbWFnZS5w/bmc",
+        image:"https://firebasestorage.googleapis.com/v0/b/mesa-8924d.appspot.com/o/Akshar.png?alt=media&token=09102910-f745-4258-8905-c0ba9972b39c",
         background: "green",
         position:"Finance and Publication Head",
         socialMedia: {instagram:'https://www.instagram.com/akshxr_1754/', linkedin:'https://www.linkedin.com/in/akshar-chauhan-1a4128263/', mail: 'mailto:c.akshar@iitg.ac.in' },
@@ -69,7 +69,7 @@ const team = [
     {
         id:9,
         name:"Shreyansh Srivastava",
-        image:"https://imgs.search.brave.com/metSyjKuX3OGsQ5ZQpRt2PHEpJJi2KzSWJsRG58cdY0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5ncGxheS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzE1L01l/bi1CYWNrZ3JvdW5k/LVBORy1JbWFnZS5w/bmc",
+        image:"https://firebasestorage.googleapis.com/v0/b/mesa-8924d.appspot.com/o/Shreyansh.png?alt=media&token=43359061-a7ca-487f-a35b-65a68088804f",
         background: "#00efbf",
         position:"Core Team",
         socialMedia: {instagram:'https://www.instagram.com/shreyynshhh/',linkedin: 'https://www.linkedin.com/in/tanya-gupta-611066278/',mail: 'mailto:shreyansh.s@gmail.com'},
@@ -78,7 +78,7 @@ const team = [
     {
         id:10,
         name:"Ashok Menon",
-        image:"https://imgs.search.brave.com/metSyjKuX3OGsQ5ZQpRt2PHEpJJi2KzSWJsRG58cdY0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5ncGxheS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzE1L01l/bi1CYWNrZ3JvdW5k/LVBORy1JbWFnZS5w/bmc",
+        image:"https://firebasestorage.googleapis.com/v0/b/mesa-8924d.appspot.com/o/Ashok.png?alt=media&token=07b41f7a-27bb-4a63-9414-30c919101879",
         background: "#BEB068",
         position:"Events Head",
         socialMedia: {instagram:'https://www.instagram.com/_ashoxx_.m083/',linkedin:'https://www.linkedin.com/in/ashok-menon-551199261/',mail:'mailto:ashok.menon@iitg.ac.in'},
