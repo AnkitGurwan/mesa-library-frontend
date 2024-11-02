@@ -22,8 +22,9 @@ const Folder = (props) => {
 
   return (
     <div className='hover:bg-gray-200 rounded-lg relative'
-    onMouseEnter={()=>{setShowDelete(true)}}
-    onMouseLeave={()=>setShowDelete(false)}>
+    // onMouseEnter={()=>{setShowDelete(true)}}
+    // onMouseLeave={()=>setShowDelete(false)}
+    >
       {showDelete
       ?
       <div className='text-end absolute right-0 text-sm flex justify-end p-1'>
