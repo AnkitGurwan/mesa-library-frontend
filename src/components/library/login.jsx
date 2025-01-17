@@ -186,9 +186,9 @@ const Login = () => {
           
             </form>
             <div
-                    class="pt-2 w-3/4 md:w-2/5 text-center text-gray-600 hover:underline"
-                    >Note : First Login usually takes 45-50 sec due to our free server. Soon, we will come up with a better solution.
-                </div>
+                class="pt-2 w-3/4 md:w-2/5 text-center text-gray-600"
+                >Note : First Login usually takes 45-50 sec due to our free server. Soon, we will come up with a better solution.
+            </div>
             </div>
         </div>
 

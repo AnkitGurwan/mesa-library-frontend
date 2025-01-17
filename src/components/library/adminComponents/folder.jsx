@@ -19,7 +19,7 @@ const Folder = (props) => {
   };
 
   const deleteHandler = async () => {
-    if (confirmationText === 'DELETE') {
+    if (confirmationText.toLocaleLowerCase() === 'delete' ) {
       const x = await removeFolder(props.name, props.parent);
       if (x === 201) GetDetails();
       setShowConfirm(false); // Close the confirmation input
@@ -47,25 +47,30 @@ const Folder = (props) => {
       )}
 
       {showConfirm && (
-        <div className='absolute top-0 right-0 bg-white p-4 rounded shadow-md'>
+        <div className='fixed top-1/3 left-[15%] md:left-[40%] bg-white p-8 rounded-lg shadow-lg'>
           <div className="flex flex-col items-center">
             <p className="mb-2">Type <strong>DELETE</strong> to confirm</p>
             <input
               type="text"
               value={confirmationText}
               onChange={(e) => setConfirmationText(e.target.value)}
-              className="p-2 border rounded mb-2"
+              className="p-2 border rounded mb-4"
             />
             <div className="flex gap-2">
               <button
                 onClick={deleteHandler}
-                className="bg-red-500 text-white px-4 py-2 rounded"
+                className="bg-blue-500 text-white px-5 py-2 rounded"
               >
                 Delete
               </button>
               <button
-                onClick={() => setShowConfirm(false)} // Close the confirmation input
-                className="bg-gray-500 text-white px-4 py-2 rounded"
+                onClick={
+                  () => {
+                    setShowConfirm(false);
+                    setConfirmationText('');
+                  } 
+                } // Close the confirmation input
+                className="bg-gray-500 text-white px-5 py-2 rounded"
               >
                 Cancel
               </button>
