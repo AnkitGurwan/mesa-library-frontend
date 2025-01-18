@@ -4,7 +4,7 @@ import File from '../adminComponents/file'
 import fire from '../../../config/firebase';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Upload from "../adminComponents/upload";
 import '../../styles.css'
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,10 +25,10 @@ const Home = () => {
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === exams && eachFolder.supParent === course});
     const [newUploadFileAdd,setNewUploadFileAdd]  = useState(false);
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == exams && eachFolder.supParent === course});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent === exams && eachFolder.supParent === course});
 
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == exams && eachFolder.supParent === course});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent === exams && eachFolder.supParent === course});
 
     var path =  useSelector(state => state.Files.path);
 

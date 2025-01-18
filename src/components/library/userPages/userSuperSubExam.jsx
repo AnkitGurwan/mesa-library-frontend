@@ -1,4 +1,4 @@
-import React,{useContext,useEffect,useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Folder from '../userComponents/userFolder'
 import File from '../userComponents/userFile'
 import "react-toastify/dist/ReactToastify.css";
@@ -15,15 +15,14 @@ const Home = () => {
     const dispatch = useDispatch();
     const { superSub , subExams , exams , course} = useParams();
     const Navigate = useNavigate();
-    const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === superSub && eachFolder.supParent === subExams});
 
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == superSub && eachFolder.supParent === subExams});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent === superSub && eachFolder.supParent === subExams});
 
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == superSub && eachFolder.supParent === subExams});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent === superSub && eachFolder.supParent === subExams});
 
     var path =  useSelector(state => state.Files.userPath);
 

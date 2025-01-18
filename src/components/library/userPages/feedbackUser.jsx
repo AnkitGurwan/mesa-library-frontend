@@ -1,5 +1,5 @@
 import React,{useState, useContext} from 'react';
-import { useNavigate, useParams ,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '../../../context/auth/AuthContext';

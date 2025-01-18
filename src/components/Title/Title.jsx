@@ -2,7 +2,7 @@ import { useInView } from "react-intersection-observer";
 
 
 const Title = ({title,quote}) => {
-    const {ref,inView} = useInView()
+    const {ref} = useInView()
     return ( 
         <div ref={ref} className={`relative aspect-[4/2] bg-[url('../public/wave5.svg')] md:aspect-[18/5] border border-white md:bg-[url('../public/wave3.svg')] bg-image-outline-none width-[100%] bg-no-repeat bg-cover sm:px-40 overflow-y-hidden fadeAnimate`}>
             <p className="absolute top-[19%] left-[10%] lg:top-[17%] text-3xl min-[360px]:text-3xl md:text-4xl xl:text-5xl font-extrabold text-[#fffafa] [text-decoration:underline_overline] underline-offset-[40%] sm:underline-offset-[37%] font-['Manrope']">{title}</p>

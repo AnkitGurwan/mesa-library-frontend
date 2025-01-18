@@ -1,11 +1,10 @@
-// components/Folder.js
 import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setPath } from '../../../redux/storage/storageSlice';
 import folder from '../../images/folder.png';
-import AuthContext from '../../../context/auth/AuthContext';  // Import context
-import { toast, ToastContainer } from 'react-toastify';
+import AuthContext from '../../../context/auth/AuthContext';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 const Folder = (props) => {
@@ -13,20 +12,19 @@ const Folder = (props) => {
   const [showDelete, setShowDelete] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
-  const { removeFolder, GetDetails } = useContext(AuthContext);  // Using the context
-
+  const { removeFolder, GetDetails } = useContext(AuthContext);
+  
   const clickHandler = () => {
     dispatch(setPath(props.name));
   };
 
   const deleteHandler = async () => {
-    if (confirmationText.toLocaleLowerCase() === 'delete') {
-      const response = await removeFolder(props.name, props.parent);
-      if (response === 201) {
-        GetDetails();
-      }
-      setShowConfirm(false);  // Close the confirmation input
+    if (confirmationText.toLocaleLowerCase() === 'delete' ) {
+      const x = await removeFolder(props.name, props.parent);
+      if (x === 201) GetDetails();
+      setShowConfirm(false); // Close the confirmation input
     } else {
+      // You can show an alert or message that the input is incorrect
       toast.error("Please type 'DELETE' to confirm.", {
         position: toast.POSITION.BOTTOM_RIGHT
       });
@@ -42,7 +40,7 @@ const Folder = (props) => {
       {showDelete && !showConfirm && (
         <div className='text-end absolute right-0 text-sm flex justify-end p-1'>
           <i
-            onClick={() => setShowConfirm(true)}  // Show the confirmation input
+            onClick={() => setShowConfirm(true)}  // Show the confirmation input when clicked
             className="fa-solid fa-trash bg-gray-400 rounded-full w-6 h-6 flex justify-center items-center cursor-pointer"
           ></i>
         </div>
@@ -66,7 +64,12 @@ const Folder = (props) => {
                 Delete
               </button>
               <button
-                onClick={() => { setShowConfirm(false); setConfirmationText(''); }}  // Close confirmation input
+                onClick={
+                  () => {
+                    setShowConfirm(false);
+                    setConfirmationText('');
+                  } 
+                } // Close the confirmation input
                 className="bg-gray-500 text-white px-5 py-2 rounded"
               >
                 Cancel
@@ -84,8 +87,6 @@ const Folder = (props) => {
         <img src={folder} alt="folder" className='' />
         <div className='text-xs px-1 pt- capitalize'>{props.name}</div>
       </Link>
-
-      <ToastContainer />  {/* To show toasts */}
     </div>
   );
 };

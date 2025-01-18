@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext'
-import fire from '../../config/firebase';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import logo from '../images/mesa-logo.png';
-import { Spinner } from "@material-tailwind/react";
+import Spinner from "react-spinners/ClipLoader";
 import LoadingBar from 'react-top-loading-bar'
 
 const Login = () => {
-    const { userLogin , loginUser ,GetDetails } = useContext(AuthContext);
+    const { userLogin , loginUser } = useContext(AuthContext);
     const [user , setUser] = useState({email:"",password:""});
     const [loading,setLoading] = useState(false);
     const Navigate = useNavigate();
@@ -17,9 +16,6 @@ const Login = () => {
 
     const changeHandler = (e) => {
         setUser({...user,[e.target.name] : e.target.value})
-    }
-    const getItem = async () => {
-        await GetDetails();
     }
 
     const topHandler = () => {
@@ -155,7 +151,7 @@ const Login = () => {
                 <div>
                     
                     <div className='w-full px-3 h-12 rounded-md text-lg font-bold flex justify-center items-center bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]'>
-                        <div className='pr-2'><Spinner/></div>
+                        <div className='pr-2 flex items-center'><Spinner color='white'/></div>
                         <div>Loading...</div>
                     </div>
                 </div>
