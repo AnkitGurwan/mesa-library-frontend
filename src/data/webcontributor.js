@@ -10,7 +10,7 @@ const team = [
     {
         id:2,
         name:"Aratrick Mondal",
-        image:"https://firebasestorage.googleapis.com/v0/b/mesa-library.appspot.com/o/uploads%2F12345%2FPHOTO-2025-01-18-09-31-51-removebg-preview.png?alt=media&token=e93297ce-7418-451e-b778-caa0057ed4c0",
+        image:"https://firebasestorage.googleapis.com/v0/b/mesa-library.appspot.com/o/uploads%2F12345%2FPHOTO-2025-01-18-13-08-43-removebg-preview.png?alt=media&token=16691273-c395-42c9-af12-53543a88fcf4",
         background: "orange",
         // position:"Web Head",
         socialMedia: {instagram:'https://www.instagram.com/aratrick007/', linkedin:'https://www.linkedin.com/in/aratrick/',mail: 'mailto:m.aratrick@iitg.ac.in' },
