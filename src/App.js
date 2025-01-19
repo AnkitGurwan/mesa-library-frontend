@@ -24,6 +24,9 @@ import Siesmech from "./components/Events/Seismech";
 import SeismechPage from "./components/Events/Seismech";
 import Merch from "./components/Events/Merch";
 
+import Placements from "./components/placements/placements"
+import Form from "./components/placements/form"
+
 function App() {
   return (
       <AuthState>
@@ -50,6 +53,9 @@ function App() {
             <Route path="/library/main/:course/:exams/:subExams/:superSub" element={<UserSuperSubExams/>}></Route>
 
             <Route path="/library/events/seismech" element={<SeismechPage/>}></Route>
+
+            <Route path="/placements" element={<Placements />} />
+            <Route path="/placements/form" element={<Form />} />
           </Routes>
         </BrowserRouter>
       </AuthState>
