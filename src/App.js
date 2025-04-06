@@ -20,9 +20,12 @@ import UserSuperSubExams from "./components/library/userPages/userSuperSubExam";
 import Feedback from "./components/library/userPages/feedbackUser";
 import Team from "./components/Team/team";
 import Events from "./components/Events/Events";
+import Placement from "./components/Placement/InterviewData";
+import Contribution from "./components/Placement/Contribution";
 import Siesmech from "./components/Events/Seismech";
 import SeismechPage from "./components/Events/Seismech";
 import Merch from "./components/Events/Merch";
+import InterviewDetails from "./components/Placement/InterviewDetails";
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
             <Route path='/team' element={<Team/>}></Route>
             <Route path='/merch' element={<Merch/>}></Route>
             <Route path='/events' element={<Events/>}></Route>
+            <Route path='/placement' element={<Placement/>}></Route>
+            <Route path="/interview-details" element={<InterviewDetails />} />
+            <Route path='/contribution' element={<Contribution/>}/>
             <Route path="/events/seismech" element={<Siesmech/>} />
             <Route path='/library' element={<Login/>}/>
             <Route path='/library/register' element={<Register/>}/>
@@ -48,7 +54,7 @@ function App() {
             <Route path="/library/main/:course/:exams" element={<UserExams/>}></Route>
             <Route path="/library/main/:course/:exams/:subExams" element={<UserSubCourseExams/>}></Route>
             <Route path="/library/main/:course/:exams/:subExams/:superSub" element={<UserSuperSubExams/>}></Route>
-
+          
             <Route path="/library/events/seismech" element={<SeismechPage/>}></Route>
           </Routes>
         </BrowserRouter>
