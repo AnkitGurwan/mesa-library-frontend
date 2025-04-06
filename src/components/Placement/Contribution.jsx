@@ -43,7 +43,7 @@ const Contribution = () => {
       formData.append("resumeFile", resumeFile); 
     }
   
-    const response = await fetch("https://mesa-library-frontend.vercel.app/api/contribute", {
+    const response = await fetch(`${Server_URL}/api/contribute`, {
       method: "POST",
       body: formData,
     });
