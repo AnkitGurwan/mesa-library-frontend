@@ -50,7 +50,7 @@ const InterviewDetails = () => {
           {resumeFilePath && (
             <div className="mb-4">
               <a
-                href={`http://localhost:8000/api/${resumeFilePath}`}
+                href={`https://mesa-library-frontend.vercel.app/api/${resumeFilePath}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-[#6699ff] text-white px-4 py-2 rounded hover:bg-indigo-700 transition"

@@ -16,7 +16,7 @@ const InterviewData = () => {
   useEffect(() => {
     async function fetchForms() {
       try {
-        const response = await fetch("http://localhost:8000/api/interviewdata");
+        const response = await fetch("https://mesa-library-frontend.vercel.app/api/interviewdata");
         const data = await response.json();
         setInterviewData(data);
       } catch (error) {
