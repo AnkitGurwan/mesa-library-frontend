@@ -56,17 +56,17 @@ const Team = () => {
 
             <div className="text-xl lg:text-2xl font-bold drop-shadow-lg tracking-wide text-[#2e2d30] mt-12">Website Contributors</div>
 
-            <div className="flex flex-col w-full justify-center align-center text-center mb-0 min-h-[400px]">
-                {/* <div className="text-[32px] md:text-[40px] font-bold text-[#303030] ">Our Team</div> */}
-                    <div className="my-2 px-12 md:px-28 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-0 md:gap-x-16 gap-y-0 md:gap-y-4 place-items-center">
-                    {
-                        webcontributors.map((info)=>(
-                            <Webcontributorcard key={info.id} name={info.name} image={info.image} background={info.background} position={info.position} social={info.socialMedia} />
-                        ))
-                    }
-                    </div>
-                
-            </div>
+                <div className="flex flex-col w-full justify-center align-center text-center mb-0 min-h-[400px]">
+                    {/* <div className="text-[32px] md:text-[40px] font-bold text-[#303030] ">Our Team</div> */}
+                        <div className="my-2 px-12 md:px-28 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-0 md:gap-x-16 gap-y-0 md:gap-y-4 place-items-center">
+                        {
+                            webcontributors.map((info)=>(
+                                <Webcontributorcard key={info.id} name={info.name} image={info.image} background={info.background} position={info.position} social={info.socialMedia} />
+                            ))
+                        }
+                        </div>
+                    
+                </div>
             <Footer/>
         </div>
      );

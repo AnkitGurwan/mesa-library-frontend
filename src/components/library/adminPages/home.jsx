@@ -7,7 +7,7 @@ import Upload from "../adminComponents/upload";
 import { useSelector } from 'react-redux';
 import '../../styles.css'
 import AuthContext from '../../../context/auth/AuthContext';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Loader from '../../loader';
 import LoaderLottie from '../userComponents/loaderlottie';
@@ -32,10 +32,10 @@ const Home = () => {
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === "root" && eachFolder.supParent === "root"});
 
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == "root" && eachFolder.supParent === "root"});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent === "root" && eachFolder.supParent === "root"});
 
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == "root" && eachFolder.supParent === "root"});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent === "root" && eachFolder.supParent === "root"});
 
     const getItem = async () => {
         

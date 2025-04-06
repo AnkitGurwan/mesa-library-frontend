@@ -2,7 +2,7 @@ import React,{useContext,useEffect,useState} from 'react';
 import Folder from '../adminComponents/folder'
 import File from '../adminComponents/file'
 import fire from '../../../config/firebase';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Upload from "../adminComponents/upload";
@@ -25,10 +25,10 @@ const Home = () => {
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === course && eachFolder.supParent === "root"});
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == course && eachFolder.supParent === "root"});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent === course && eachFolder.supParent === "root"});
     const [newUploadFileAdd,setNewUploadFileAdd]  = useState(false);
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == course && eachFolder.supParent === "root"});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent === course && eachFolder.supParent === "root"});
 
     var path =  useSelector(state => state.Files.path);
 

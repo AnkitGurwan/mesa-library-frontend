@@ -25,10 +25,10 @@ const Home = () => {
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
     const [progress , setProgress] = useState("");
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams && eachFolder.supParent === exams});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
     const [newUploadFileAdd,setNewUploadFileAdd]  = useState(false);
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == subExams && eachFolder.supParent === exams});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
 
     var path =  useSelector(state => state.Files.path);
 

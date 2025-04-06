@@ -1,9 +1,9 @@
-import React,{useContext,useEffect,useState} from 'react';
-import Folder from '../userComponents/userFolder'
+import React, {useContext, useEffect} from 'react';
+import Folder from '../userComponents/userFolder2'
 import File from '../userComponents/userFile'
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
-import Upload from "../userComponents/userUpload";
+import Upload from "../userComponents/userUpload2";
 import { useDispatch, useSelector } from 'react-redux';
 import AuthContext from '../../../context/auth/AuthContext';
 import { setUserUpdatePath ,setUserPath } from '../../../redux/storage/storageSlice';
@@ -15,15 +15,14 @@ const Home = () => {
     const dispatch = useDispatch();
     const { superSub , subExams , exams , course} = useParams();
     const Navigate = useNavigate();
-    const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === superSub && eachFolder.supParent === subExams});
 
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == superSub && eachFolder.supParent === subExams});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent === superSub && eachFolder.supParent === subExams});
 
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == superSub && eachFolder.supParent === subExams});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent === superSub && eachFolder.supParent === subExams});
 
     var path =  useSelector(state => state.Files.userPath);
 

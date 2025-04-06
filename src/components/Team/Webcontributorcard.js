@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import SocialMedia from "./SocialMedia";
 import { useInView } from "react-intersection-observer";
 
 const Webcontributorcard = ({name,image,position,background,social}) => {

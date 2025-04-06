@@ -9,6 +9,14 @@ const team = [
     },
     {
         id:2,
+        name:"Aratrick Mondal",
+        image:"https://firebasestorage.googleapis.com/v0/b/mesa-library.appspot.com/o/uploads%2F12345%2Fimage-removebg-preview.png?alt=media&token=817ef705-c7b8-429c-ac46-e808eeaf7d59",
+        background: "orange",
+        // position:"Web Head",
+        socialMedia: {instagram:'https://www.instagram.com/aratrick007/', linkedin:'https://www.linkedin.com/in/aratrick/',mail: 'mailto:m.aratrick@iitg.ac.in' },
+    },
+    {
+        id:3,
         name:"Jatin Varma",
         image:"https://firebasestorage.googleapis.com/v0/b/mesa-8924d.appspot.com/o/phototo.png?alt=media&token=098d7411-a0c3-48f1-8b11-518ab50e987f",
         background: "#bcfd4c",
@@ -16,7 +24,7 @@ const team = [
         socialMedia: {instagram:'https://www.instagram.com/varmajatin2004/', linkedin:'https://www.linkedin.com/in/varmajatin/',mail: 'mailto:s.varma@iitg.ac.in' },
     },
     {
-        id:3,
+        id:4,
         name:"Devesh Kamble",
         image:"https://firebasestorage.googleapis.com/v0/b/mesa-8924d.appspot.com/o/Devesh-removebg-preview.png?alt=media&token=f716f7f9-12a6-404a-86d4-fc1111cdde78",
         background: "#BCF2F6",

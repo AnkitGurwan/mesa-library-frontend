@@ -1,7 +1,5 @@
 import React, { useContext, useState } from 'react'
 import AuthContext from '../../../context/auth/AuthContext';
-import { toast, ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 
 const File = (props) => {
   const [flag,setFlag] = useState(false);

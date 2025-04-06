@@ -1,5 +1,5 @@
 import React,{useState, useContext} from 'react';
-import { useNavigate, useParams ,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '../../../context/auth/AuthContext';
@@ -27,7 +27,7 @@ const Feedbackpage = () => {
 
     return(
         
-        <section class="bg-white dark:bg-gray-900 py-4">
+        <section class="bg-white h-full py-4">
             <Link to={`/library/main`} className='fixed text-lg md:text-2xl hover:scale-105 font-bold no-underline text-blue-1200 ml-4 md:ml-8 mt-4'>Home</Link>
             <div class="py-4 md:py-6 px-4 mx-auto max-w-screen-md">
                 <h2 class="mb-2 text-4xl py-2 tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>

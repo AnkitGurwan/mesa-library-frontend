@@ -3,12 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../../../context/auth/AuthContext';
 import { useSearchParams } from 'react-router-dom';
 import { BsChevronRight } from 'react-icons/bs';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Folder from '../userComponents/userFolder';
-import File from '../userComponents/userFile';
-import Upload from '../adminComponents/upload';
 import Lottie from '../userComponents/courselottie';
 import LoaderLottie from '../userComponents/loaderlottie';
 
@@ -71,10 +69,10 @@ const HomePage = () => {
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === "root"});
 
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent === "root"});
 
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent === "root"});
 
     const studName = localStorage.getItem('studName')?localStorage.getItem('studName').toLowerCase():"";
 

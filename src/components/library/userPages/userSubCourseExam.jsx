@@ -1,4 +1,4 @@
-import React,{useContext,useEffect,useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Folder from '../userComponents/userFolder2'
 import File from '../userComponents/userFile'
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +15,6 @@ const Home = () => {
     const dispatch = useDispatch();
     const { subExams , exams , course } = useParams();
     const Navigate = useNavigate();
-    const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
 
