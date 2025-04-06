@@ -50,7 +50,8 @@ const InterviewDetails = () => {
           {resumeFilePath && (
             <div className="mb-4">
               <a
-                href={`${Server_URL}/api/${resumeFilePath}`}
+                // href={`${Server_URL}/api/${resumeFilePath}`}
+                href={`https://mesa-library.onrender.com/api/${resumeFilePath}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-[#6699ff] text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
