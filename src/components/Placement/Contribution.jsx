@@ -43,7 +43,7 @@ const Contribution = () => {
       formData.append("resumeFile", resumeFile); 
     }
   
-    const response = await fetch("http://localhost:8000/contribute", {
+    const response = await fetch("http://localhost:8000/api/contribute", {
       method: "POST",
       body: formData,
     });
