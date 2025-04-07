@@ -50,7 +50,7 @@ const InterviewDetails = () => {
           {resumeFilePath && (
             <div className="mb-4">
               <a
-                // href={`${Server_URL}/api/${resumeFilePath}`}
+                // href={`http://localhost:8000/api/${resumeFilePath}`}
                 href={`https://mesa-library.onrender.com/api/${resumeFilePath}`}
                 target="_blank"
                 rel="noopener noreferrer"
