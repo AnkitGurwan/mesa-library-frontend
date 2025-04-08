@@ -1,101 +1,98 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-const Home = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    isAnonymous: true,
-    name: "",
-    company: "",
-    role: "",
-  });
 
-  const handleChange = (field, value) => {
-    setFormData({ ...formData, [field]: value });
+
+// Form.js
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
+const Form = () => {
+  const { state } = useLocation();
+  const [rounds, setRounds] = useState(1);
+  const [roundDetails, setRoundDetails] = useState([{}]);
+  const [materials, setMaterials] = useState("");
+
+  useEffect(() => {
+    setRoundDetails((prev) => {
+      const updated = [...prev];
+      while (updated.length < rounds) updated.push({});
+      return updated.slice(0, rounds);
+    });
+  }, [rounds]);
+
+  const handleRoundChange = (index, field, value) => {
+    const updated = [...roundDetails];
+    updated[index] = { ...updated[index], [field]: value };
+    setRoundDetails(updated);
   };
 
   const handleSubmit = () => {
-    if (!formData.company || !formData.role) {
-      alert("Please fill in all required fields.");
-      return;
-    }
-    navigate("/placements/form", { state: formData });
+    console.log({ ...state, materials, roundDetails });
+    alert("Details Submitted! Check console for output.");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-800 to-pink-700 px-6 py-12">
-      <div className="bg-white shadow-2xl rounded-lg p-10 w-full max-w-lg">
-        <h1 className="text-3xl font-extrabold text-gray-800 text-center mb-6">
-          Placement Experience Portal
-        </h1>
-        <p className="text-gray-600 text-center mb-8">
-          Share your placement experience to guide future candidates!
-        </p>
+    <div className="min-h-screen bg-gradient-to-bl from-gray-800 via-gray-700 to-gray-600 flex items-center justify-center px-4 py-12">
+      <div className="bg-white rounded-3xl p-10 shadow-2xl w-full max-w-5xl">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Placement Process Details</h1>
 
-        {/* Option Buttons */}
-        <div className="flex justify-around mb-8">
-          <button
-            onClick={() => handleChange("isAnonymous", true)}
-            className={`py-3 px-6 text-lg font-semibold rounded-lg shadow-md transform transition-transform ${
-              formData.isAnonymous
-                ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white scale-105"
-                : "bg-gray-100 text-gray-600 hover:scale-105 hover:shadow-lg"
-            }`}
-          >
-            Go Anonymous
-          </button>
-          <button
-            onClick={() => handleChange("isAnonymous", false)}
-            className={`py-3 px-6 text-lg font-semibold rounded-lg shadow-md transform transition-transform ${
-              !formData.isAnonymous
-                ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white scale-105"
-                : "bg-gray-100 text-gray-600 hover:scale-105 hover:shadow-lg"
-            }`}
-          >
-            Show Identity
-          </button>
+        <div className="bg-purple-50 p-4 rounded-xl border mb-6">
+          <p className="text-lg text-gray-700"><span className="font-semibold text-purple-700">Name:</span> {state.isAnonymous ? "Anonymous" : state.name}</p>
+          <p className="text-lg text-gray-700"><span className="font-semibold text-purple-700">Company:</span> {state.company}</p>
+          <p className="text-lg text-gray-700"><span className="font-semibold text-purple-700">Role:</span> {state.role}</p>
         </div>
 
-        {/* Conditional Form */}
-        {!formData.isAnonymous && (
-          <div className="space-y-4 mb-6">
-            <input
-              type="text"
-              placeholder="Your Full Name"
-              value={formData.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-              className="w-full px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-purple-500 focus:outline-none"
-            />
-          </div>
-        )}
+        <textarea
+          rows="4"
+          placeholder="Materials used for preparation (e.g. LeetCode, GFG, Mock Interviews...)"
+          value={materials}
+          onChange={(e) => setMaterials(e.target.value)}
+          className="w-full mb-6 px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-purple-500"
+        ></textarea>
 
-        <div className="space-y-4">
+        <div className="mb-6">
+          <label className="text-lg font-medium text-gray-700">Number of Rounds</label>
           <input
-            type="text"
-            placeholder="Company Name"
-            value={formData.company}
-            onChange={(e) => handleChange("company", e.target.value)}
-            className="w-full px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-purple-500 focus:outline-none"
-          />
-          <input
-            type="text"
-            placeholder="Role (e.g., Software Engineer)"
-            value={formData.role}
-            onChange={(e) => handleChange("role", e.target.value)}
-            className="w-full px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-purple-500 focus:outline-none"
+            type="number"
+            min="1"
+            value={rounds}
+            onChange={(e) => setRounds(parseInt(e.target.value))}
+            className="ml-4 w-20 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
           />
         </div>
 
-        {/* Submit Button */}
+        <div className="space-y-6">
+          {roundDetails.map((round, index) => (
+            <div key={index} className="bg-gray-50 border rounded-xl p-4 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Round {index + 1}</h3>
+              <input
+                type="text"
+                placeholder="Round Description (e.g., Technical Interview)"
+                value={round.details || ""}
+                onChange={(e) => handleRoundChange(index, "details", e.target.value)}
+                className="w-full mb-3 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+              <input
+                type="number"
+                placeholder="Difficulty (1-5)"
+                min="1"
+                max="5"
+                value={round.difficulty || ""}
+                onChange={(e) => handleRoundChange(index, "difficulty", parseInt(e.target.value))}
+                className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+          ))}
+        </div>
+
         <button
           onClick={handleSubmit}
-          className="w-full mt-8 py-3 bg-gradient-to-r from-pink-600 to-red-600 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transition-transform transform"
+          className="mt-8 w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:scale-105 transition-transform"
         >
-          Proceed
+          Submit
         </button>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Form;

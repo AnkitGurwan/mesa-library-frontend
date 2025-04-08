@@ -6,7 +6,7 @@ const Navbar = () => {
         ['About Us', '/'],
         ['Events', '/events'],
         ['Team', '/team'],
-        // ['BTP Phase-I', "https://btp-frontend-chi.vercel.app/"],
+        ['Placments', "/placements"],
         ['Library', '/library'],
     ]
 

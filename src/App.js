@@ -28,6 +28,7 @@ import Merch from "./components/Events/Merch";
 import InterviewDetails from "./components/Placement/InterviewDetails";
 
 import Placements from "./components/placements/placements"
+import HomePlacements from "./components/Placement/Home"
 import Form from "./components/placements/form"
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
             <Route path='/team' element={<Team/>}></Route>
             <Route path='/merch' element={<Merch/>}></Route>
             <Route path='/events' element={<Events/>}></Route>
-            <Route path='/placement' element={<Placement/>}></Route>
+            <Route path='/placements' element={<HomePlacements/>}></Route>
             <Route path="/interview-details" element={<InterviewDetails />} />
             <Route path='/contribution' element={<Contribution/>}/>
             <Route path="/events/seismech" element={<Siesmech/>} />
@@ -60,7 +61,7 @@ function App() {
           
             <Route path="/library/events/seismech" element={<SeismechPage/>}></Route>
 
-            <Route path="/placements" element={<Placements />} />
+            <Route path="/placements/add" element={<Placements />} />
             <Route path="/placements/form" element={<Form />} />
           </Routes>
         </BrowserRouter>

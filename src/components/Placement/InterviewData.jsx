@@ -36,7 +36,7 @@ const InterviewData = () => {
         <div className="flex justify-end">
         <div className="flex justify-end">
           <NavLink
-            to="/contribution"
+            to="/placements/add"
             className="py-2 px-4 rounded-lg bg-[#6699ff] text-white transition duration-200 hover:bg-[#0055ff]"
           >
             Contribute
