@@ -85,11 +85,10 @@ const Contribution = () => {
       <Navbar className="shadow-lg bg-white border border-gray-300" />
       <div
         style={{
-          background: "#86c3fc", // Changed from gradient to solid color
+          background: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,64,121,1) 15%, rgba(0,212,255,1) 100%)",
         }}
         className="min-h-screen flex items-center justify-center px-4 py-8 sm:py-16 bg-gray-65"
       >
-
         <div className="w-full max-w-4xl bg-white shadow-[0_4px_10px_rgba(0,0,0,0.25)] rounded-xl p-6 sm:p-10">
           <div className="text-center mb-6">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">

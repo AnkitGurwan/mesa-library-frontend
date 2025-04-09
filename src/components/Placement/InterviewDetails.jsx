@@ -25,7 +25,7 @@ const InterviewDetails = () => {
   return (
     <div className="w-full overflow-x-hidden">
       <Navbar />
-      <section className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+      <section  className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6 sm:p-10 overflow-x-hidden w-full">
           <button
             onClick={() => navigate(-1)}
@@ -50,8 +50,8 @@ const InterviewDetails = () => {
           {resumeFilePath && (
             <div className="mb-4">
               <a
-                // href={`http://localhost:8000/api/${resumeFilePath}`}
-                href={`https://mesa-library.onrender.com/api/${resumeFilePath}`}
+                href={`http://localhost:8000/api/${resumeFilePath}`}
+                // href={`https://mesa-library.onrender.com/api/${resumeFilePath}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-[#6699ff] text-white px-4 py-2 rounded hover:bg-indigo-700 transition"

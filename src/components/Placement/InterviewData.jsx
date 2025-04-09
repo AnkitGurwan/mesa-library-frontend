@@ -34,7 +34,6 @@ const InterviewData = () => {
     navigate("/interview-details", { state: info });
   };
 
-
   const filteredData = interviewdata.filter((info) =>
     search.toLowerCase() === ""
       ? true
@@ -138,7 +137,6 @@ const InterviewData = () => {
                     ))}
                   </tbody>
                 </table>
-
               ) : (
                 <div className="text-center text-gray-600 text-lg font-medium mt-8">
                   No results found.
