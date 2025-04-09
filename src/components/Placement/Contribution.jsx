@@ -83,7 +83,10 @@ const Contribution = () => {
   return (
     <div>
     <Navbar className="shadow-lg bg-white border border-gray-300" />
-    <div className="min-h-screen flex items-center justify-center px-4 py-8 sm:py-16 bg-gray-65">
+    <div style={{
+          background: "rgb(2,0,36)",
+          background: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,64,121,1) 15%, rgba(0,212,255,1) 100%)",
+        }} className="min-h-screen flex items-center justify-center px-4 py-8 sm:py-16 bg-gray-65">
       <div className="w-full max-w-4xl bg-white shadow-[0_4px_10px_rgba(0,0,0,0.25)] rounded-xl p-6 sm:p-10">
         <div className="text-center mb-6">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
@@ -209,7 +212,7 @@ const Contribution = () => {
             <button
               type="button"
               onClick={handleClick}
-              className="w-full sm:w-auto bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition"
+             className="py-2 px-4 rounded-lg bg-[#339dd6] text-white transition duration-200 hover:bg-blue-800"
             >
               Submit
             </button>
