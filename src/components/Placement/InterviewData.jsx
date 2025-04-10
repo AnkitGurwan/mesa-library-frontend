@@ -82,7 +82,7 @@ const InterviewData = () => {
               />
             </div>
             <div className="flex justify-center gap-4 mb-6">
-              <button
+              {/* <button
                 onClick={() => console.log("Filter logic here")}
                 className="px-10 py-2 text-lg bg-[#0d91b5] text-white font-semibold rounded-lg hover:bg-[#0b5063] transition duration-200"
               >
@@ -95,7 +95,7 @@ const InterviewData = () => {
                 className="px-10 py-2 text-lg bg-white text-black font-semibold rounded-lg border border-gray-400 hover:bg-[#0eb9e8] hover:text-white transition duration-200"
               >
                 Reset Filter
-              </button>
+              </button> */}
 
 
             </div>
@@ -108,6 +108,7 @@ const InterviewData = () => {
                       <th className="px-4 py-2 border-b border-gray-300">Program</th>
                       <th className="px-4 py-2 border-b border-gray-300">Branch</th>
                       <th className="px-4 py-2 border-b border-gray-300">Company</th>
+                      <th className="px-4 py-2 border-b border-gray-300">Intern/Placements</th>
                       <th className="px-4 py-2 border-b border-gray-300">Profile</th>
                     </tr>
                   </thead>
@@ -129,6 +130,9 @@ const InterviewData = () => {
                         </td>
                         <td className="px-4 py-3 border-b border-gray-300 break-words">
                           {capitalizeFirstWord(info.company)}
+                        </td>
+                        <td className="px-4 py-3 border-b border-gray-300 break-words">
+                          {capitalizeFirstWord(info.infoo)}
                         </td>
                         <td className="px-4 py-3 border-b border-gray-300 break-words">
                           {capitalizeFirstWord(info.jobTitle)}

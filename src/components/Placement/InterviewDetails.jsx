@@ -20,7 +20,7 @@ const InterviewDetails = () => {
     );
   }
 
-  const { infoo, round1Name, round2Name, round3Name, round4Name, company, jobTitle, name,graduation,tips,cpi,resumeFilePath } = state;
+  const { infoo, round1, round1Name, round2, round2Name,round3, round3Name,round4, round4Name, company, jobTitle, name,graduation,tips,cpi,resumeFilePath } = state;
    console.log(state)
   return (
     <div className="w-full overflow-x-hidden">
@@ -34,7 +34,7 @@ const InterviewDetails = () => {
             ← Back
           </button>
           <h2 className="text-2xl sm:text-3xl font-bold text-blue-800 mb-2 break-all">
-            {company} Interview Experience
+            {company} {infoo} Interview Experience
           </h2>
           <p className="text-lg text-gray-700 mb-1 break-all">Position: {jobTitle}</p>
           <p className="text-sm text-gray-600 mb-4 break-all">Shared by: {name}</p>
@@ -50,8 +50,8 @@ const InterviewDetails = () => {
           {resumeFilePath && (
             <div className="mb-4">
               <a
-                href={`http://localhost:8000/api/${resumeFilePath}`}
-                // href={`https://mesa-library.onrender.com/api/${resumeFilePath}`}
+                // href={`http://localhost:8000/api/${resumeFilePath}`}
+                href={`https://mesa-library.onrender.com/api/${resumeFilePath}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-[#6699ff] text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
@@ -63,26 +63,26 @@ const InterviewDetails = () => {
 
           {round1Name && (
             <div className="mb-4">
-              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 1:</h3>
-              <p className="text-gray-800 whitespace-pre-wrap break-all">{round1Name}</p>
+              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 1 ({round1Name}): </h3>
+              <p className="text-gray-800 whitespace-pre-wrap break-all">{round1}</p>
             </div>
           )}
           {round2Name && (
             <div className="mb-4">
-              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 2:</h3>
-              <p className="text-gray-800 whitespace-pre-wrap break-all">{round2Name}</p>
+              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 2 ({round2Name}):</h3>
+              <p className="text-gray-800 whitespace-pre-wrap break-all">{round2}</p>
             </div>
           )}
           {round3Name && (
             <div className="mb-4">
-              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 3:</h3>
-              <p className="text-gray-800 whitespace-pre-wrap break-all">{round3Name}</p>
+              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 3 ({round3Name}):</h3>
+              <p className="text-gray-800 whitespace-pre-wrap break-all">{round3}</p>
             </div>
           )}
           {round4Name && (
             <div className="mb-4">
-              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 4:</h3>
-              <p className="text-gray-800 whitespace-pre-wrap break-all">{round4Name}</p>
+              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 4 ({round4Name}):</h3>
+              <p className="text-gray-800 whitespace-pre-wrap break-all">{round4}</p>
             </div>
           )}
 

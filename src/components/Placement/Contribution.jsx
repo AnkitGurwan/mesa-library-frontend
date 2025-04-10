@@ -194,7 +194,7 @@ const Contribution = () => {
                   <input
                     type="text"
                     className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
-                    placeholder={`Round ${index + 1} Name`}
+                    placeholder={`Round ${index + 1} Name (Technical/HR)`}
                     name={`round${index + 1}Name`}
                     onChange={handleChange}
                   />
