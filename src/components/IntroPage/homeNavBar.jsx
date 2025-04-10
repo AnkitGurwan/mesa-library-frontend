@@ -6,7 +6,7 @@ const Navbar = () => {
         ['About Us', '/'],
         ['Events', '/events'],
         ['Team', '/team'],
-        ['Placments', "/placements"],
+        // ['Placments', "/placements"],
         ['Library', '/library'],
     ]
 
