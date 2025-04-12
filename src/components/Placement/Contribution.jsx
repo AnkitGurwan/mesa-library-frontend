@@ -1,15 +1,17 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import fire from '../../config/firebase';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import AuthContext from "../../context/auth/AuthContext";
 
 const Contribution = () => {
+  const { GetDetails, getToken, checkAuth, createStudent } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loading,setLoading] = useState(false);
   const [resumeFile, setResumeFile] = useState(null);
-  const { uploadFile } = useContext(AuthContext);
+  const Navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const [data, setData] = useState({
     name: "",
@@ -36,8 +38,28 @@ const Contribution = () => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  const funcAllowed = async () => {
+      const rollNumber = parseInt(localStorage.getItem('studRoll'));
+      const flag = await checkAuth();
+
+      if (!rollNumber || !flag) 
+        {
+          Navigate("/");
+          toast.error('Please login to access', { position: toast.POSITION.TOP_CENTER });
+      }
+  };
+
+  const getItem = async () => {
+        funcAllowed();
+    };
+
+    useEffect(() => {
+        getItem();
+    }, []);
+
   const handleClick = async (e) => {
     e.preventDefault();
+    
   
     if (!data.name) {
       toast.error("Name is required.", { position: toast.POSITION.BOTTOM_RIGHT });

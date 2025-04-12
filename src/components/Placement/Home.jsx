@@ -6,7 +6,7 @@ const Body = () => {
     const Navigate = useNavigate();
 
     const GoBackHandler = async ()=>{
-        Navigate('/library');
+        Navigate('/library/main');
     }
 
     return(

@@ -1,18 +1,41 @@
-import React, { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
-import Navbar from "../../components/IntroPage/homeNavBar";
-import Footer from "../../components/IntroPage/footer";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, NavLink, useSearchParams } from "react-router-dom";
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../context/auth/AuthContext";
 
 const InterviewData = () => {
+  const { GetDetails, getToken, checkAuth, createStudent } = useContext(AuthContext);
   const [interviewdata, setInterviewData] = useState([]);
   const [search, setSearch] = useState("");
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const capitalizeFirstWord = (text) => {
     if (!text || typeof text !== "string") return text;
     return text.charAt(0).toUpperCase() + text.slice(1);
   };
+
+  const funcAllowed = async () => {
+      const rollNumber = parseInt(localStorage.getItem('studRoll'));
+      const flag = await checkAuth();
+
+      if (!rollNumber || !flag) 
+      {
+          Navigate("/");
+          toast.error('Please login to access', { position: toast.POSITION.TOP_CENTER });
+      }
+  };
+
+  const getItem = async () => {
+        funcAllowed();
+    };
+
+    useEffect(() => {
+        getItem();
+    }, []);
+  
 
   useEffect(() => {
     async function fetchForms() {
@@ -31,7 +54,7 @@ const InterviewData = () => {
   }, []);
 
   const goToDetails = (info) => {
-    navigate("/interview-details", { state: info });
+    Navigate("/interview-details", { state: info });
   };
 
   const filteredData = interviewdata.filter((info) =>
