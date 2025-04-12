@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom';
 import Navbar from '../library/adminComponents/navbar';
 
 const Body = () => {
+
+    const GoBackHandler = async ()=>{
+        Navigate('/library');
+    }
+
     return(
         <div className='h-screen'>
-            <Navbar/>
+            <div className='w-full h-16 text-end border-b flex items-center justify-end'>
+                <button onClick={GoBackHandler} className='text-white bg-black py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer'>Go Back</button>
+            </div>
             <div className='flex flex-wrap justify-center items-center h-auto md:h-[70vh]'>
                 <div className="w-48 h-48 md:w-[14.375rem] md:h-[14.375rem] rounded-full flex justify-center items-center m-8 md:m-10 shadow-md bg-no-repeat bg-contain bg-center" 
                     style={{backgroundImage: "url('https://www.isponline.org/wp-content/uploads/sites/71/2020/05/TeachersTrained-1024x1024.png')"}}>
