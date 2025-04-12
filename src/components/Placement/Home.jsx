@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Navbar from '../library/adminComponents/navbar';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const Body = () => {
+    const Navigate = useNavigate();
 
     const GoBackHandler = async ()=>{
         Navigate('/library');

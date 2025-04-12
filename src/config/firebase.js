@@ -15,3 +15,13 @@ const firebaseConfig = {
   const fire = firebase.initializeApp(firebaseConfig);
 
   export default fire;
+
+  // const firebaseConfig = {
+  //   apiKey: "AIzaSyAvoIU93exlkUVY09kuatjyHnx9F3G1MPs",
+  //   authDomain: "mesa-d321b.firebaseapp.com",
+  //   projectId: "mesa-d321b",
+  //   storageBucket: "mesa-d321b.firebasestorage.app",
+  //   messagingSenderId: "385828495745",
+  //   appId: "1:385828495745:web:ff0560442443ec5ff48880",
+  //   measurementId: "G-63LHB42LR7"
+  // };
