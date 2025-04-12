@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Navbar from "../../components/IntroPage/homeNavBar";
 import Footer from "../../components/IntroPage/footer";
 import { useNavigate } from "react-router-dom";
@@ -42,7 +42,7 @@ const InterviewData = () => {
 
   return (
     <div className="relative min-h-screen">
-      <Navbar className="shadow-lg bg-white border border-gray-300" />
+      {/* <Navbar className="shadow-lg bg-white border border-gray-300" /> */}
       <section
         style={{
           background: "#86c3fc", // Changed from gradient to solid color
@@ -52,14 +52,18 @@ const InterviewData = () => {
 
         <div className="max-w-6xl mx-auto">
           <div className="bg-white shadow-[0_4px_10px_rgba(0,0,0,0.25)] rounded-lg p-6 sm:p-8">
-            <div className="flex justify-end">
+            {/* <div className="flex justify-end">
               <NavLink
                 to="/contribution"
                 className="py-2 px-4 rounded-lg bg-[#339dd6] text-white transition duration-200 hover:bg-blue-800"
               >
                 Contribute
               </NavLink>
-            </div>
+            </div> */}
+            <span className="cursor-pointer text-blue-500 hover:underline">
+              
+              <Link to={'/library/placements'}>Go Back</Link>
+            </span>
             <div className="text-center mb-6 sm:mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
                IITG Student's Placement Interviews 
@@ -108,7 +112,7 @@ const InterviewData = () => {
                       <th className="px-4 py-2 border-b border-gray-300">Program</th>
                       <th className="px-4 py-2 border-b border-gray-300">Branch</th>
                       <th className="px-4 py-2 border-b border-gray-300">Company</th>
-                      <th className="px-4 py-2 border-b border-gray-300">Intern/Placements</th>
+                      <th className="px-4 py-2 border-b border-gray-300">Summer Intern</th>
                       <th className="px-4 py-2 border-b border-gray-300">Profile</th>
                     </tr>
                   </thead>
@@ -150,7 +154,7 @@ const InterviewData = () => {
           </div>
         </div>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

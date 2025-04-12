@@ -20,7 +20,7 @@ const Home = () => {
     const [added,setAdded] = useState(false);
     const { subExams , exams , course } = useParams();
     const Navigate = useNavigate();
-    const [pathState,setPathState] = useState("");
+    
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === subExams && eachFolder.supParent === exams});
     const [progress , setProgress] = useState("");

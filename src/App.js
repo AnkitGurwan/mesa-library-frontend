@@ -40,10 +40,10 @@ function App() {
             <Route path='/team' element={<Team/>}></Route>
             <Route path='/merch' element={<Merch/>}></Route>
             <Route path='/events' element={<Events/>}></Route>
-            <Route path='/placements' element={<HomePlacements/>}></Route>
+            <Route path='/library/placements' element={<HomePlacements/>}></Route>
             <Route path="/interview-details" element={<InterviewDetails />} />
-            <Route path='/contribution' element={<Contribution/>}/>
-            <Route path='/Placement' element={<Placement/>}/>
+            <Route path='/library/placements/add' element={<Contribution/>}/>
+            <Route path='/library/placements/all' element={<Placement/>}/>
             <Route path="/events/seismech" element={<Siesmech/>} />
             <Route path='/library' element={<Login/>}/>
             <Route path='/library/register' element={<Register/>}/>
@@ -62,8 +62,8 @@ function App() {
           
             <Route path="/library/events/seismech" element={<SeismechPage/>}></Route>
 
-            <Route path="/placements/add" element={<Placements />} />
-            <Route path="/placements/form" element={<Form />} />
+            {/* <Route path="/placements/add" element={<Placements />} /> */}
+            {/* <Route path="/placements/form" element={<Form />} /> */}
           </Routes>
         </BrowserRouter>
       </AuthState>

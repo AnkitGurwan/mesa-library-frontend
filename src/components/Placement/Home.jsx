@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../IntroPage/homeNavBar';
+import Navbar from '../library/adminComponents/navbar';
 
 const Body = () => {
     return(
@@ -11,7 +11,7 @@ const Body = () => {
                     style={{backgroundImage: "url('https://www.isponline.org/wp-content/uploads/sites/71/2020/05/TeachersTrained-1024x1024.png')"}}>
                     <Link 
                         // to='/placements/add' 
-                        to='/Contribution' 
+                        to='/library/placements/add' 
                         className="box-border no-underline rounded px-2 py-2 bg-[#FB2576] text-black font-serif text-lg md:text-[1.5rem] font-semibold"
                     >
                         Contribute
@@ -21,7 +21,7 @@ const Body = () => {
                     style={{backgroundImage: "url('https://cdn-icons-png.flaticon.com/512/3334/3334309.png')"}}>
                     <Link 
                         // to='/placements/all' 
-                        to='/Placement' 
+                        to='/library/placements/all' 
                         className="box-border no-underline rounded px-2 py-2 bg-[#FB2576] text-black font-serif text-lg md:text-[1.5rem] font-semibold"
                     >
                         Experiences
