@@ -152,7 +152,7 @@ const InterviewData = () => {
                       <th className="px-6 py-3 text-left cursor-pointer flex items-center" onClick={() => handleSort("company")}>
                         <span className="pr-1">Company</span><span>{renderSortIcon("company")}</span>
                       </th>
-                      <th className="px-6 py-3 text-left hidden sm:table-cell">Worked as Summer Intern Here?</th>
+                      <th className="px-6 py-3 text-left hidden md:block">Worked as Summer Intern Here?</th>
                       <th className="px-6 py-3 text-left cursor-pointer flex items-center" onClick={() => handleSort("jobTitle")}>
                         <span className="pr-1">Profile</span><span>{renderSortIcon("jobTitle")}</span>
                       </th>
@@ -174,10 +174,9 @@ const InterviewData = () => {
                         <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
                           {capitalizeFirstWord(info.company)}
                         </td>
-                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700 hidden sm:table-cell">
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700 hidden md:block">
                           {capitalizeFirstWord(info.infoo)}
                         </td>
-
                         <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
                           {capitalizeFirstWord(info.jobTitle)}
                         </td>
