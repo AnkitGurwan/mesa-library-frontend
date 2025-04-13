@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, NavLink, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/auth/AuthContext";
 
 const InterviewData = () => {
-  const { GetDetails, getToken, checkAuth, createStudent } = useContext(AuthContext);
+  const { checkAuth } = useContext(AuthContext);
   const [interviewdata, setInterviewData] = useState([]);
   const [search, setSearch] = useState("");
   const Navigate = useNavigate();
@@ -18,36 +17,34 @@ const InterviewData = () => {
   };
 
   const funcAllowed = async () => {
-      const rollNumber = parseInt(localStorage.getItem('studRoll'));
-      const flag = await checkAuth();
+    const rollNumber = parseInt(localStorage.getItem('studRoll'));
+    const flag = await checkAuth();
 
-      if (!rollNumber || !flag) 
-      {
-          Navigate("/");
-          toast.error('Please login to access', { position: toast.POSITION.TOP_CENTER });
-      }
+    if (!rollNumber || !flag) {
+      Navigate("/");
+      toast.error('Please login to access', { position: toast.POSITION.TOP_CENTER });
+    }
   };
 
-  const getItem = async () => {
-        funcAllowed();
-    };
-
-    useEffect(() => {
-        getItem();
-    }, []);
-  
+  useEffect(() => {
+    // funcAllowed();
+  }, []);
 
   useEffect(() => {
     async function fetchForms() {
       try {
-        // const response = await fetch("http://localhost:8000/api/interviewdata");
-         const response = await fetch("https://mesa-library.onrender.com/api/interviewdata");
-       // const response = await fetch("/intdata.json");
-
+        const response = await fetch("https://mesa-library.onrender.com/api/interviewdata");
         const data = await response.json();
-        setInterviewData(data);
+
+        if (Array.isArray(data)) {
+          setInterviewData(data);
+        } else {
+          setInterviewData([]);
+          console.error("Expected array but got:", data);
+        }
       } catch (error) {
-        console.error(error);
+        console.error("Failed to fetch data:", error);
+        setInterviewData([]);
       }
     }
     fetchForms();
@@ -57,39 +54,28 @@ const InterviewData = () => {
     Navigate("/interview-details", { state: info });
   };
 
-  const filteredData = interviewdata.filter((info) =>
-    search.toLowerCase() === ""
-      ? true
-      : info.company.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredData = Array.isArray(interviewdata)
+    ? interviewdata.filter((info) =>
+        search.toLowerCase() === ""
+          ? true
+          : info.company.toLowerCase().includes(search.toLowerCase())
+      )
+    : [];
 
   return (
     <div className="relative min-h-screen">
-      {/* <Navbar className="shadow-lg bg-white border border-gray-300" /> */}
       <section
-        style={{
-          background: "#86c3fc", // Changed from gradient to solid color
-        }}
+        style={{ background: "#f1f9fc" }}
         className="py-8 min-h-screen px-4 sm:px-6 lg:px-8"
       >
-
         <div className="max-w-6xl mx-auto">
-          <div className="bg-white shadow-[0_4px_10px_rgba(0,0,0,0.25)] rounded-lg p-6 sm:p-8">
-            {/* <div className="flex justify-end">
-              <NavLink
-                to="/contribution"
-                className="py-2 px-4 rounded-lg bg-[#339dd6] text-white transition duration-200 hover:bg-blue-800"
-              >
-                Contribute
-              </NavLink>
-            </div> */}
-            <span className="cursor-pointer text-blue-500 hover:underline">
-              
-              <Link to={'/library/placements'}>Go Back</Link>
+          <div className="bg-white shadow-lg rounded-lg p-6 sm:p-8">
+            <span className="cursor-pointer text-blue-600 hover:underline">
+              <Link to={"/library/placements"}>← Go Back</Link>
             </span>
             <div className="text-center mb-6 sm:mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
-               IITG Student's Placement Interviews 
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
+                IITG Student's Placement Interviews
               </h2>
             </div>
             <div className="flex flex-col sm:flex-row justify-center items-center mb-6 sm:mb-8">
@@ -104,64 +90,53 @@ const InterviewData = () => {
                 id="search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full sm:w-80 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                className="w-full sm:w-80 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 shadow-md"
                 placeholder="Search by company name..."
               />
             </div>
-            <div className="flex justify-center gap-4 mb-6">
-              {/* <button
-                onClick={() => console.log("Filter logic here")}
-                className="px-10 py-2 text-lg bg-[#0d91b5] text-white font-semibold rounded-lg hover:bg-[#0b5063] transition duration-200"
-              >
-                Apply Filter
-              </button>
 
-
-              <button
-                onClick={() => setSearch("")}
-                className="px-10 py-2 text-lg bg-white text-black font-semibold rounded-lg border border-gray-400 hover:bg-[#0eb9e8] hover:text-white transition duration-200"
-              >
-                Reset Filter
-              </button> */}
-
-
-            </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto mt-6">
               {filteredData.length > 0 ? (
-                <table className="table-fixed w-full text-left border border-gray-300 rounded-lg overflow-hidden min-w-[700px]">
-                  <thead>
-                    <tr className="bg-white text-black font-bold">
-                      <th className="px-4 py-2 border-b border-gray-300">Name</th>
-                      <th className="px-4 py-2 border-b border-gray-300">Program</th>
-                      <th className="px-4 py-2 border-b border-gray-300">Branch</th>
-                      <th className="px-4 py-2 border-b border-gray-300">Company</th>
-                      <th className="px-4 py-2 border-b border-gray-300">Summer Intern</th>
-                      <th className="px-4 py-2 border-b border-gray-300">Profile</th>
+                <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden">
+                  <thead className="bg-gray-100 text-gray-700 font-semibold">
+                    <tr>
+                      <th className="px-6 py-3 text-left">Name</th>
+                      <th className="px-6 py-3 text-left">Program</th>
+                      <th className="px-6 py-3 text-left">Email</th>
+                      <th className="px-6 py-3 text-left">Branch</th>
+                      <th className="px-6 py-3 text-left">Company</th>
+                      <th className="px-6 py-3 text-left">Summer Intern</th>
+                      <th className="px-6 py-3 text-left">Profile</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredData.map((info, index) => (
                       <tr
                         key={index}
-                        className={`${index % 2 === 0 ? "bg-blue-50" : "bg-gray-50"} cursor-pointer hover:bg-slate-300 transition duration-200 ease-in-out`}
+                        className={`${
+                          index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                        } cursor-pointer hover:bg-blue-100 transition-all duration-200 ease-in-out`}
                         onClick={() => goToDetails(info)}
                       >
-                        <td className="px-4 py-3 border-b border-gray-300 break-words">
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700 break-words">
                           {capitalizeFirstWord(info.name)}
                         </td>
-                        <td className="px-4 py-3 border-b border-gray-300 break-words">
-                          <div>B.Tech</div>
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
+                          B.Tech
                         </td>
-                        <td className="px-4 py-3 border-b border-gray-300 break-words">
-                          <div>Mechanical Engineering</div>
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
+                          {capitalizeFirstWord(info.email)}
                         </td>
-                        <td className="px-4 py-3 border-b border-gray-300 break-words">
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
+                          Mechanical Engineering
+                        </td>
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
                           {capitalizeFirstWord(info.company)}
                         </td>
-                        <td className="px-4 py-3 border-b border-gray-300 break-words">
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
                           {capitalizeFirstWord(info.infoo)}
                         </td>
-                        <td className="px-4 py-3 border-b border-gray-300 break-words">
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
                           {capitalizeFirstWord(info.jobTitle)}
                         </td>
                       </tr>
@@ -177,7 +152,6 @@ const InterviewData = () => {
           </div>
         </div>
       </section>
-      {/* <Footer /> */}
     </div>
   );
 };

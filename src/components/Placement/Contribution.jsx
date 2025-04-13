@@ -47,12 +47,8 @@ const Contribution = () => {
     }
   };
 
-  const getItem = async () => {
-    await funcAllowed();
-  };
-
   useEffect(() => {
-    getItem();
+    // funcAllowed();
   }, []);
 
   const handleClick = async (e) => {
@@ -96,68 +92,43 @@ const Contribution = () => {
 
     uploadFileRef.put(resumeFile).on(
       "state_changed",
-      (snapshot) => {
-        // Optional: show upload progress
-      },
+      () => {},
       (error) => {
-        console.error(error);
         toast.error("Resume upload failed.");
         setLoading(false);
       },
       async () => {
         const fileData = await uploadFileRef.getDownloadURL();
 
-        const formData = new FormData();
-        Object.keys(data).forEach((key) => {
-          formData.append(key, data[key]);
-        });
-
-        if (resumeFile) {
-          formData.append("resumeFile", fileData);
-        }
+        const payload = {
+          ...data,
+          resumeFilePath: fileData,
+        };
 
         try {
           const response = await fetch("https://mesa-library.onrender.com/api/contribute", {
             method: "POST",
-            body: formData,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
           });
 
           if (response.ok) {
-            toast.success("Added Successfully", {
-              position: toast.POSITION.BOTTOM_RIGHT
+            toast.success("Thanks for contributing! 🎉", {
+              position: toast.POSITION.BOTTOM_RIGHT,
             });
-
             setData({
-              name: "",
-              company: "",
-              jobTitle: "",
-              infoo: "",
-              resumeScreening: "",
-              round1Name: "",
-              round1: "",
-              round2Name: "",
-              round2: "",
-              round3Name: "",
-              round3: "",
-              round4Name: "",
-              round4: "",
-              round5Name: "",
-              round5: "",
-              graduation: "",
-              tips: "",
-              cpi: ""
+              name: "", company: "", jobTitle: "", infoo: "", email: "", resumeScreening: "",
+              round1Name: "", round1: "", round2Name: "", round2: "",
+              round3Name: "", round3: "", round4Name: "", round4: "",
+              round5Name: "", round5: "", graduation: "", tips: "", cpi: ""
             });
             setResumeFile(null);
-            navigate("/Placement");
+            navigate("/library/main");
           } else {
-            toast.error("Invalid submission.", {
-              position: toast.POSITION.BOTTOM_RIGHT
-            });
+            toast.error("Invalid submission.", { position: toast.POSITION.BOTTOM_RIGHT });
           }
         } catch (err) {
-          toast.error("Something went wrong.", {
-            position: toast.POSITION.BOTTOM_RIGHT
-          });
+          toast.error("Something went wrong.", { position: toast.POSITION.BOTTOM_RIGHT });
         } finally {
           setLoading(false);
         }
@@ -166,64 +137,66 @@ const Contribution = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-8 sm:py-16 bg-gradient-to-r from-blue-900 via-blue-700 to-cyan-400">
-      <div className="w-full max-w-4xl bg-white shadow-xl rounded-xl p-6 sm:p-10">
-        <span className="cursor-pointer text-blue-500 hover:underline">
-          <Link to={'/library/placements'}>Go Back</Link>
-        </span>
-        <div className="text-center mb-6">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
-            Share Your Interview Experience
-          </h2>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Help others by contributing your valuable insights!
+    <div className="min-h-screen bg-gradient-to-br from-purple-800 via-blue-700 to-cyan-500 flex items-center justify-center py-10 px-4">
+      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-8 sm:p-10 overflow-y-auto">
+        <div className="sticky top-0 bg-white z-10 pb-4">
+          <span className="text-blue-600 hover:underline">
+            <Link to={"/library/placements"}>← Back to Placements</Link>
+          </span>
+          <h1 className="text-3xl font-bold text-gray-800 mt-2">
+            Share Your Interview Journey 🚀
+          </h1>
+          <p className="text-gray-600 mt-1">
+            Your insights could be the key to someone else's success!
           </p>
         </div>
 
-        <form onSubmit={handleClick}>
+        <form onSubmit={handleClick} className="mt-6 space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { name: "name", placeholder: "Your Name*" },
               { name: "company", placeholder: "Company Name*" },
               { name: "jobTitle", placeholder: "Job Title*" },
-              { name: "infoo", placeholder: "Summer intern? (Yes/No)*" },
+              { name: "infoo", placeholder: "Summer Intern? (Yes/No)*" },
               { name: "graduation", placeholder: "Graduation Year*", type: "number" },
-              { name: "email", placeholder: "Email Id*", type: "email" },
+              { name: "email", placeholder: "Email ID*", type: "email" },
               { name: "cpi", placeholder: "CPI Criteria", type: "number" },
             ].map(({ name, placeholder, type = "text" }) => (
               <input
                 key={name}
                 type={type}
-                className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+                className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 w-full"
                 placeholder={placeholder}
                 name={name}
                 value={data[name]}
-                required
                 onChange={handleChange}
+                required={placeholder.includes("*")}
               />
             ))}
           </div>
 
-          <div className="mt-5">
-            <h3 className="text-lg font-semibold text-gray-700 mt-5">Resume :</h3>
-            <div className="pt-2 pb-3 text-gray-400">Upload the doc that landed you the job 💪</div>
+          <div>
+            <label className="block font-medium text-gray-700 mb-2">
+              Resume Upload (PDF/DOC) 💼
+            </label>
+            <div className="pt-1 pb-3 text-gray-400">Upload the doc that landed you the job 💪</div>
             <input
               type="file"
               accept=".pdf,.doc,.docx"
               onChange={(e) => setResumeFile(e.target.files[0])}
-              className="w-full border rounded-lg px-4 py-2"
+              className="w-full border border-gray-300 rounded-md px-4 py-2"
               required
             />
           </div>
 
-          <div className="mt-6">
-            <h3 className="text-lg font-semibold text-gray-700">Resume Screening*</h3>
-            <div className="flex gap-4 mt-2">
+          <div>
+            <h3 className="font-medium text-gray-800 mb-2">Resume Screening*</h3>
+            <div className="flex gap-6">
               {["Yes", "No"].map((val) => (
-                <label key={val} className="flex items-center">
+                <label key={val} className="flex items-center text-gray-700">
                   <input
                     type="radio"
-                    className="form-radio text-indigo-600"
+                    className="form-radio text-blue-600"
                     value={val}
                     name="resumeScreening"
                     onChange={handleChange}
@@ -235,37 +208,38 @@ const Contribution = () => {
             </div>
           </div>
 
-          <div className="mt-6">
-            <h3 className="text-lg font-semibold text-gray-700">
-              Materials used for preparation (e.g. LeetCode, GFG, etc.)*
-            </h3>
+          <div>
+            <label className="block font-medium text-gray-700 mb-1">
+              Preparation Resources*
+            </label>
             <textarea
               name="tips"
-              className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 mt-4"
+              className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500"
               placeholder="If Netflix helped you prepare, we won't judge 😅"
               value={data.tips}
-              required
               onChange={handleChange}
+              required
             />
           </div>
 
-          <div className="mt-6">
-            {[1, 2, 3, 4, 5].map((num) => (
-              <div key={num} className="mt-3">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-3">Interview Rounds (Add up to 4)</h3>
+            {[1, 2, 3, 4].map((num) => (
+              <div key={num} className="mb-4">
                 <input
                   type="text"
                   name={`round${num}Name`}
                   value={data[`round${num}Name`]}
                   placeholder={`Round ${num} Name`}
                   onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2 mt-2"
+                  className="w-full border rounded-md px-4 py-2 mt-2"
                 />
                 <textarea
                   name={`round${num}`}
                   value={data[`round${num}`]}
                   placeholder={`Round ${num} Description`}
                   onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2 mt-2"
+                  className="w-full border rounded-md px-4 py-2 mt-2"
                 />
               </div>
             ))}
@@ -273,10 +247,10 @@ const Contribution = () => {
 
           <button
             type="submit"
-            className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition"
             disabled={loading}
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg shadow transition-transform transform hover:scale-105"
           >
-            {loading ? "Submitting..." : "Submit Experience"}
+            {loading ? "Submitting..." : "✨ Submit My Experience"}
           </button>
         </form>
       </div>

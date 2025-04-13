@@ -1,8 +1,7 @@
-// src/pages/InterviewDetails.jsx
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Navbar from "../../components/IntroPage/homeNavBar";
-import Footer from "../../components/IntroPage/footer";
+// import Navbar from "../../components/IntroPage/homeNavBar";
+// import Footer from "../../components/IntroPage/footer";
 
 const InterviewDetails = () => {
   const { state } = useLocation();
@@ -14,89 +13,112 @@ const InterviewDetails = () => {
 
   if (!state) {
     return (
-      <div className="text-center mt-10 text-red-500">
-        No data found. Please go back and select an interview.
+      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fc]">
+        <p className="text-center text-red-600 text-lg font-semibold">
+          No data found. Please go back and select an interview.
+        </p>
       </div>
     );
   }
 
-  const { infoo, round1, round1Name, round2, round2Name,round3, round3Name,round4, round4Name, company, jobTitle, name,graduation,tips,cpi,resumeFilePath } = state;
-   console.log(state)
+  const {
+    infoo, round1, round1Name,
+    round2, round2Name,
+    round3, round3Name,
+    round4, round4Name,
+    company, jobTitle, name,
+    graduation, tips, cpi, resumeFilePath,
+  } = state;
+
+  const rounds = [
+    { name: round1Name, content: round1 },
+    { name: round2Name, content: round2 },
+    { name: round3Name, content: round3 },
+    { name: round4Name, content: round4 },
+  ];
+
   return (
-    <div className="w-full overflow-x-hidden">
-      <Navbar />
-      <section  className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6 sm:p-10 overflow-x-hidden w-full">
+    <div className="w-full min-h-screen overflow-x-hidden bg-[#f8f9fc]">
+      {/* <Navbar /> */}
+
+      <main className="py-10 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-6 sm:p-10 border border-gray-200 space-y-8">
+
           <button
             onClick={() => navigate(-1)}
-            className="text-blue-600 hover:underline mb-6 text-left"
+            className="text-blue-600 hover:underline text-sm"
           >
-            ← Back
+            ← Back to Interviews
           </button>
-          <h2 className="text-2xl sm:text-3xl font-bold text-blue-800 mb-2 break-all">
-            {company} {infoo} Interview Experience
-          </h2>
-          <p className="text-lg text-gray-700 mb-1 break-all">Position: {jobTitle}</p>
-          <p className="text-sm text-gray-600 mb-4 break-all">Shared by: {name}</p>
-          <p className="text-sm text-gray-600 mb-4 break-all">Graduation Year: {graduation}</p>
 
-          <div className="text-black text-base sm:text-lg whitespace-pre-wrap break-all mb-4">
-            Interview Experience for : {infoo}
-          </div>
+          <section className="space-y-2">
+            <h1 className="text-2xl sm:text-4xl font-extrabold capitalize text-blue-900 break-words">
+              <span className="text-red-600">{company}</span> - Interview Experience
+            </h1>
+            <div className="text-gray-600 text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+              <span>Shared by <span className="font-medium text-black capitalize">{name}</span></span>
+              <span className="hidden sm:inline">|</span>
+              <span>Graduation: <span className="font-medium text-black">{graduation}</span></span>
+              <span className="hidden sm:inline">|</span>
+              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium capitalize">
+                Position: {jobTitle}
+              </span>
+            </div>
+          </section>
 
-          <div className="text-black text-base sm:text-lg whitespace-pre-wrap break-all mb-4">
-            CPI Criteria : {cpi}
-          </div>
-          {resumeFilePath && (
-            <div className="mb-4">
+          <section className="grid gap-4 border-t pt-6">
+            <p className="text-gray-700">
+              <strong className="text-gray-900">Interview For:</strong> <span className="capitalize text-red-500">{infoo}</span>
+            </p>
+            <p className="text-gray-700">
+              <strong className="text-gray-900">CPI Criteria:</strong> <span className="text-red-500">{cpi}</span>
+            </p>
+            {resumeFilePath && (
               <a
-                // href={`http://localhost:8000/api/${resumeFilePath}`}
-                href={`https://mesa-library.onrender.com/api/${resumeFilePath}`}
+                href={resumeFilePath}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-[#6699ff] text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
+                className="inline-block w-fit bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-2 rounded-full shadow hover:from-blue-700 hover:to-indigo-700 transition font-medium text-sm"
               >
                 View Resume
               </a>
-            </div>
-          )}
+            )}
+          </section>
 
-          {round1Name && (
-            <div className="mb-4">
-              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 1 ({round1Name}): </h3>
-              <p className="text-gray-800 whitespace-pre-wrap break-all">{round1}</p>
-            </div>
-          )}
-          {round2Name && (
-            <div className="mb-4">
-              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 2 ({round2Name}):</h3>
-              <p className="text-gray-800 whitespace-pre-wrap break-all">{round2}</p>
-            </div>
-          )}
-          {round3Name && (
-            <div className="mb-4">
-              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 3 ({round3Name}):</h3>
-              <p className="text-gray-800 whitespace-pre-wrap break-all">{round3}</p>
-            </div>
-          )}
-          {round4Name && (
-            <div className="mb-4">
-              <h3 className="font-semibold text-blue-800 text-lg mb-1">Round 4 ({round4Name}):</h3>
-              <p className="text-gray-800 whitespace-pre-wrap break-all">{round4}</p>
-            </div>
-          )}
+          <section className="space-y-6 border-t pt-6">
+            {rounds.map((round, idx) => (
+              round.name && (
+                <div
+                  key={idx}
+                  className="bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-sm"
+                >
+                  <h3 className="text-lg font-semibold text-blue-800 mb-2 capitalize">
+                    Round {idx + 1} ({round.name})
+                  </h3>
+                  <p className="text-gray-800 whitespace-pre-wrap leading-relaxed">
+                    {round.content}
+                  </p>
+                </div>
+              )
+            ))}
+          </section>
 
-        {tips && (
-            <div className="mb-4">
-              <h3 className="font-semibold text-blue-800 text-lg mb-1">Tips : </h3>
-              <p className="text-gray-800 whitespace-pre-wrap break-all">{tips}</p>
-            </div>
-          )} 
-
-   
+          {tips && (
+            <section className="border-t pt-6">
+              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
+                <h3 className="text-lg font-semibold text-yellow-800 mb-1">
+                  Tips & Advice
+                </h3>
+                <p className="text-gray-700 whitespace-pre-wrap">
+                  {tips}
+                </p>
+              </div>
+            </section>
+          )}
         </div>
-      </section>
-      <Footer />
+      </main>
+
+      {/* <Footer /> */}
     </div>
   );
 };
