@@ -153,7 +153,7 @@ const InterviewData = () => {
                           {capitalizeFirstWord(info.name)}
                         </td>
                         <td className="px-6 py-4 border-b border-gray-300 text-gray-700">B.Tech</td>
-                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{info.email}</td>
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700 lowercase">{info.email}</td>
                         <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Mechanical Engineering</td>
                         <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
                           {capitalizeFirstWord(info.company)}

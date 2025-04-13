@@ -62,7 +62,7 @@ const InterviewDetails = () => {
               <span className="hidden sm:inline">|</span>
               <span>Graduation: <span className="font-medium text-black">{graduation}</span></span>
               <span className="hidden sm:inline">|</span>
-              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium capitalize">
+              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium capitalize w-fit">
                 Position: {jobTitle}
               </span>
             </div>
