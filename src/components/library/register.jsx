@@ -146,7 +146,7 @@ const Register = () => {
         :
         <div class="absolute top-24 left-9 md:left-1/3 w-4/5 md:w-1/3">
             <Link to={`/library`} className='text-2xl font-semibold mb-8 pb-4 text-blue-800 cursor-pointer hover:underline'>
-                Go Back
+                Go back
             </Link>
             <div class="max-w-md bg-white rounded-lg shadow-md p-8">
                 <h1 class="text-3xl font-bold mb-4">404</h1>

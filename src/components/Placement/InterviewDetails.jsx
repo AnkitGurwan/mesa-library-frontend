@@ -72,7 +72,7 @@ const InterviewDetails = () => {
 
           <section className="grid gap-4 border-t pt-6">
             <p className="text-gray-700">
-              <strong className="text-gray-900">Have Summer Intern here:</strong> <span className="capitalize text-red-500">{infoo}</span>
+              <strong className="text-gray-900">Worked here as a Summer Intern?</strong> <span className="capitalize text-red-500">{infoo}</span>
             </p>
             <p className="text-gray-700">
               <strong className="text-gray-900">CPI Criteria:</strong> <span className="text-red-500">{cpi}</span>

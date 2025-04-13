@@ -98,7 +98,7 @@ const InterviewData = () => {
         <div className="max-w-6xl mx-auto">
           <div className="bg-white shadow-lg rounded-lg p-6 sm:p-8">
             <span className="cursor-pointer text-blue-600 hover:underline">
-              <Link to={"/library/placements"}>← Go Back</Link>
+              <Link to={"/library/placements"}>← Go back</Link>
             </span>
             <div className="text-center mb-6 sm:mb-8">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
