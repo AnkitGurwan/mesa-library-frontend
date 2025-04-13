@@ -129,9 +129,9 @@ const InterviewData = () => {
               Loading Placement Statistics ....
             </div>
             :
-            <div className="overflow-x-auto mt-6 mb-4">
+            <div className="overflow-x-auto mt-6">
               {filteredData.length > 0 ?
-              <span className="flex">
+              <span className="flex pb-3 md:pb-4">
                   <div className="text-red-500 pr-2">Total Responses:</div>
                   <div>{filteredData.length}</div>
               </span>
@@ -152,9 +152,9 @@ const InterviewData = () => {
                       <th className="px-6 py-3 text-left cursor-pointer flex items-center" onClick={() => handleSort("company")}>
                         <span className="pr-1">Company</span><span>{renderSortIcon("company")}</span>
                       </th>
-                      <th className="px-6 py-3 text-left hidden md:block">Worked as Summer Intern Here?</th>
-                      <th className="px-6 py-3 text-left cursor-pointer flex items-center" onClick={() => handleSort("jobTitle")}>
-                        <span className="pr-1">Profile</span><span>{renderSortIcon("jobTitle")}</span>
+                      <th className="px-6 py-3 text-left hidden md:table-cell">Worked as Summer Intern Here?</th>
+                      <th className="px-6 py-3 text-left cursor-pointer items-center table-cell" onClick={() => handleSort("jobTitle")}>
+                        <div className="flex items-center"><span className="pr-1">Profile</span><span>{renderSortIcon("jobTitle")}</span></div>
                       </th>
                     </tr>
                   </thead>
@@ -174,10 +174,10 @@ const InterviewData = () => {
                         <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
                           {capitalizeFirstWord(info.company)}
                         </td>
-                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700 hidden md:block">
+                        <td className="px-6 py-4 border-b border-gray-300 hidden md:table-cell text-gray-700">
                           {capitalizeFirstWord(info.infoo)}
                         </td>
-                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700 table-cell">
                           {capitalizeFirstWord(info.jobTitle)}
                         </td>
                       </tr>
