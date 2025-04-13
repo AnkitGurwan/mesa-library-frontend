@@ -121,10 +121,12 @@ const HomePage = () => {
                         <a
                             href="#material"
                             className='mx-auto flex justify-center items-center w-28 mt-8 border p-2 rounded-lg hover:bg-gray-100 hover:text-black cursor-pointer scroll-smooth z-10'>
-                            <div className='mr-2'>Let's Start</div>
+                            <Link to={'/library/placements'} className="block hover:text-blue-600" onClick={() => setIsMenuOpen(false)}>Placement Stats</Link>
                             <BsChevronRight />
                         </a>
                     </div>
+
+                    
 
                     {/* MATERIAL SECTION */}
                     <div id='material' className='flex justify-center w-full md:px-4 pt-2 pb-5 z-10'>
