@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import AuthContext from "../../context/auth/AuthContext";
+import { FaArrowsUpDown, FaArrowDownLong, FaArrowUpLong } from "react-icons/fa6";
 
 const InterviewData = () => {
   const { checkAuth } = useContext(AuthContext);
@@ -12,6 +13,7 @@ const InterviewData = () => {
   const [sortOrder, setSortOrder] = useState("asc");
   const Navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const [loading, setLoading] = useState(true);
 
   const capitalizeFirstWord = (text) => {
     if (!text || typeof text !== "string") return text;
@@ -23,7 +25,7 @@ const InterviewData = () => {
     const flag = await checkAuth();
 
     if (!rollNumber || !flag) {
-      Navigate("/");
+      Navigate("/library");
       toast.error('Please login to access', { position: toast.POSITION.TOP_CENTER });
     }
   };
@@ -40,8 +42,10 @@ const InterviewData = () => {
 
         if (Array.isArray(data)) {
           setInterviewData(data);
+          setLoading(false);
         } else {
           setInterviewData([]);
+          setLoading(false);
         }
       } catch (error) {
         // console.error("Failed to fetch data:", error);
@@ -88,37 +92,43 @@ const InterviewData = () => {
     : [];
 
   const renderSortIcon = (column) => {
-    if (sortColumn !== column) return "↕️";
-    return sortOrder === "asc" ? "🔼" : "🔽";
+    if (sortColumn !== column) return <FaArrowsUpDown />;
+    return sortOrder === "asc" ? <FaArrowUpLong /> : <FaArrowDownLong />;
   };
 
   return (
-    <div className="relative min-h-screen">
-      <section style={{ background: "#f1f9fc" }} className="py-8 min-h-screen px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-white shadow-lg rounded-lg p-6 sm:p-8">
+    <div className="w-full min-h-screen overflow-x-hidden bg-[#e3e8f6]">
+      <section className="py-10 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto bg-white shadow-xl rounded-2xl p-6 sm:p-10 border border-gray-200 space-y-8">
+          <div className="">
             <span className="cursor-pointer text-blue-600 hover:underline">
-              <Link to={"/library/placements"}>← Go back</Link>
+              <Link to={"/library/placements"}>← Back to Home</Link>
             </span>
-            <div className="text-center mb-6 sm:mb-8">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
-                IITG Student's Placement Interviews
+            <div className="text-center mt-4 mb-6 sm:mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
+                Mech Student's Placement Stats
               </h2>
             </div>
             <div className="flex flex-col sm:flex-row justify-center items-center mb-6 sm:mb-8">
               <label htmlFor="search" className="text-lg text-gray-700 font-medium mb-2 sm:mb-0 sm:mr-4">
-                Enter company name:
+                Search by company name:
               </label>
               <input
                 type="search"
                 id="search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full sm:w-80 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 shadow-md"
+                className="w-full sm:w-80 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 shadow-md"
                 placeholder="Search by company name..."
               />
             </div>
 
+            {loading
+            ?
+            <div className="w-full h-24 md:h-40 flex justify-center items-center">
+              Loading Placement Stats ....
+            </div>
+            :
             <div className="overflow-x-auto mt-6">
               {filteredData.length > 0 ? (
                 <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden">
@@ -128,14 +138,14 @@ const InterviewData = () => {
                         Name {renderSortIcon("name")}
                       </th>
                       <th className="px-6 py-3 text-left">Program</th>
-                      <th className="px-6 py-3 text-left cursor-pointer" onClick={() => handleSort("email")}>
+                      {/* <th className="px-6 py-3 text-left cursor-pointer" onClick={() => handleSort("email")}>
                         Email {renderSortIcon("email")}
-                      </th>
-                      <th className="px-6 py-3 text-left">Branch</th>
+                      </th> */}
+                      {/* <th className="px-6 py-3 text-left">Branch</th> */}
                       <th className="px-6 py-3 text-left cursor-pointer" onClick={() => handleSort("company")}>
                         Company {renderSortIcon("company")}
                       </th>
-                      <th className="px-6 py-3 text-left">Summer Intern</th>
+                      <th className="px-6 py-3 text-left">Worked as Summer Intern Here?</th>
                       <th className="px-6 py-3 text-left cursor-pointer" onClick={() => handleSort("jobTitle")}>
                         Profile {renderSortIcon("jobTitle")}
                       </th>
@@ -152,8 +162,8 @@ const InterviewData = () => {
                           {capitalizeFirstWord(info.name)}
                         </td>
                         <td className="px-6 py-4 border-b border-gray-300 text-gray-700">B.Tech</td>
-                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700 lowercase">{info.email}</td>
-                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Mechanical Engineering</td>
+                        {/* <td className="px-6 py-4 border-b border-gray-300 text-gray-700 lowercase">{info.email}</td> */}
+                        {/* <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Mechanical Engineering</td> */}
                         <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
                           {capitalizeFirstWord(info.company)}
                         </td>
@@ -172,7 +182,7 @@ const InterviewData = () => {
                   No results found.
                 </div>
               )}
-            </div>
+            </div>}
           </div>
         </div>
       </section>

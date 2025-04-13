@@ -40,15 +40,31 @@ const Contribution = () => {
 
   const funcAllowed = async () => {
     const rollNumber = parseInt(localStorage.getItem('studRoll'));
+
     const flag = await checkAuth();
     if (!rollNumber || !flag) {
-      navigate("/");
+      navigate("/library");
       toast.error('Please login to access', { position: toast.POSITION.TOP_CENTER });
+    }
+
+    const response = await fetch("https://mesa-library.onrender.com/api/check", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({rollNumber}),
+    });
+
+    const data = await response.json();
+    if (data.exists) {
+      toast.success("You have already submitted! 🎉", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+
+      navigate("/library/placements");
     }
   };
 
   useEffect(() => {
-    // funcAllowed();
+    funcAllowed();
   }, []);
 
   const handleClick = async (e) => {
@@ -103,6 +119,7 @@ const Contribution = () => {
         const payload = {
           ...data,
           resumeFilePath: fileData,
+          rollNo: localStorage.getItem('studRoll')
         };
 
         try {
@@ -141,7 +158,7 @@ const Contribution = () => {
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-8 sm:p-10 overflow-y-auto">
         <div className="sticky top-0 bg-white z-10 pb-4">
           <span className="text-blue-600 hover:underline">
-            <Link to={"/library/placements"}>← Back to Placements</Link>
+            <Link to={"/library/placements"}>← Back to Home</Link>
           </span>
           <h1 className="text-3xl font-bold text-gray-800 mt-2">
             Share Your Interview Journey 🚀
@@ -157,9 +174,9 @@ const Contribution = () => {
               { name: "name", placeholder: "Your Name*" },
               { name: "company", placeholder: "Company Name*" },
               { name: "jobTitle", placeholder: "Job Title*" },
-              { name: "infoo", placeholder: "Have Summer Intern Here? (Yes/No)*" },
+              { name: "infoo", placeholder: "Worked here as a Summer Intern? (Yes/No)*" },
               { name: "graduation", placeholder: "Graduation Year*", type: "number" },
-              { name: "email", placeholder: "Email ID*", type: "email" },
+              { name: "email", placeholder: "Email ID (not Outlook)*", type: "email" },
               { name: "cpi", placeholder: "CPI Criteria", type: "number" },
             ].map(({ name, placeholder, type = "text" }) => (
               <input

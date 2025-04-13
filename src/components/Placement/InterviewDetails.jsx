@@ -50,15 +50,15 @@ const InterviewDetails = () => {
             onClick={() => navigate(-1)}
             className="text-blue-600 hover:underline text-sm"
           >
-            ← Back to Interviews
+            ← Back to Placements
           </button>
 
           <section className="space-y-2">
             <h1 className="text-2xl sm:text-4xl font-extrabold capitalize text-blue-900 break-words">
-              <span className="text-red-600">{company}</span> - Interview Experience
+              <span className="text-red-600">{company}</span> - Placement Experience
             </h1>
             <div className="text-gray-600 text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
-              <span>Shared by <span className="font-medium text-black capitalize">{name}</span></span>
+              <span>Shared by <span className="font-medium capitalize text-red-500">{name}</span></span>
               <span className="hidden sm:inline">|</span>
               <span>Email: <span className="font-medium text-black">{email}</span></span>
               <span className="hidden sm:inline">|</span>
@@ -111,7 +111,7 @@ const InterviewDetails = () => {
             <section className="border-t pt-6">
               <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
                 <h3 className="text-lg font-semibold text-yellow-800 mb-1">
-                  Tips & Advice
+                  Preparation Resources
                 </h3>
                 <p className="text-gray-700 whitespace-pre-wrap">
                   {tips}

@@ -37,8 +37,12 @@ const Body = () => {
         </button>
       </div>
 
+      <div className="text-center bg-yellow-100 border border-yellow-300 text-yellow-800 px-4 py-3 mx-4 mt-6 rounded-md text-sm md:text-base font-medium">
+        Please avoid filling the form multiple times.
+      </div>
+
       {/* Content */}
-      <div className="flex-1 flex flex-col md:flex-row items-center justify-center gap-10 p-6 md:p-12">
+      <div className="flex-1 flex flex-col md:flex-row items-center justify-center gap-10 p-2 md:p-4">
         {/* Contribute Card */}
         <div
           className="w-48 h-48 md:w-60 md:h-60 rounded-full flex items-center justify-center bg-center bg-cover shadow-lg hover:scale-105 transition-transform duration-300"
