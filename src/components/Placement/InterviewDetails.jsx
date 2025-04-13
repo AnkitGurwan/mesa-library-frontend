@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const InterviewDetails = () => {
   const { state } = useLocation();
+  console.log(state)
+  alert(state)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const InterviewDetails = () => {
     round2, round2Name,
     round3, round3Name,
     round4, round4Name,
-    company, jobTitle, name,
+    company, jobTitle, name, email,
     graduation, tips, cpi, resumeFilePath,
   } = state;
 

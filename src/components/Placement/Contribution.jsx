@@ -185,7 +185,7 @@ const Contribution = () => {
               accept=".pdf,.doc,.docx"
               onChange={(e) => setResumeFile(e.target.files[0])}
               className="w-full border border-gray-300 rounded-md px-4 py-2"
-              required
+              // required
             />
           </div>
 
