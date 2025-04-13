@@ -42,10 +42,9 @@ const InterviewData = () => {
           setInterviewData(data);
         } else {
           setInterviewData([]);
-          console.error("Expected array but got:", data);
         }
       } catch (error) {
-        console.error("Failed to fetch data:", error);
+        // console.error("Failed to fetch data:", error);
         setInterviewData([]);
       }
     }

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Body = () => {
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ const Body = () => {
   const handleContributeClick = (e) => {
     if (!isAllowed) {
       e.preventDefault();
-      alert("You are not allowed to contribute.");
+      toast.error("You are not allowed to contribute.", { position: toast.POSITION.BOTTOM_RIGHT });
     }
   };
 

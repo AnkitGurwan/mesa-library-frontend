@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const InterviewDetails = () => {
   const { state } = useLocation();
-  console.log(state)
-  alert(state)
+  // console.log(state)
+  // alert(state)
   const navigate = useNavigate();
 
   useEffect(() => {
