@@ -58,6 +58,8 @@ const InterviewDetails = () => {
             <div className="text-gray-600 text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
               <span>Shared by <span className="font-medium text-black capitalize">{name}</span></span>
               <span className="hidden sm:inline">|</span>
+              <span>Email: <span className="font-medium text-black">{email}</span></span>
+              <span className="hidden sm:inline">|</span>
               <span>Graduation: <span className="font-medium text-black">{graduation}</span></span>
               <span className="hidden sm:inline">|</span>
               <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium capitalize">
@@ -68,7 +70,7 @@ const InterviewDetails = () => {
 
           <section className="grid gap-4 border-t pt-6">
             <p className="text-gray-700">
-              <strong className="text-gray-900">Interview For:</strong> <span className="capitalize text-red-500">{infoo}</span>
+              <strong className="text-gray-900">Have Summer Intern here:</strong> <span className="capitalize text-red-500">{infoo}</span>
             </p>
             <p className="text-gray-700">
               <strong className="text-gray-900">CPI Criteria:</strong> <span className="text-red-500">{cpi}</span>

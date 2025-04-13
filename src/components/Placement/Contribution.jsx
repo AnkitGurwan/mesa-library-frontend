@@ -157,7 +157,7 @@ const Contribution = () => {
               { name: "name", placeholder: "Your Name*" },
               { name: "company", placeholder: "Company Name*" },
               { name: "jobTitle", placeholder: "Job Title*" },
-              { name: "infoo", placeholder: "Summer Intern? (Yes/No)*" },
+              { name: "infoo", placeholder: "Have Summer Intern Here? (Yes/No)*" },
               { name: "graduation", placeholder: "Graduation Year*", type: "number" },
               { name: "email", placeholder: "Email ID*", type: "email" },
               { name: "cpi", placeholder: "CPI Criteria", type: "number" },

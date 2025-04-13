@@ -8,6 +8,8 @@ const InterviewData = () => {
   const { checkAuth } = useContext(AuthContext);
   const [interviewdata, setInterviewData] = useState([]);
   const [search, setSearch] = useState("");
+  const [sortColumn, setSortColumn] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
   const Navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -54,20 +56,46 @@ const InterviewData = () => {
     Navigate("/interview-details", { state: info });
   };
 
+  const handleSort = (column) => {
+    if (sortColumn === column) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortColumn(column);
+      setSortOrder("asc");
+    }
+  };
+
+  const getSortedData = (data) => {
+    if (!sortColumn) return data;
+
+    return [...data].sort((a, b) => {
+      const valA = a[sortColumn]?.toString().toLowerCase() || "";
+      const valB = b[sortColumn]?.toString().toLowerCase() || "";
+
+      if (valA < valB) return sortOrder === "asc" ? -1 : 1;
+      if (valA > valB) return sortOrder === "asc" ? 1 : -1;
+      return 0;
+    });
+  };
+
   const filteredData = Array.isArray(interviewdata)
-    ? interviewdata.filter((info) =>
-        search.toLowerCase() === ""
-          ? true
-          : info.company.toLowerCase().includes(search.toLowerCase())
+    ? getSortedData(
+        interviewdata.filter((info) =>
+          search.toLowerCase() === ""
+            ? true
+            : info.company.toLowerCase().includes(search.toLowerCase())
+        )
       )
     : [];
 
+  const renderSortIcon = (column) => {
+    if (sortColumn !== column) return "↕️";
+    return sortOrder === "asc" ? "🔼" : "🔽";
+  };
+
   return (
     <div className="relative min-h-screen">
-      <section
-        style={{ background: "#f1f9fc" }}
-        className="py-8 min-h-screen px-4 sm:px-6 lg:px-8"
-      >
+      <section style={{ background: "#f1f9fc" }} className="py-8 min-h-screen px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="bg-white shadow-lg rounded-lg p-6 sm:p-8">
             <span className="cursor-pointer text-blue-600 hover:underline">
@@ -79,10 +107,7 @@ const InterviewData = () => {
               </h2>
             </div>
             <div className="flex flex-col sm:flex-row justify-center items-center mb-6 sm:mb-8">
-              <label
-                htmlFor="search"
-                className="text-lg text-gray-700 font-medium mb-2 sm:mb-0 sm:mr-4"
-              >
+              <label htmlFor="search" className="text-lg text-gray-700 font-medium mb-2 sm:mb-0 sm:mr-4">
                 Enter company name:
               </label>
               <input
@@ -100,36 +125,36 @@ const InterviewData = () => {
                 <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden">
                   <thead className="bg-gray-100 text-gray-700 font-semibold">
                     <tr>
-                      <th className="px-6 py-3 text-left">Name</th>
+                      <th className="px-6 py-3 text-left cursor-pointer" onClick={() => handleSort("name")}>
+                        Name {renderSortIcon("name")}
+                      </th>
                       <th className="px-6 py-3 text-left">Program</th>
-                      <th className="px-6 py-3 text-left">Email</th>
+                      <th className="px-6 py-3 text-left cursor-pointer" onClick={() => handleSort("email")}>
+                        Email {renderSortIcon("email")}
+                      </th>
                       <th className="px-6 py-3 text-left">Branch</th>
-                      <th className="px-6 py-3 text-left">Company</th>
+                      <th className="px-6 py-3 text-left cursor-pointer" onClick={() => handleSort("company")}>
+                        Company {renderSortIcon("company")}
+                      </th>
                       <th className="px-6 py-3 text-left">Summer Intern</th>
-                      <th className="px-6 py-3 text-left">Profile</th>
+                      <th className="px-6 py-3 text-left cursor-pointer" onClick={() => handleSort("jobTitle")}>
+                        Profile {renderSortIcon("jobTitle")}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredData.map((info, index) => (
                       <tr
                         key={index}
-                        className={`${
-                          index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                        } cursor-pointer hover:bg-blue-100 transition-all duration-200 ease-in-out`}
+                        className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"} cursor-pointer hover:bg-blue-100 transition-all duration-200 ease-in-out`}
                         onClick={() => goToDetails(info)}
                       >
                         <td className="px-6 py-4 border-b border-gray-300 text-gray-700 break-words">
                           {capitalizeFirstWord(info.name)}
                         </td>
-                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
-                          B.Tech
-                        </td>
-                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
-                          {capitalizeFirstWord(info.email)}
-                        </td>
-                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
-                          Mechanical Engineering
-                        </td>
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">B.Tech</td>
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{info.email}</td>
+                        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Mechanical Engineering</td>
                         <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
                           {capitalizeFirstWord(info.company)}
                         </td>
