@@ -129,11 +129,11 @@ const InterviewData = () => {
               Loading Placement Statistics ....
             </div>
             :
-            <div className="overflow-x-auto mt-6">
+            <div className="overflow-x-auto mt-6 mb-4">
               {filteredData.length > 0 ?
               <span className="flex">
                   <div className="text-red-500 pr-2">Total Responses:</div>
-                  <div>3</div>
+                  <div>{filteredData.length}</div>
               </span>
               :
               ""}
@@ -141,7 +141,7 @@ const InterviewData = () => {
                 <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden">
                   <thead className="bg-gray-100 text-gray-700 font-semibold">
                     <tr>
-                      <th className="px-6 py-3 text-left cursor-pointer flex" onClick={() => handleSort("name")}>
+                      <th className="px-6 py-3 text-left cursor-pointer flex items-center" onClick={() => handleSort("name")}>
                         <span className="pr-1">Name</span><span>{renderSortIcon("name")}</span>
                       </th>
                       <th className="px-6 py-3 text-left">Program</th>
@@ -149,11 +149,11 @@ const InterviewData = () => {
                         Email {renderSortIcon("email")}
                       </th> */}
                       {/* <th className="px-6 py-3 text-left">Branch</th> */}
-                      <th className="px-6 py-3 text-left cursor-pointer flex" onClick={() => handleSort("company")}>
+                      <th className="px-6 py-3 text-left cursor-pointer flex items-center" onClick={() => handleSort("company")}>
                         <span className="pr-1">Company</span><span>{renderSortIcon("company")}</span>
                       </th>
                       <th className="px-6 py-3 text-left">Worked as Summer Intern Here?</th>
-                      <th className="px-6 py-3 text-left cursor-pointer flex" onClick={() => handleSort("jobTitle")}>
+                      <th className="px-6 py-3 text-left cursor-pointer flex items-center" onClick={() => handleSort("jobTitle")}>
                         <span className="pr-1">Profile</span><span>{renderSortIcon("jobTitle")}</span>
                       </th>
                     </tr>
