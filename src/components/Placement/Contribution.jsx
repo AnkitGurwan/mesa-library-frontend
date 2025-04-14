@@ -92,65 +92,97 @@ const Contribution = () => {
 
     setLoading(true);
 
-    const fileMeta = {
-      createdAt: new Date(),
-      name: resumeFile?.name || "",
-      userId: 12345,
-      createdBy: "mesa",
-      pathState: "parent folder pathState",
-      parent: "subExams",
-      lastAccessed: null,
-      updatedAt: new Date(),
-      url: ""
+    if(resumeFile)
+    {
+
+      const fileMeta = {
+        createdAt: new Date(),
+        name: resumeFile?.name || "",
+        userId: 12345,
+        createdBy: "mesa",
+        pathState: "parent folder pathState",
+        parent: "subExams",
+        lastAccessed: null,
+        updatedAt: new Date(),
+        url: ""
+      };
+
+      const uploadFileRef = fire.storage().ref(`uploads/${fileMeta.userId}/${fileMeta.name}`);
+
+      uploadFileRef.put(resumeFile).on(
+        "state_changed",
+        () => {},
+        (error) => {
+          toast.error("Resume upload failed.");
+          setLoading(false);
+        },
+        async () => {
+          const fileData = await uploadFileRef.getDownloadURL();
+
+          const payload = {
+            ...data,
+            resumeFilePath: fileData,
+            rollNo: localStorage.getItem('studRoll')
+          };
+
+          try {
+            const response = await fetch("https://mesa-library.onrender.com/api/contribute", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+              toast.success("Thanks for contributing! 🎉", {
+                position: toast.POSITION.BOTTOM_RIGHT,
+              });
+              setData({
+                name: "", company: "", jobTitle: "", infoo: "", email: "", resumeScreening: "",
+                round1Name: "", round1: "", round2Name: "", round2: "",
+                round3Name: "", round3: "", round4Name: "", round4: "",
+                round5Name: "", round5: "", graduation: "", tips: "", cpi: ""
+              });
+              setResumeFile(null);
+              navigate("/library/main");
+            } else {
+              toast.error("Invalid submission.", { position: toast.POSITION.BOTTOM_RIGHT });
+            }
+          } catch (err) {
+            toast.error("Something went wrong.", { position: toast.POSITION.BOTTOM_RIGHT });
+          } finally {
+            setLoading(false);
+          }
+        }
+    );
+  }
+  else
+  {
+    const payload = {
+      ...data,
+      resumeFilePath: "",
+      rollNo: localStorage.getItem('studRoll')
     };
 
-    const uploadFileRef = fire.storage().ref(`uploads/${fileMeta.userId}/${fileMeta.name}`);
+    const response = await fetch("https://mesa-library.onrender.com/api/contribute", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-    uploadFileRef.put(resumeFile).on(
-      "state_changed",
-      () => {},
-      (error) => {
-        toast.error("Resume upload failed.");
-        setLoading(false);
-      },
-      async () => {
-        const fileData = await uploadFileRef.getDownloadURL();
-
-        const payload = {
-          ...data,
-          resumeFilePath: fileData,
-          rollNo: localStorage.getItem('studRoll')
-        };
-
-        try {
-          const response = await fetch("https://mesa-library.onrender.com/api/contribute", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          });
-
-          if (response.ok) {
-            toast.success("Thanks for contributing! 🎉", {
-              position: toast.POSITION.BOTTOM_RIGHT,
-            });
-            setData({
-              name: "", company: "", jobTitle: "", infoo: "", email: "", resumeScreening: "",
-              round1Name: "", round1: "", round2Name: "", round2: "",
-              round3Name: "", round3: "", round4Name: "", round4: "",
-              round5Name: "", round5: "", graduation: "", tips: "", cpi: ""
-            });
-            setResumeFile(null);
-            navigate("/library/main");
-          } else {
-            toast.error("Invalid submission.", { position: toast.POSITION.BOTTOM_RIGHT });
-          }
-        } catch (err) {
-          toast.error("Something went wrong.", { position: toast.POSITION.BOTTOM_RIGHT });
-        } finally {
-          setLoading(false);
-        }
-      }
-    );
+    if (response.ok) {
+      toast.success("Thanks for contributing! 🎉", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+      setData({
+        name: "", company: "", jobTitle: "", infoo: "", email: "", resumeScreening: "",
+        round1Name: "", round1: "", round2Name: "", round2: "",
+        round3Name: "", round3: "", round4Name: "", round4: "",
+        round5Name: "", round5: "", graduation: "", tips: "", cpi: ""
+      });
+      setResumeFile(null);
+      navigate("/library/main");
+    }
+  }
   };
 
   return (

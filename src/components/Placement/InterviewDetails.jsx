@@ -77,7 +77,7 @@ const InterviewDetails = () => {
             <p className="text-gray-700">
               <strong className="text-gray-900">CPI Criteria:</strong> <span className="text-red-500">{cpi}</span>
             </p>
-            {resumeFilePath && (
+            {resumeFilePath && resumeFilePath != "" && (
               <a
                 href={resumeFilePath}
                 target="_blank"
