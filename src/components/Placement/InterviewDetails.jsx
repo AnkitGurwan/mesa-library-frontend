@@ -24,7 +24,7 @@ const InterviewDetails = () => {
   }
 
   const {
-    infoo, round1, round1Name,
+    infoo, codingPreparation, projectPreparation, round1, round1Name,
     round2, round2Name,
     round3, round3Name,
     round4, round4Name,
@@ -115,6 +115,32 @@ const InterviewDetails = () => {
                 </h3>
                 <p className="text-gray-700 whitespace-pre-wrap">
                   {tips}
+                </p>
+              </div>
+            </section>
+          )}
+
+          {codingPreparation && (
+            <section className="border-t pt-6">
+              <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-lg">
+                <h3 className="text-lg font-semibold text-red-800 mb-1">
+                  How i prepared for online assesments?
+                </h3>
+                <p className="text-gray-700 whitespace-pre-wrap">
+                  {codingPreparation}
+                </p>
+              </div>
+            </section>
+          )}
+
+          {projectPreparation && (
+            <section className="border-t pt-6">
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg">
+                <h3 className="text-lg font-semibold text-blue-800 mb-1">
+                  How i prepared my projects?
+                </h3>
+                <p className="text-gray-700 whitespace-pre-wrap">
+                  {projectPreparation}
                 </p>
               </div>
             </section>

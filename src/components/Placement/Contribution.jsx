@@ -18,6 +18,8 @@ const Contribution = () => {
     jobTitle: "",
     infoo: "",
     email: "",
+    codingPreparation: "",
+    projectPreparation: "",
     resumeScreening: "",
     round1Name: "",
     round1: "",
@@ -137,7 +139,7 @@ const Contribution = () => {
                 position: toast.POSITION.BOTTOM_RIGHT,
               });
               setData({
-                name: "", company: "", jobTitle: "", infoo: "", email: "", resumeScreening: "",
+                name: "", company: "", jobTitle: "", infoo: "", email: "", resumeScreening: "", codingPreparation: "", projectPreparation: "",
                 round1Name: "", round1: "", round2Name: "", round2: "",
                 round3Name: "", round3: "", round4Name: "", round4: "",
                 round5Name: "", round5: "", graduation: "", tips: "", cpi: ""
@@ -174,7 +176,7 @@ const Contribution = () => {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
       setData({
-        name: "", company: "", jobTitle: "", infoo: "", email: "", resumeScreening: "",
+        name: "", company: "", jobTitle: "", infoo: "", email: "", resumeScreening: "", codingPreparation: "", projectPreparation: "",
         round1Name: "", round1: "", round2Name: "", round2: "",
         round3Name: "", round3: "", round4Name: "", round4: "",
         round5Name: "", round5: "", graduation: "", tips: "", cpi: ""
@@ -222,6 +224,34 @@ const Contribution = () => {
                 required={placeholder.includes("*")}
               />
             ))}
+          </div>
+
+          <div>
+            <label className="block font-medium text-gray-700 mb-1">
+              How you prepared for online assesments? (For coding, other assesments)*
+            </label>
+            <textarea
+              name="codingPreparation"
+              className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+              placeholder="How was your 4 year college journey?"
+              value={data.codingPreparation}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block font-medium text-gray-700 mb-1">
+              How you prepared your projects?*
+            </label>
+            <textarea
+              name="projectPreparation"
+              className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+              placeholder="From where you copied your projects? 😂"
+              value={data.projectPreparation}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <div>
