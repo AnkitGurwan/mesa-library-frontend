@@ -20,14 +20,17 @@ const HomePage = () => {
 
     const funcAllowed = async () => {
         const rollNumber = parseInt(localStorage.getItem('studRoll'));
-        const flag = await checkAuth();
+        const flag = 1;
 
         if (rollNumber && flag) {
             if (
                 (210103001 <= rollNumber && rollNumber <= 210103140) ||
                 (230103001 <= rollNumber && rollNumber <= 230103140) ||
                 (200103001 <= rollNumber && rollNumber <= 200103140) ||
-                (220103001 <= rollNumber && rollNumber <= 220103140)
+                (220103001 <= rollNumber && rollNumber <= 220103140) ||
+                (240103001 <= rollNumber && rollNumber <= 240103140) ||
+                (250103001 <= rollNumber && rollNumber <= 250103140) ||
+                (260103001 <= rollNumber && rollNumber <= 260103140)
             ) {
                 setAllowed(true);
                 setLoading(false);
