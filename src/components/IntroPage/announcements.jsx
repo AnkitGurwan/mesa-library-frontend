@@ -1,5 +1,5 @@
-import ExamImage from './assests/schedule.png'
-import ClassImage from './assests/expired.png'
+import ExamImage from './IntroPage/assests/schedule.png'
+import ClassImage from './IntroPage/assests/expired.png'
 
 const Announcements = () => {
     
