@@ -19,7 +19,7 @@ const Announcements = () => {
 
                 <a
                     target='_blank'
-                    href='https://www.iitg.ac.in/mech/documents/705/WS2025_Jan-May_Timetable_03012025.pdf'
+                    href='https://iitg.ac.in/mech/documents/754/20260117_WS2026_Timetable.pdf'
                     className='hover:scale-[1.01] w-[270px] sm:h-[360px] md:w-[300px] mt-8 mb-2 py-2 px-4 md:ml-8 flex flex-col justify-center items-center text-center border rounded-[5%] shadow-[5px_5px_15px_rgba(0,0,0,0.25)]'
                 >
                         <img src={ClassImage} alt="" className='w-[130px] my-3'/>
@@ -36,7 +36,7 @@ const Announcements = () => {
 
                 <a
                     target='_blank'
-                    href='https://firebasestorage.googleapis.com/v0/b/mesa-8924d.appspot.com/o/Acad_Calendar_2024.pdf?alt=media&token=2bbffcb9-b7f3-43fd-8fa4-aa570633abf3'
+                    href='https://drive.google.com/file/d/1c4EIhHUYI6peC8LxzfejEip3pRSHkh7b/view?usp=sharing'
                     className='hover:scale-[1.01] w-[270px] sm:h-[360px] md:w-[300px] mt-8 mb-2 py-2 px-4 md:ml-8 flex flex-col justify-center items-center text-center border rounded-[5%] shadow-[5px_5px_15px_rgba(0,0,0,0.25)]'
                 >
                         <img src={ExamImage} alt="" className='w-[130px] my-3'/>
