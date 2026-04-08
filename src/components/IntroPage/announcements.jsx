@@ -2,7 +2,7 @@ import ExamImage from './assests/schedule.png'
 import ClassImage from './assests/expired.png'
 
 const Announcements = () => {
-    
+     
     return ( 
         <div
             className='w-full my-16 py-7 flex flex-col justify-center items-center text-center text-[#252525]'
